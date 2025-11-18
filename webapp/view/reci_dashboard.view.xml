@@ -1,0 +1,377 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="RECI_MASTER.controller.reci_dashboard"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<App>
+		<pages>
+			<Page showHeader="true" title="Application" class="cl_pageBg sapUiSizeCompact" enableScrolling="true">
+				<!--Header Bar-->
+				<customHeader>
+					<OverflowToolbar class="sapUiLargeMarginBegin cl_header_toolbar">
+						<Title text="{i18n>DashboardTitle}" class="sapUiSmallMarginBegin cl_header_title"/>
+						<ToolbarSpacer/>
+						<Label text="{JM_UserModel>/0/Uname} - {JM_UserModel>/0/Sysid}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!--Navigation Bar-->
+				<core:Fragment fragmentName="RECI_MASTER.Fragment.NavigationBar" type="XML"/>
+				<content>
+					<VBox class="sapUiLargeMarginBegin sapUiSmallMarginTop cl_db_grid">
+						<grid:Grid defaultSpan="L2 M12 S12" class="sapUiTinyMarginBeginEnd" visible="{JM_Visible>/visible}">
+							<VBox class="cl_db_card cl_db_cardGradientBlue ">
+								<Toolbar class="cl_db_ToolbarNoBorder" width="100%">
+									<VBox justifyContent="Center">
+										<Text text="{i18n>Total}" class="cl_db_cardTitle"/>
+										<Text text="{JM_RECORDCOUNT>/TotalCount}" class="cl_db_cardCount"/>
+									</VBox>
+									<ToolbarSpacer/>
+									<HBox class=" cl_db_iconButton1" justifyContent="Center">
+										<Image src="{= ${JM_ImageModel>/path} + 'TotalIcons.svg'}"  tooltip="{i18n>Total}" class="cl_db_IconImage1" width="1rem"/>
+									</HBox>
+								</Toolbar>
+							</VBox>
+							<VBox class="cl_db_card cl_db_cardGradientPink ">
+								<Toolbar class="cl_db_ToolbarNoBorder" width="100%">
+									<VBox justifyContent="Center">
+										<Text text="{i18n>Sendback}" class="cl_db_cardTitle"/>
+										<Text text="{JM_RECORDCOUNT>/SendBackCount}" class="cl_db_cardCount"/>
+									</VBox>
+									<ToolbarSpacer/>
+									<HBox class="cl_db_iconButton2" justifyContent="Center">
+										<Image src="{= ${JM_ImageModel>/path} + 'Sendback.svg'}" tooltip="{i18n>Sendback}" class="cl_db_IconImage1"/>
+									</HBox>
+								</Toolbar>
+							</VBox>
+							<VBox class="cl_db_card cl_db_cardGradientlightblue ">
+								<Toolbar class="cl_db_ToolbarNoBorder" width="100%">
+									<VBox justifyContent="Center">
+										<Text text="{i18n>Inprogress}" class="cl_db_cardTitle"/>
+										<Text text="{JM_RECORDCOUNT>/InprogressCount}" class="cl_db_cardCount"/>
+									</VBox>
+									<ToolbarSpacer/>
+									<HBox class="cl_db_iconButton3" justifyContent="Center">
+										<Image  src="{= ${JM_ImageModel>/path} + 'Drafted.svg'}" tooltip="{i18n>Inprogress}" width="1.5rem" class=" cl_db_IconImage1"/>
+									</HBox>
+								</Toolbar>
+							</VBox>
+							<VBox class="cl_db_card cl_db_cardGradientOrange ">
+								<Toolbar class="cl_db_ToolbarNoBorder" width="100%">
+									<VBox justifyContent="Center">
+										<Text text="{i18n>Drafted}" class="cl_db_cardTitle"/>
+										<Text text="{JM_RECORDCOUNT>/DraftCount}" class="cl_db_cardCount"/>
+									</VBox>
+									<ToolbarSpacer/>
+									<HBox class="cl_db_iconButton4" justifyContent="Center">
+										<Image  src="{= ${JM_ImageModel>/path} + 'SaveAsDraft.svg'}" tooltip="{i18n>Drafted}" class="cl_db_IconImage1"/>
+									</HBox>
+								</Toolbar>
+							</VBox>
+							<VBox class="cl_db_card cl_db_cardGradientgreen ">
+								<Toolbar class="cl_db_ToolbarNoBorder" width="100%">
+									<VBox justifyContent="Center">
+										<Text text="{i18n>Completed}" class="cl_db_cardTitle"/>
+										<Text text="{JM_RECORDCOUNT>/CompleteCount}" class="cl_db_cardCount"/>
+									</VBox>
+									<ToolbarSpacer/>
+									<HBox class="cl_db_iconButton5" justifyContent="Center">
+										<Image  src="{= ${JM_ImageModel>/path} + 'Completed.svg'}" tooltip="{i18n>Completed}" class="cl_db_IconImage1"/>
+									</HBox>
+								</Toolbar>
+							</VBox>
+							<VBox class="cl_db_card cl_db_cardGradientred ">
+								<Toolbar class="cl_db_ToolbarNoBorder" width="100%">
+									<VBox justifyContent="Center">
+										<Text text="{i18n>Rejected}" class="cl_db_cardTitle"/>
+										<Text text="{JM_RECORDCOUNT>/RejectCount}" class="cl_db_cardCount"/>
+									</VBox>
+									<ToolbarSpacer/>
+									<HBox class="cl_db_iconButton6" justifyContent="Center">
+										<Image src="{= ${JM_ImageModel>/path} + 'RejectStatus.svg'}" tooltip="{i18n>Rejected}" class="cl_db_IconImage1"/>
+									</HBox>
+								</Toolbar>
+							</VBox>
+						</grid:Grid>
+						<grid:Grid class="sapUiSmallMarginEnd sapUiSmallMarginBegin sapUiSmallMarginTopBottom cl_basicSearchBorder" visible="{JM_Visible>/visible}">
+							<HBox class="cl_db_basicSearchHbox sapUiSmallMarginTop sapUiTinyMarginBegin sapUiTinyMarginBottom" height="1.2rem" width="100%">
+								<Text text="{i18n>BasicSearch}" class=" sapUiTinyMarginBeginEnd cl_db_basicsearchtext"/>
+								<layoutData>
+									<grid:GridData span="L12 M12 S12"/>
+								</layoutData>
+							</HBox>
+							<VBox class="sapUiTinyMarginBegin">
+								<Label text="{i18n>TransactionID}" class="cl_inputLabel"></Label>
+								<Input liveChange="fnLiveChange" valueHelpRequest="fnF4press" id="DID_RECI_TRANS_ID" class="cl_inputField" showValueHelp="true"
+									maxLength="18"></Input>
+								<layoutData>
+									<grid:GridData span="L2 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>UserID}" class="cl_inputLabel"></Label>
+								<Input liveChange="fnLiveChange" valueHelpRequest="fnF4press" id="DID_RECI_WF_AGENT" class="cl_inputField" showValueHelp="true"
+									maxLength="18"></Input>
+								<layoutData>
+									<grid:GridData span="L2 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>ApplicationID}" id="DID_RECI_WF_APPID_TXT" class="cl_inputLabel"></Label>
+								<Input liveChange="fnAppidLiveChange" valueHelpRequest="fnF4press" id="DID_RECI_WF_APPID" class="cl_inputField" showValueHelp="true"
+									maxLength="18"></Input>
+								<layoutData>
+									<grid:GridData span="L2 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox >
+								<Label text="{i18n>FromDate}" class="cl_inputLabel"/>
+								<DatePicker id="DID_RECI_FDATE" displayFormat="dd.MM.yyyy" valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation"
+									class="cl_inputField"/>
+								<layoutData>
+									<grid:GridData span="L2 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox >
+								<Label text="{i18n>ToDate}" class="cl_inputLabel"/>
+								<DatePicker id="DID_RECI_TDATE" displayFormat="dd.MM.yyyy" valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation"
+									class="cl_inputField"/>
+								<layoutData>
+									<grid:GridData span="L2 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>SpecificDateRange}" class="cl_inputLabel"/>
+								<ComboBox id="DID_DATERANGE" width="100%" class="cl_db_datefield" items="{JAppID>/List}" change="fnDateOptionChange">
+									<core:Item key="{JAppID>DomvalueL}" text="{JAppID>Ddtext}"/>
+								</ComboBox>
+								<layoutData>
+									<grid:GridData span="L2 M6 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox class="sapUiTinyMarginBegin">
+								<Label text="{i18n>Status}" class="cl_inputLabel"/>
+								<ComboBox id="DID_RECI_STATUS" selectedKey="C" width="100%" class="cl_db_datefield" items="{JMStatus>/}" change="fnSelectStatus">
+									<core:Item key="{JMStatus>DomvalueL}" text="{JMStatus>Ddtext}"/>
+								</ComboBox>
+								<layoutData>
+									<grid:GridData span="L2 M6 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox >
+								<Label text="{i18n>ObjectValue}" class="cl_inputLabel"/>
+								<Input id="DID_OBJVAL" class="cl_inputField" liveChange="fnLivechangeInput" maxLength="40"/>
+								<layoutData>
+									<grid:GridData span="L2 M8 S6"/>
+								</layoutData>
+							</VBox>
+							<OverflowToolbar class="sapUiSmallMarginTop cl_init_toolbar" visible="{JM_Visible>/toolbar}">
+								<ToolbarSpacer/>
+								<HBox justifyContent="End" visible="{= !${JMVboxVisibilityModel>/AdvanceSearch}}">
+									<Label id="id_AdvanceSrchText" text="{i18n>AdvanceSearch}"
+										class="sapUiTinyMarginBegin sapUiTinyMarginTop cl_db_advsearchtext cl_db_AdvanceSearchDisabled"/>
+									<Image id="id_AdvanceSrchImg" tooltip="{i18n>AdvanceSearch}"  src="{= ${JM_ImageModel>/path} + 'AdvanceSearchDownArrow.svg'}" press="fnPressAdvSearch"
+										class="cl_advsearchImage sapUiTinyMarginBegin sapUiTinyMarginTop cl_db_AdvanceSearchDisabled " width="1.2rem"/>
+								</HBox>
+								<Button text="{i18n>ClearAll}" class="cl_secondaryButton sapUiTinyMarginEnd" press="fnOpeanClearallMeassage"  icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}"
+									width="5.7rem"/> 
+								<Button text="{i18n>Search}" class="cl_primaryButton sapUiTinyMarginEnd" press="fnSearch" icon="{= ${JM_ImageModel>/path} + 'Search.svg'}" width="5rem"/>
+								<layoutData>
+									<grid:GridData span="L8 M12 S12"/>
+								</layoutData>
+							</OverflowToolbar>
+							<VBox visible="{JM_Visible>/advanceSearch}" class="cl_db_advanceSearchHbox">
+								<grid:Grid >
+									<HBox class="cl_db_basicSearchHbox sapUiSmallMarginTop sapUiTinyMarginBegin sapUiTinyMarginBottom" height="1.2rem" width="100%">
+										<Text text="{i18n>AdvanceSearch}" class=" sapUiTinyMarginBeginEnd cl_db_basicsearchtext"/>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<HBox width="100%" id="id_advanceSearch">
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<OverflowToolbar class="sapUiSmallMarginTop cl_init_toolbar">
+										<ToolbarSpacer/>
+										<HBox justifyContent="End" visible="{= !${JMVboxVisibilityModel>/AdvanceSearch}}">
+											<Label text="{i18n>AdvanceSearch}" class="sapUiTinyMarginBegin sapUiTinyMarginTop cl_db_advsearchtext"/>
+											<Image tooltip="{i18n>AdvanceSearch}"  src="{= ${JM_ImageModel>/path} + 'AdvanceSearchUpArrow.svg'}" press="fnPressAdvClose"
+												class="cl_advsearchImage sapUiTinyMarginBegin sapUiTinyMarginTop " width="1.2rem"/>
+										</HBox>
+										<Button text="{i18n>ClearAll}" class="cl_secondaryButton sapUiTinyMarginEnd" press="fnClearAllfields"  icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}"
+											width="5.7rem"/>
+										<Button text="{i18n>Search}" class="cl_primaryButton" press="fnSearch"  icon="{= ${JM_ImageModel>/path} + 'Search.svg'}" width="5.7rem"/>
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</OverflowToolbar>
+								</grid:Grid>
+								<layoutData>
+									<grid:GridData span="L12 M12 S12"/>
+								</layoutData>
+							</VBox>
+						</grid:Grid>
+						<VBox id="id_searchTableBox" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom cl_basicSearchBorder">
+							<OverflowToolbar class="cl_init_toolbar sapUiSmallMarginBegin sapUiTinyMarginTopBottom sapUiSmallMarginEnd">
+								<Image width="1.6rem" tooltip="{i18n>TableFilter}"  src="{= ${JM_ImageModel>/path} + 'ColumnFilter.svg'}" press="fnTableFilter"/>
+								<Label text="{i18n>MyRequest}" class="sapUiTinyMarginBegin cl_search_tableHeaderTxt"></Label>
+								<Label id="idResultCount" class="sapUiTinyMarginBegin cl_search_tableCntTxt"></Label>
+								<ToolbarSpacer/>
+								<Button id="id_DeselectAll" text="{i18n>ViewDetails}" class="cl_opr_DeselectBtn sapUiSizeCompact" press="fnPressViewDetails"/>
+								<Image width="1.6rem"  src="{= ${JM_ImageModel>/path} + 'Mail.svg'}"  tooltip="{i18n>Mail}" press="fnDownloadTable" class="cl_pv_removeImgFocus"/>
+								<Image width="1.6rem"  src="{= ${JM_ImageModel>/path} + 'DownloadSearch.svg'}"  tooltip="{i18n>DownloadData}" press="fnExportExcel" class="cl_pv_removeImgFocus"/>
+								<Image width="0.8rem" visible="{JM_Visible>/visible}" class="sapUiSmallMarginBegin cl_search_expandCollpase" press="fnExpand"
+									 src="{= ${JM_ImageModel>/path} + 'Zoom.svg'}"  tooltip="{i18n>Expand}"/>
+								<Image width="1rem" visible="{= !${JM_Visible>/visible} }" class="sapUiSmallMarginBegin cl_search_expandCollpase" press="fnCollapse"
+									 src="{= ${JM_ImageModel>/path} + 'CollapseIcon.svg'}"  tooltip="{i18n>Collapse}"/>
+								<layoutData>
+									<grid:GridData span="L12 M12 S12"/>
+								</layoutData>
+							</OverflowToolbar>
+							<ScrollContainer horizontal="true" vertical="false" height="100%">
+								<VBox id="id_ListVbox" class="sapUiSmallMarginBeginEnd cl_db_tableBox sapUiSmallMarginBottom">
+									<CustomListItem class="cl_db_listBg">
+										<HBox class="cl_db_rowHdr" alignItems="Center">
+											<VBox width="2rem">
+												<CheckBox id="DID_SELALL" width="2rem" class="cl_db_SelectAllChk"/>
+											</VBox>
+											<VBox width="3rem">
+												<Label text="" width="3rem" class="cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox width="3.2rem" visible="{JMVisible>/status}">
+												<Label text="{i18n>Status}" width="3.2rem" class="cl_db_columnCellHdr "/>
+											</VBox>
+											<VBox width="7rem" visible="{JMVisible>/trans}">
+												<Label width="7rem" text="{i18n>TransactionID}" class="cl_db_columnCellHdr "/>
+											</VBox>
+											<VBox width="8rem" class="cl_dynamicAppWidth" visible="{JMVisible>/application}">
+												<Label width="8rem" text="{i18n>Application}" class="cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox width="8rem" visible="{JMVisible>/sapcode}">
+												<Label width="8rem" text="{i18n>SapCode}" class="cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox class="cl_dynamicDescWidth" visible="{JMVisible>/desc}">
+												<Label text="{i18n>Description}" class="cl_dynamicDescWidth cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox width="6rem" visible="{JMVisible>/startDate}">
+												<Label width="6rem" text="{i18n>StartDate}" class="cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox width="6rem" visible="{JMVisible>/endDate}">
+												<Label width="6rem" text="{i18n>EndDate}" class="cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox width="9rem" visible="{JMVisible>/userid}">
+												<Label width="9rem" text="{i18n>UserID}" class="cl_db_columnCellHdr"/>
+											</VBox>
+											<VBox width="7rem" visible="{JMVisible>/overAlltime}">
+												<Label width="7rem" text="{i18n>OverallTime}" class="cl_db_columnCellHdr"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<ScrollContainer id="id_Scrollcontainer" class="cl_listScrollhegiht" vertical="true" horizontal="true">
+										<List items="{JM_DASHBOARD>/}" class="cl_db_customList cl_db_List" showSeparators="None" mode="MultiSelect"
+											selectionChange="onListItemSelect">
+											<CustomListItem>
+												<HBox alignItems="Center" class="cl_db_listRow sapUiTinyMarginTop">
+													<VBox width="3rem" justifyContent="Start" alignItems="Start">
+														<Image src="{JM_DASHBOARD>levelIcon}"  tooltip="{i18n>Expand}" press="fnLevelIconPress" class="cl_db_columnCellIcon"/>
+													</VBox>
+													<VBox width="2rem" justifyContent="Center" id="id_Status" alignItems="Center" alignContent="Center">
+														<Image src="{path: 'JM_DASHBOARD>Status', formatter: '.formatter.fnDBgetStatusIcon'}" class="cl_db_StatusImage"
+															tooltip="{JM_DASHBOARD>Status}"/>
+													</VBox>
+													<VBox width="7rem" visible="{JMVisible>/trans}" class="cl_paddingtop">
+														<!--added by sabarish to navigate to the Initiator to see the Material Details-->
+														<Link text="{JM_DASHBOARD>Transid}" width="7rem" tooltip="{JM_DASHBOARD>Transid}" press="fnTransidPress"
+															class="cl_TransIdTextColor cl_db_columnCell sapUiSmallMarginBegin"></Link>
+													</VBox>
+													<VBox width="8rem" visible="{JMVisible>/application}">
+														<Label width="8rem" text="{JM_DASHBOARD>AppId}" tooltip="{JM_DASHBOARD>AppId}" class="cl_db_columnCell sapUiSmallMarginBegin"/>
+													</VBox>
+													<VBox width="8rem" visible="{JMVisible>/sapcode}">
+														<Label width="8rem" text="{path: 'JM_DASHBOARD>Sapcode', formatter: '.formatter.fnremoveLeadingZeros'}"
+															tooltip="{path: 'JM_DASHBOARD>Sapcode', formatter: '.formatter.fnremoveLeadingZeros'}" class="cl_db_columnCell sapUiSmallMarginBegin"/>
+													</VBox>
+													<VBox class="cl_dynamicDescWidth" visible="{JMVisible>/desc}">
+														<Label text="{JM_DASHBOARD>Description}" width="17rem" tooltip="{JM_DASHBOARD>Description}"
+															class="cl_db_columnCell cl_dynamicDescWidth sapUiSmallMarginBegin"/>
+													</VBox>
+													<VBox width="6rem" visible="{JMVisible>/startDate}">
+														<Label width="6rem" text="{path: 'JM_DASHBOARD>StartDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+															class="cl_db_columnCell sapUiSmallMarginBegin"
+															tooltip="{path: 'JM_DASHBOARD>StartDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+													</VBox>
+													<VBox width="6rem" visible="{JMVisible>/endDate}">
+														<Label width="6rem" text="{path: 'JM_DASHBOARD>EndDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+															class="cl_db_columnCell sapUiSmallMarginBegin"
+															tooltip="{path: 'JM_DASHBOARD>EndDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+													</VBox>
+													<VBox width="9rem" visible="{JMVisible>/userid}">
+														<Label width="9rem" text="{JM_DASHBOARD>UserId}" tooltip="{JM_DASHBOARD>UserId}" class="cl_db_columnCell sapUiSmallMarginBegin"/>
+													</VBox>
+													<VBox width="7rem" visible="{JMVisible>/overAlltime}">
+														<Label text="{JM_DASHBOARD>OveralTime}" width="7rem" tooltip="{JM_DASHBOARD>OveralTime}" class="cl_db_columnCell sapUiSmallMarginBegin"/>
+													</VBox>
+												</HBox>
+												<VBox class="sapUiTinyMarginTop" visible="{= ${JM_DASHBOARD>expanded} &amp;&amp; ${JM_DASHBOARD>canExpand}}">
+													<HBox>
+														<Text text="Initiator / Reviewwer / Approver" class="cl_db_initText"/>
+													</HBox>
+													<HBox class="sapUiSmallMarginBeginEnd">
+														<Table items="{JM_DASHBOARD>_FilteredLevelData}" width="100%" updateFinished="fnUpdateFinished"
+															class="cl_db_table sapUiSizeCompact sapUiTinyMarginTopBottom ">
+															<headerToolbar >
+																<Toolbar visible="false">
+																	<Title text="{i18n>F4Dialog}" level="H2"/>
+																</Toolbar>
+															</headerToolbar>
+															<columns>
+																<Column width="4rem"><Label text="{i18n>Role}"/></Column>
+																<Column width="7rem"><Label text="{i18n>UserID}"/></Column>
+																<Column width="7rem">
+																	<Label text="{i18n>TransactionID}"/></Column>
+																<Column width="4rem">
+																	<Label text="{i18n>InitiationTime}"/></Column>
+																<Column width="4rem"><Label text="{i18n>InitiationDate}"/></Column>
+																<Column width="4rem"><Label text="{i18n>OverallTime}"/></Column>
+																<Column width="4rem">
+																	<Label text="{i18n>Status}"/></Column>
+																<Column width="4rem"><Label text="{i18n>SLA}"/></Column>
+																<Column width="4rem"><Label text="{i18n>Reminder}"/></Column>
+															</columns>
+															<items>
+																<ColumnListItem >
+																	<cells>
+																		<Label text="{JM_DASHBOARD>Roll}" class="cl_db_subTabCol "/>
+																		<Label text="{JM_DASHBOARD>UserId}" class="cl_db_subTabCol"/>
+																		<Label text="{JM_DASHBOARD>Transid}" class="cl_db_subTabCol"/>
+																		<Label text="{path: 'JM_DASHBOARD>InitiatedTime', formatter: '.formatter.fnDBformatODataTime'}" class="cl_db_subTabCol"/>
+																		<Label text="{path: 'JM_DASHBOARD>InitiatedDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+																			class="cl_db_subTabCol"/>
+																		<Label text="{JM_DASHBOARD>OveralAllTime}" class="cl_db_subTabCol"/>
+																		<HBox width="auto" alignItems="Center">
+																			<Image src="{path: 'JM_DASHBOARD>Status', formatter: '.formatter.fnDBgetLevelStatusIcon'}" tooltip = "{JM_DASHBOARD>Status}" class="sapUiTinyMarginBeginEnd"/>
+																			<Text text="{JM_DASHBOARD>Status}" class="cl_db_subTabCol" wrapping="{JMVisible>/wrap}">
+																				<customData>
+																					<core:CustomData key="statusClass" value="{ path: 'JM_DASHBOARD>Status', formatter: '.formatter.getStatusClass' }" writeToDom="true"/>
+																				</customData>
+																			</Text>
+																		</HBox>
+																		<Text text="{JM_DASHBOARD>SLA}" class="cl_db_subTabCol" wrapping="{JMVisible>/wrap}"/>
+																		<Text text="{JM_DASHBOARD>Remainder}" class="cl_db_subTabCol" wrapping="{JMVisible>/wrap}"/>
+																	</cells>
+																</ColumnListItem>
+															</items>
+														</Table>
+													</HBox>
+												</VBox>
+											</CustomListItem>
+										</List>
+									</ScrollContainer>
+								</VBox>
+							</ScrollContainer>
+							<HBox id="idPaginationBar" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiTinyMarginEnd sapUiTinyMarginBottom"></HBox>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
