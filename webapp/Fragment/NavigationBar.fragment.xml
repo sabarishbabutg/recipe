@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<VBox alignContent="Center" height="100%" alignItems="Center" class="cl_customSidebar">
+		<!-- Header Logo -->
+		<Toolbar class="cl_logobox" height="2.4rem">
+			<HBox alignContent="Center" alignItems="End" class="cl_logoCollapsed" visible="true">
+				<Image src="{= ${JM_ImageModel>/path} + 'MDSLogo.svg'}" class="sapUiTinyMarginTop sapUiTinyMarginBottom" tooltip="{i18n>MDS}"
+					width="1.9rem"/>
+			</HBox>
+			<HBox alignContent="Center" class="cl_headLogo_expand" visible="true">
+				<Image src="{= ${JM_ImageModel>/path} + 'MDSLogoBG.svg'}" width="12rem" tooltip="{i18n>MDS}"
+					class="sapUiTinyMarginTop sapUiTinyMarginBottom"/>
+			</HBox>
+		</Toolbar>
+		<HBox height="65%" class="cl_tab cl_list_sm" width="100%">
+			<List mode="None" width="100%" class=" cl_navbar">
+				<CustomListItem selected="false" class="cl_customlist">
+					<!-- Dashboard -->
+					<HBox id="id_dashBoard_h" class="sapUiTinyMarginBegin cl_listhighlight sapUiTinyMarginTop cl_sidebarItem">
+						<Toolbar id="id_dashboard" active="true" class="sapUiTinyMarginEnd" press="fnNavigateToView">
+							<Image src="{= ${JM_ImageModel>/path} + 'Dashboard.svg'}" tooltip="{i18n>Dashboard}"/>
+							<Text text="{i18n>Dashboard}" class="cl_list_text sapUiTinyMarginBegin"/>
+						</Toolbar>
+					</HBox>
+					<!-- Universal Work List -->
+					<HBox id="id_uwl_h" class="sapUiTinyMarginBegin cl_list_con sapUiTinyMarginTop cl_sidebarItem">
+						<Toolbar id="id_uwl" active="true" class="sapUiTinyMarginEnd" press="fnNavigateToView">
+							<Image src="{= ${JM_ImageModel>/path} + 'Uwl.svg'}" tooltip="{i18n>Uwl}"/>
+							<Text text="{i18n>Uwl}" class="cl_list_text sapUiTinyMarginBegin"/>
+						</Toolbar>
+					</HBox>
+					<!-- App List -->
+					<HBox id="id_appList_h" class="sapUiTinyMarginBegin sapUiTinyMarginTop cl_list_con cl_sidebarItem">
+						<Toolbar id="id_appList" active="true" class="sapUiTinyMarginEnd" press="fnNavExpandList">
+							<Image src="{= ${JM_ImageModel>/path} + 'Applist.svg'}" tooltip="{i18n>Applist}"/>
+							<Text text="{i18n>Applist}" class="cl_list_text sapUiTinyMarginBegin"/>
+							<ToolbarSpacer/>
+							<Image src="{= ${JM_ImageModel>/path} + 'arrowRight.svg'}" tooltip="Expand" id="id_applistArr" visible="true" class="sapUiSmallMarginEnd"/>
+						</Toolbar>
+					</HBox>
+					<!-- Sub list for App List -->
+					<VBox width="100%" class="sapUiTinyMarginBegin cl_appl_bk " id="id_appList_i" visible="false">
+						<Toolbar id="id_material" active="true" width="100%" class="sapUiSmallMarginBegin cl_sub_tbh" press="fnNavigateToView">
+							<Image src="{= ${JM_ImageModel>/path} + 'Dot.svg'}" tooltip="{i18n>Material}" class="sapUiSmallMarginBegin "/>
+							<Text text="{i18n>Material}" class="cl_list_textsub"/>
+						</Toolbar>
+					</VBox>
+					<!-- Work Flow -->
+					<HBox class="sapUiTinyMarginBegin sapUiTinyMarginTop cl_list_con cl_sidebarItem">
+						<Toolbar id="id_workFlow" active="true" width="100%" class="cl_listwidthctrl sapUiTinyMarginEnd" press="fnNavigateToView">
+							<Image src="{= ${JM_ImageModel>/path} + 'Workflow.svg'}" tooltip="{i18n>Workflow}"/>
+							<Text text="{i18n>Workflow}" class="cl_list_text sapUiTinyMarginBegin"/>
+						</Toolbar>
+					</HBox>
+					<!-- Rules Engine -->
+					<HBox class="sapUiTinyMarginBegin sapUiTinyMarginTop cl_list_con cl_sidebarItem">
+						<Toolbar id="id_RulesEngine" active="true" width="100%" class="cl_listwidthctrl sapUiTinyMarginEnd" press="fnNavigateToView">
+							<Image src="{= ${JM_ImageModel>/path} + 'Rulesengine.svg'}" tooltip="{i18n>RulesEngine}"/>
+							<Text text="{i18n>RulesEngine}" class="cl_list_text"/>
+						</Toolbar>
+					</HBox>
+				</CustomListItem>
+			</List>
+		</HBox>
+		<VBox class="sapUiTinyMarginBegin" alignItems="Center" justifyContent="End" height="30%"/>
+		<HBox class="sapUiTinyMarginBegin cl_logoExpanded" visible="true">
+			<Image src="{= ${JM_ImageModel>/path} + 'Exalca.svg'}" tooltip="Exalca" class="cl_logo sapUiSmallMarginBeginEnd sapUiTinyMarginBottom "
+				width="5rem"/>
+		</HBox>
+		<HBox class="cl_logoCollapsed">
+			<Image src="{= ${JM_ImageModel>/path} + 'Elogo.svg'}" tooltip="Exalca" class="cl_logo sapUiSmallMarginBeginEnd sapUiTinyMarginBottom"
+				width="1rem"/>
+		</HBox>
+	</VBox>
+</core:FragmentDefinition>

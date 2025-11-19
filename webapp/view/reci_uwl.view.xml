@@ -1,0 +1,133 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="RECI_MASTER.controller.reci_uwl"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<App>
+		<pages>
+			<Page showHeader="true" title="Application" class="cl_pageBg sapUiSizeCompact" enableScrolling="true">
+				<!--Header Bar-->
+				<customHeader>
+					<OverflowToolbar class="sapUiLargeMarginBegin cl_header_toolbar">
+						<Title text="{i18n>UWLTitle}" class="sapUiSmallMarginBegin cl_header_title"/>
+						<ToolbarSpacer/>
+						<Label text="{JM_UserModel>/0/Uname} - {JM_UserModel>/0/Sysid}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!-- Fragment for Navigation Bar-->
+				<core:Fragment fragmentName="RECI_MASTER.Fragment.NavigationBar" type="XML"/>
+				<content>
+					<VBox class="sapUiLargeMarginBegin">
+						<VBox class="sapUiSmallMarginBeginEnd sapUiTinyMarginTop">
+							<grid:Grid class="cl_search_grid">
+								<VBox>
+									<Label text="{i18n>ApplicationID}" class="cl_inputLabel"/>
+									<ComboBox id="UID_APPID" items="{JM_AppIdModel>/List}" width="100%" required="true" class="cl_comboBox" change="fnAppidDropDown">
+										<core:Item key="{JM_AppIdModel>DomvalueL}" text="{JM_AppIdModel>Ddtext}"/>
+									</ComboBox>
+									<layoutData>
+										<grid:GridData span="L2 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>DateFromTo}" class="cl_inputLabel"/>
+									<DateRangeSelection id="UID_RDATE" placeholder="" class="cl_inputField"/>
+									<layoutData>
+										<grid:GridData span="L2 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>SpecificDateRange}" class="cl_inputLabel"/>
+									<ComboBox selectionChange="fnDateDropDown" width="100%" class="cl_comboBox">
+										<items>
+											<core:Item key="CY" text="{i18n>CurrentYear}"/>
+											<core:Item key="CFY" text="{i18n>CurrentFinancialYear}"/>
+											<core:Item key="PFY" text="{i18n>PreviousFinancialYear}"/>
+											<core:Item key="QTR1" text="{i18n>Quarterly1}"/>
+											<core:Item key="QTR2" text="{i18n>Quarterly2}"/>
+											<core:Item key="QTR3" text="{i18n>Quarterly3}"/>
+											<core:Item key="QTR4" text="{i18n>Quarterly4}"/>
+											<core:Item key="HY" text="{i18n>HalfYearly}"/>
+											<core:Item key="ANN" text="{i18n>Annually}"/>
+										</items>
+									</ComboBox>
+									<layoutData>
+										<grid:GridData span="L2 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox class="sapUiTinyMarginEnd">
+									<Label text="{i18n>TransactionID}" class="cl_inputLabel"/>
+									<Input class="cl_inputField" liveChange="fnLiveChange" showValueHelp="false" id="UID_TRANSID"/>
+									<layoutData>
+										<grid:GridData span="L2 M6 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox class="sapUiTinyMarginEnd">
+									<Label text="{i18n>UserID}" class="cl_inputLabel"/>
+									<Input id="UID_USERID" showValueHelp="true" valueHelpRequest="fnF4press" liveChange="fnLiveChange" class="cl_inputField"/>
+									<layoutData>
+										<grid:GridData span="L2 M6 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox >
+									<Label class="cl_uwl_inputLabel"/>
+									<Button text="{i18n>Search}" class="cl_primaryButton sapUiSmallMarginEnd"  icon="{= ${JM_ImageModel>/path} + 'Search.svg'}" press="fnUWLSearch"/>
+									<layoutData>
+										<grid:GridData span="L2 M6 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+							<grid:Grid class="cl_search_grid sapUiSmallMarginTop">
+								<VBox>
+									<OverflowToolbar class="cl_init_toolbar sapUiTinyMarginBottom">
+										<Image width="1.6rem" tooltip="{i18n>TableFilter}"   src="{= ${JM_ImageModel>/path} + 'ColumnFilter.svg'}"  press="fnTableFilter"/>
+										<Label text="{i18n>TotalRecordsFound}" class="sapUiTinyMarginBegin cl_search_tableHeaderTxt"></Label>
+										<Label id = "id_tableRecordCnt" class="sapUiTinyMarginBegin cl_search_tableCntTxt"></Label>
+										<ToolbarSpacer/>
+										<Button text="{i18n>DownloadData}" class="cl_primaryButton"   icon="{= ${JM_ImageModel>/path} + 'Download.svg'}"  press="fnDownloadTable"/>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</OverflowToolbar>
+									<uitable:Table id="id_UWLtable" visible="true" rows="{JM_UWLModel>/}" visibleRowCount="11" selectionMode="None"
+										visibleRowCountMode="Interactive" rowSelectionChange="onRowSelectionChange" class="cl_opr_Tbl">
+										<uitable:columns>
+											<!-- Transaction ID - WiText -->
+											<uitable:Column width="10%" filterProperty="Transid" sortProperty="Transid">
+												<Text text="{i18n>TransactionID}" />
+												<uitable:template>
+													<Link text="{JM_UWLModel>Transid}" press="fnTransidPress" class="cl_table_label cl_TransIdTextColor  sapUiSmallMarginBegin"></Link>
+												</uitable:template>
+											</uitable:Column>
+											<!-- Transaction ID - WiText -->
+											<uitable:Column width="70%">
+												<Text text="{i18n>TransactionReq}"/>
+												<uitable:template>
+													<Text text="{JM_UWLModel>WiText}" class="cl_table_label sapUiTinyMarginBegin"/>
+												</uitable:template>
+											</uitable:Column>
+											<!-- Sent - WiCd -->
+											<uitable:Column width="15%">
+												<Text text="{i18n>Sent}"/>
+												<uitable:template>
+													<Label text="{JM_UWLModel>WiCd}" class="cl_table_label sapUiTinyMarginBegin"/>
+												</uitable:template>
+											</uitable:Column>
+											<!-- From - WiCruser -->
+											<uitable:Column width="15%">
+												<Text text="{i18n>UserID}"/>
+												<uitable:template>
+													<Label text="{JM_UWLModel>WiCruser}" class="cl_table_label sapUiTinyMarginBegin"/>
+												</uitable:template>
+											</uitable:Column>
+										</uitable:columns>
+									</uitable:Table>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

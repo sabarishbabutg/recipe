@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="F4Dialog" contentHeight="20rem" class="cl_f4Help sapUiSizeCompact" verticalScrolling="false"
+		afterClose="fnAfterCloseFragment">
+		<VBox class="cl_f4tableScroll">
+			<Table id="idOperationTable" items="{JM_OperationsData>/NavRecipe_Operation}" mode="None" inset="false" fixedLayout="false" width="100%"
+				class="sapUiResponsiveMargin cl_f4table">
+				<headerToolbar >
+					<Toolbar visible="false">
+						<Title text="{i18n>F4Dialog}" level="H2"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column >
+						<Text text="{i18n>Operation}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>Phase}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>SubOperation}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>Resource}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>Description}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press="fnOprItempress">
+						<cells>
+							<Text text="{JM_OperationsData>Vornr}"/>
+							<CheckBox selected="{JM_OperationsData>Phflg}" editable="false" class="cl_opr_checkbx"/>
+							<Text text="{JM_OperationsData>Pvznr}"/>
+							<Text text="{JM_OperationsData>Arbpl}"/>
+							<Text text="{JM_OperationsData>Ltxa1}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</VBox>
+		<endButton>
+			<Button text="{i18n>Cancel}" class="sapUiSizeCompact cl_f4table_change sapUiSmallMarginEnd" icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}"
+				press="fnOperCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

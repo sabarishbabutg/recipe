@@ -1,0 +1,15 @@
+.cl_init_scrollStyle{
+	overflow-y:scroll;
+	height:calc(100vh - 8.2rem);
+}
+.cl_init_toolbar{
+	border-bottom: none !important;
+	padding:0px;
+}
+.cl_search_rotateImage {
+	margin-top:4px !important;
+	transform: rotate(180deg) !important;
+}
+.cl_fileupload{
+	display:none !important;
+}

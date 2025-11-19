@@ -1,0 +1,26 @@
+/* ===========================
+   Key Data Grid Style
+   =========================== */
+.cl_kd_grid {
+    background: #ffffff;
+    padding-top:0.7rem!important;
+    border-right: 1px solid #B6B5B5;
+    border-left: 1px solid #B6B5B5;
+    border-bottom: 1px solid #B6B5B5;
+    border-radius: 0px 0px 5px 5px;
+}
+
+/* ===========================
+   key Data Image Style
+   =========================== */
+.cl_imageContainer {
+	position:relative;
+	bottom: 130px;
+	z-index:-1;
+    width: 100% !important;
+    height: 100% !important;
+}
+.cl_fitImage {
+    width: 100% !important;
+    height: 100% !important;
+}

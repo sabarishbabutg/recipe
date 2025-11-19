@@ -1,0 +1,555 @@
+.sapMImgFocusable:focus{
+	outline:none !important;
+	border-radius:0px;
+}
+.sapMCb:focus::before{
+	outline:none !important;
+	border:none !important;
+}
+/* ===========================
+   Dashboard Screen Grid Styles
+   =========================== */
+.cl_db_grid .sapUiRespGrid.sapUiRespGridHSpace1{
+	padding: 0px !important;
+}
+
+/* ===========================
+   Dashboard Item level list pending status Styles
+   =========================== */
+.sapMText[data-statusClass='cl_CompletedStatus'] {
+    color: #23C746 !important;
+    font-weight: 500;
+    margin-top:3px;
+}
+.sapMText[data-statusClass='cl_statusInprogress'] {
+    color: #5123C7 !important;
+    font-weight: 500;
+    margin-top:3px;
+}
+.sapMText[data-statusClass='cl_Rejectstatus'] {
+    color: red !important;
+    font-weight: 500;
+    margin-top:3px;
+}
+.sapMText[data-statusClass='cl_draftstatus'] {
+    color: #EDAC13 !important;
+    font-weight: 500;
+    margin-top:3px;
+}
+.sapMText[data-statusClass='cl_sendBack'] {
+    color: #AC0FC8 !important;
+    font-weight: 500;
+}
+.sapMText[data-statusClass='cl_initiated'] {
+    color: #F68B4E !important;
+    font-weight: 500;
+    margin-top:3px;
+}
+.sapMText[data-statusClass='statusDefault'] {
+    color: black !important;
+    font-weight: 500;
+    margin-top:3px;
+}
+
+/* ===========================
+   Dashboard Card Styles
+   =========================== */
+.cl_db_card {
+    height: 4.5rem;
+    background-color: white;
+    border-radius: 8px;
+    /* to attain as per figma desifn we have to use this padding*/
+    padding: 0.8rem; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.cl_db_cardGradientBlue {
+    border-left: 4px solid rgba(27, 13, 156, 1);
+}
+.cl_db_ToolbarNoBorder {
+    height: 3rem !important;
+    border-bottom: none !important;
+    background: transparent !important;
+}
+.cl_db_cardTitle {
+    font-size: 14px;
+    color: #141414;
+    font-weight: 600;
+}
+.cl_db_cardCount {
+    font-size: 25px !important;
+    font-weight: 600;
+    color: #141414;
+}
+.cl_db_iconButton1 {
+    background-color: rgba(227, 224, 253, 1) !important;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle !important;
+}
+.cl_db_iconButton1 img {
+    width: 1rem !important;
+    vertical-align: middle !important;
+    display: block !important;
+}
+.cl_db_cardGradientPink {
+    border-left: 4px solid rgba(172, 15, 200, 1);
+}
+.cl_db_iconButton2 {
+    background-color: rgba(172, 15, 200, 0.15) !important;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle !important;
+}
+.cl_db_iconButton2 img {
+    width: 1rem !important;
+    vertical-align: middle !important;
+    display: block !important;
+}
+.cl_db_cardGradientlightblue {
+    border-left: 4px solid rgba(67, 179, 196, 1);
+}
+.cl_db_iconButton3 {
+    background-color: rgba(67, 179, 196, 0.15) !important;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle !important;
+}
+.cl_db_iconButton3 img {
+    width: 1rem !important;
+    vertical-align: middle !important;
+    display: block !important;
+}
+.cl_db_cardGradientOrange {
+    border-left: 4px solid rgba(238, 149, 26, 1);
+}
+.cl_db_iconButton4 {
+    background-color: rgba(238, 149, 26, 0.15) !important;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle !important;
+}
+.cl_db_iconButton4 img {
+    width: 1rem !important;
+    vertical-align: middle !important;
+    display: block !important;
+}
+.cl_db_cardGradientgreen {
+    border-left: 4px solid rgba(76, 208, 87, 1);
+}
+.cl_db_iconButton5 {
+    background-color: rgba(76, 208, 87, 0.15) !important;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle !important;
+}
+.cl_db_iconButton5 img {
+	width : 1.1rem;
+    vertical-align: middle !important;
+    display: block !important;
+}
+.cl_db_cardGradientred {
+    border-left: 4px solid rgba(234, 56, 97, 1);
+}
+.cl_db_iconButton6 {
+    background-color: rgba(234, 56, 97, 0.15) !important;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle !important;
+}
+.cl_db_iconButton6 img {
+	width : 1.2rem;
+    vertical-align: middle !important;
+    display: block !important;
+}
+
+
+/* ===========================
+   item level inidcator styles
+   =========================== */
+.rowGreen {
+	background-color: #4CD05726 !important;
+}
+.rowOrange  {
+	background-color: #fff3cd !important;
+}
+.rowRed {
+	background-color: #EA386126 !important;
+}
+.cl_rowrejected {
+	background-color: rgba(234, 56, 97, 0.15) !important;
+}
+.cl_saveAsDraft {
+	background-color: rgba(238, 149, 26, 0.15) !important;
+}
+.cl_SendbackRow  {
+	background-color:  #AC0FC826 !important;
+}
+.rowDefault  {
+	background-color: #f4f4f4 !important;
+}
+.cl_InprogressRow  {
+	background-color: #43B3C426 !important;
+}
+.cl_rowr .sapMListTblRow {
+	background-color: rgba(234, 56, 97, 0.15) !important;
+}
+.cl_CompletedBackground{
+	background-color: #23C7461A !important;
+	border-radius:10px;
+}
+.cl_InitiatedBackground{
+	background-color: #F68B4E1A !important;
+	border-radius:10px;
+}
+.cl_RequestedBackground{
+	background-color: #5123C71A !important;
+	border-radius:10px;
+}
+.cl_rejectBackground{
+	background-color: #43B3C426 !important;
+	border-radius:10px;
+}
+.cl_draftBackground{
+	background-color: #F7CD261A !important;
+	border-radius:10px;
+}
+.cl_sendBackBackground{
+	background-color: #EA386126 !important;
+	border-radius:10px;
+}
+.rowGreen.sapMLIB {
+    background-color: #d8f5d1 !important;
+}
+.rowRed.sapMLIB {
+    background-color: #f8d7da !important;
+}
+.rowOrange.sapMLIB {
+    background-color: #fff3cd !important;
+}
+.rowDefault.sapMLIB {
+    background-color: transparent !important;
+}
+.highlightCompleted.sapMLIB {
+  background-color: #d8f5d1 !important;  /* light green */
+}
+/* ===========================
+   Date Picker styles in dashboard
+   =========================== */
+
+.cl_db_datefield .sapMInputBaseInner {
+    font-family: "Segoe UI" !important;
+    font-size: 12px;
+    background: #ffffff;
+    font-weight: 400;
+    color: #141414;
+}
+.cl_db_datefield .sapUiIcon::before {
+    color: #3393A1;
+}
+.cl_db_datefield .sapMInputBaseInner::placeholder {
+    font-family: "Segoe UI" !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    height: 24px;
+    letter-spacing: 0.15px;
+    text-transform: capitalize;
+    color: #9AA0A7;
+    opacity: 1;
+}
+.cl_db_datefield .sapMInputBaseContentWrapper {
+    box-shadow: none !important;
+    border-radius: 2px;
+    border: 1px solid #A8A7A7;
+}
+.cl_db_datefield .sapMInputBaseContentWrapper:not(.sapMInputBaseReadonlyWrapper):not(.sapMInputBaseContentWrapperState):not(.sapMInputBaseDisabledWrapper):hover {
+    border-color: #A8A7A7;
+}
+.cl_db_datefield.sapMInputBase:not(.sapMFocus) .sapMInputBaseContentWrapper:not(.sapMInputBaseReadonlyWrapper):not(.sapMInputBaseContentWrapperState):not(.sapMInputBaseDisabledWrapper):hover {
+    border-color: #A8A7A7;
+}
+.cl_db_datefield.sapMFocus.sapMInputBase .sapMInputBaseContentWrapper:not(.sapMInputBaseDisabledWrapper)::before {
+    border: none !important;
+}
+
+/* ===========================
+   Advance Search Styles
+   =========================== */
+.cl_db_advsearchtext {
+    color: rgba(51, 147, 161, 1);
+    font-weight: 500;
+    font-size: 13px;
+    padding-top:3px;
+}
+.cl_db_AdvanceSearchDisabled {
+    opacity: 0.6;
+}
+.cl_advsearchImage.sapMImgFocusable:focus{
+	border: none !important;
+	outline: none !important;
+}
+/* ===========================
+   List Check Box styles
+   =========================== */
+.cl_db_SelectAllChk .sapMCbBg {
+    border-radius: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: #E4FBFF;
+}
+.cl_db_SelectAllChk.sapMCb::before {
+    border: none !important;
+}
+.cl_db_SelectAllChk .sapMCbBg.sapMCbMarkChecked::before {
+    font-size: 10px;
+}
+/* ===========================
+   Basic data Text and Styles
+   =========================== */
+.cl_basicSearchBorder{
+	border: 1px solid #9AA0A7 !important;
+    border-radius: 10px;
+}
+.cl_db_basicSearchHbox {
+    border-left: 3px solid rgba(51, 147, 161, 1);
+}
+.cl_db_advanceSearchHbox{
+	border-top: 1px solid #ccc;
+}
+.cl_db_basicsearchtext {
+    font-family: 'Segoe UI' !important;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+    color: rgba(20, 20, 20, 1);
+}
+
+
+/* ===========================
+   Dashboard Table Styles
+   =========================== */
+.cl_db_tableBox {
+    border: 1px solid #ccc !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+.cl_db_table {
+    border: 1px solid rgba(214, 212, 212, 1);
+    border-radius: 10px;
+}
+.cl_db_table.sapUiTableHeaderDataCell .sapMText,
+.cl_db_table.sapMColumnHeader .sapMTextsapUiTableHeaderDataCell .sapMText,
+.cl_db_table.sapMColumnHeader .sapMText {
+    font-size: 13px;
+    line-height: 1rem !important;
+}
+.cl_db_table .sapMLIB {
+    border-bottom: 1px solid #ddd !important;
+    /* Each List Item row border */
+}
+.cl_db_table {
+    overflow: hidden;
+}
+.cl_db_table .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td:not(.sapMListTblDummyCell),
+.cl_db_table .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td:not(.sapMListTblDummyCell) {
+    border-bottom: none !important;
+}
+.cl_db_table .sapMTableTH {
+    background-color: #E4FBFF !important;
+    height: 2rem;
+}
+.cl_db_table .sapMListTblHeaderCell {
+    height: 1.5rem;
+}
+.cl_db_table .sapMListTblRow .sapMListShowSeparatorsNone .sapMLIBShowSeparator>td:not(.sapMListTblDummyCell),
+.cl_db_table .sapMListShowSeparatorsInner .sapMLIBShowSeparator:first-child>td:not(.sapMListTblDummyCell) {
+    border-bottom: 1px solid #d0d0d0 !important;
+}
+.cl_db_table .sapMListTblRow:last-child {
+    border-bottom: none;
+}
+.cl_db_table .sapMTable td {
+    border-bottom: 1px solid red;
+}
+.cl_db_subTabCol {
+    font-size: 12px;
+    font-family: 'Segoe UI' !important;
+    color: #141414;
+}
+.cl_db_columnCell .sapMLIBContent {
+    height: 2.5rem;
+}
+.cl_db_columnCell {
+    flex: 1;
+    text-align: left !important;
+    font-size: 12px !important;
+    font-family: 'Segoe UI' !important;
+    color: #1c1c1c !important;
+}
+.cl_db_rowHdr{
+	width : max-content;
+	background-color: #E4FBFF;	
+	border-radius: 10px 10px 0 0;
+}
+.cl_db_columnCellHdr,
+.cl_db_columnCell {
+    width: auto;
+    font-size: 12px;
+}
+.cl_db_columnCellHdr{
+    font-weight: 550;
+    color: #1c1c1c !important;
+    font-size: 13px;
+    font-family: 'Segoe UI' !important;
+}
+
+.cl_db_listRow{
+	width: max-content;
+}
+/* ===========================
+   Dashboard List Styles
+   =========================== */
+.cl_db_customList .sapMListModeSingleSelectLeft>.sapMCLI, .sapMListModeMultiSelect>.sapMCLI{
+	padding-left:0.5rem;
+}
+
+.cl_listScrollhegiht{
+	height:calc(100vh - 32rem) !important;
+}
+.cl_listScrollhegihtSS{
+	height:calc(100vh - 14rem) !important;
+}
+.cl_db_listBg{
+	background-color: #E4FBFF;	
+	border-radius: 10px 10px 0 0;
+}
+.cl_ListToolbarBorder{
+	border-bottom:1px solid #ccc;
+}
+.cl_db_customList .sapMCbBg{
+	height:15px !important;
+	width:15px !important;
+	top:0.6rem !important;
+	left:0.5rem !important;
+	border-radius:10px !important;
+}
+.cl_db_List .sapMListShowSeparatorsNone .sapMLIBShowSeparator{
+	border-bottom: 1px solid #ccc;
+}
+.cl_db_customList .sapMLIB.sapMLIBSelected{
+	border-left: 3px solid #3393A1 !important;
+}
+/* ===========================
+   Dashboard Pagination Styles
+   =========================== */
+.cl_paginationButtonActive .sapMBtnInner{
+	background-color:#B9F2FB !important;
+	border: none ;
+	outline: none;
+	border-radius:3px;
+	color: #141414;
+}
+.cl_paginationButtonActive .sapMBtnInner{
+	background-color:#B9F2FB !important;
+	border: none ;
+	outline: none;
+	border-radius:3px;
+	color: #141414;
+}
+
+.cl_paginationButton .sapMBtnInner{
+	background-color:transparent;
+	color: #141414 !important;
+	border-radius:3px ;
+}
+
+/* ===========================
+   Dashboard other font and Text Styles
+   =========================== */
+.cl_paddingtop{
+	margin-top:-4px;
+}
+.cl_db_StatusImage {
+    margin-right: 19px;
+}
+
+.cl_db_initText {
+    font-weight: 600;
+    font-size: 13px; /*Changed by saraswathi*/
+    padding-left: 18px;
+    color: #141414;
+}
+.cl_dynamicDescWidth {
+  width: calc(100vw - 70rem) !important;
+  min-width: 15rem;
+}
+.cl_TransIdTextColor.sapMLnk:visited {
+	padding-top:-2px;
+    color: #3393A1 !important;
+}
+.cl_TransIdTextColor.sapMLnk:not(.sapMLnkWrapping) .sapMLnkText {
+	padding-top:-2px;
+    color: #3393A1 !important;
+}
+.cl_SeparatorsapMTBStandard{
+	border-bottom: solid .0625rem #ccc;
+}
+
+
+
+
+/*advance search*/
+
+
+
+
+
+
+
+/*check box*/
+
+
+/*font styles*/
+
+
+
+
+
+
+
+
+

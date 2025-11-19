@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table">
+	<Dialog showHeader="false" title="{i18n>CustomizeTable}" class="cl_customize_Dialog sapUiSizeCompact" contentWidth="10rem"
+		verticalScrolling="false" contentHeight="auto">
+		<customHeader>
+			<Toolbar class="cl_customize_Toolbar_Dialog" height="2.5rem">
+				<Text text="{i18n>CustomizeColumns}" class="sapUiTinyMarginBegin"/>
+			</Toolbar>
+		</customHeader>
+		<Toolbar class="sapUiTinyMargin cl_bordertool">
+			<Input placeholder="{i18n>SearchHere}" liveChange="fnColumnFilter" class="cl_inputField "/>
+		</Toolbar>
+		<VBox class="cl_customize_dialog_scroll">
+			<Toolbar class="cl_bordertool cl_list_col sapUiSmallMarginBegin sapUiTinyMarginEnd">
+				<CheckBox id="id_checkselect" class="cl_checkboxSel" select="fnCheckSelAll"/>
+				<Text text="{i18n>SelectAll}" class="cl_columnTextBold"/>
+			</Toolbar>
+			<List id="id_columnSel" items="{JMColumn>/}" class="sapUiTinyMarginBottom">
+				<CustomListItem class="cl_list_act sapUiTinyMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd">
+					<Toolbar class="cl_bordertool cl_list_col ">
+						<CheckBox selected="{JMColumn>Visible}" class="cl_checkbox" select="fnCheckSel"/>
+						<Text text="{JMColumn>CName}" class="cl_columnText"/>
+					</Toolbar>
+				</CustomListItem>
+			</List>
+		</VBox>
+		<buttons>
+			<Button text="{i18n>Cancel}"  icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" class="sapUiTinyMarginBottomTop cl_secondaryButton" press="fnCancel"/>
+			<Button text="{i18n>Apply}"  icon="{= ${JM_ImageModel>/path} + 'Apply.svg'}" class="sapUiTinyMarginBottomTop cl_primaryButton" press="fnApplyCustomizeColumn"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

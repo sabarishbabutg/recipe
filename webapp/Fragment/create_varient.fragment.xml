@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:uitable="sap.ui.table">
+	<Dialog showHeader="false" title = "{i18n>CreateVarient}" class="cl_customize_Dialog sapUiSizeCompact" contentWidth="10rem" 
+			verticalScrolling="false" contentHeight="auto">
+		<customHeader>
+			<Toolbar class="cl_DialogToolbar" height="2.5rem">
+				<ToolbarSpacer/>
+				<Text text="{i18n>CreateVarient}" class="cl_DialogToolbarTitle sapUiTinyMarginTopBottom"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<Toolbar class="sapUiTinyMargin cl_bordertool">
+			<SearchField placeholder="{i18n>SearchHere}" liveChange="fnColumnFilter" class="cl_varsearch"/>
+			<Button  icon="{= ${JM_ImageModel>/path} + 'Plus.svg'}" tooltip="{i18n>addRow}" press="fnAddVariant" class="cl_item_Add_Dialog"/>
+			<Button  icon="{= ${JM_ImageModel>/path} + 'Delete.svg'}" tooltip="{i18n>deleteRow}" press="fnDeleteVariant" class="cl_item_Delete_Dialog"/>
+		</Toolbar>
+		<uitable:Table rows="{JMVaraint>/}" id="id_variantTab" visibleRowCountMode="Fixed" visibleRowCount="4" selectionMode="Single"
+			class="cl_opr_Tbl sapUiTinyMargin">
+			<uitable:columns>
+				<uitable:Column tooltip="{i18n>VariantName}">
+					<Text text="{i18n>VariantName}"/>
+					<uitable:template>
+						<Input liveChange="fnVarintComparsion" editable="{JMVaraint>New}" value="{JMVaraint>VarintName}" class="cl_opr_tableInput" maxLength="40"/>
+					</uitable:template >
+				</uitable:Column>
+				<uitable:Column tooltip="{i18n>CreatedBy}">
+					<Text text="{i18n>CreatedBy}"/>
+					<uitable:template>
+						<Label text ="{JM_UserModel>/0/Uname}" class="sapUiTinyMarginBegin cl_table_label"/>
+					</uitable:template>
+				</uitable:Column>
+			</uitable:columns>
+		</uitable:Table>
+		<buttons>
+			<Button text="Cancel"  icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" width="5rem" class="cl_secondaryButton sapUiSmallMarginEnd" press="fnCancelVariant"/>
+			<Button text="Save" icon="{= ${JM_ImageModel>/path} + 'Save.svg'}" width="4.2rem" class="cl_primaryButton sapUiSmallMarginEnd" press="fnSaveVariant"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
