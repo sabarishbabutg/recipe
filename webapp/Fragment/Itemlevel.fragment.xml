@@ -1,0 +1,574 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<Dialog title="Partner Function" showHeader="false" class="cl_bomitem_Dialog sapUiSizeCompact" afterClose="fnDupMsgFragClose">
+		<customHeader>
+			<Toolbar class="cl_item_Toolbar_Dlg" height="2.5rem">
+				<Image src="{= ${JM_ImageModel>/path} + 'Previous.svg'}" alt="{i18n>Previous}" width="25px" tooltip="Previous" press="fnPreviousItem"
+					class="cl_ImageFocusremove"/>
+				<ToolbarSpacer/>
+				<Text text="{JM_CommonModel>/message}" id="id_itemNumber" class="cl_DialogToolbarTitle sapUiTinyMarginTopBottom"/>
+				<ToolbarSpacer/>
+				<Image src="{= ${JM_ImageModel>/path} + 'Next.svg'}" alt="{i18n>Next}" width="25px" tooltip="Next" press="fnNextItem"
+					class="cl_ImageFocusremove"/>
+			</Toolbar>
+		</customHeader>
+		<VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop cl_bomitem_headerBox" height="80%">
+			<IconTabBar id="id_icontabbar" headerMode="Inline" select="onTabSelect" class="cl_item_iconTab_Dlg cl_item_iconTab_Dialog">
+				<items>
+					<IconTabFilter text="{i18n>BasicData}">
+						<VBox>
+							<grid:Grid class="cl_item_gridRemovePadding">
+								<HBox height="1.5rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>QuantityData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox>
+									<Label text="{i18n>OperationScrap}" id="ID_BOM_AVOAU_TXT" tooltip="{i18n>OperationScrap}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_AVOAU" value="{JM_BOMTable>Avoau}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{JM_BOMTable>Avoau}"
+											class="cl_inputField" liveChange="fnLiveChange" type="Number"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>ComponentScrap}" id="ID_BOM_AUSCH_TXT" tooltip="{i18n>ComponentScrap}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_AUSCH" value="{JM_BOMTable>Ausch}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{JM_BOMTable>Ausch}"
+											class="cl_inputField" liveChange="fnLiveChange" type="Number"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>FixedQuantity}" id="ID_BOM_FMENG_TXT" tooltip="{i18n>FixedQuantity}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_FMENG" select="fnCheckBoxLiveChange" selected="{JM_BOMTable>Fmeng}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>NetIndicator}" id="ID_BOM_NETAU_TXT" tooltip="{i18n>NetIndicator}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_NETAU" select="fnCheckBoxLiveChange" selected="{JM_BOMTable>Netau}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L2 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<HBox height="1.5rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>GeneralData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox>
+									<Label text="{i18n>AlternateItemGroup}" id="ID_BOM_ALPGR_TXT" tooltip="{i18n>AlternateItemGroup}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_ALPGR" class="cl_inputField" liveChange="fnLiveChange" value="{JM_BOMTable>Alpgr}"
+											editable="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{JM_BOMTable>Alpgr}"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>Referencepoint}" id="ID_BOM_RFPNT_TXT" tooltip="{i18n>Referencepoint}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_RFPNT" value="{JM_BOMTable>Rfpnt}" class="cl_inputField" showValueHelp="true" liveChange="fnLiveChange"
+											valueHelpRequest="fnF4press" tooltip="{JM_BOMTable>Rfpnt}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>RecAllowed}" id="ID_BOM_REKRS_TXT" tooltip="{i18n>RecAllowedDes}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_REKRS" selected="{JM_BOMTable>Rekrs}" select="fnCheckBoxLiveChange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>Recursive}" id="ID_BOM_REKRI_TXT" tooltip="{i18n>Recursive}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_REKRI" selected="{JM_BOMTable>Rekri}" select="fnCheckBoxLiveChange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>CADIndicator}" id="ID_BOM_CADPO_TXT" tooltip="{i18n>CADIndicator}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_CADPO" selected="{JM_BOMTable>Cadpo}" select="fnCheckBoxLiveChange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>ALEIndicator}" id="ID_BOM_ALEKZ_TXT" tooltip="{i18n>ALEIndicator}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_ALEKZ" selected="{JM_BOMTable>Alekz}" select="fnCheckBoxLiveChange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>CoProduct}" id="ID_BOM_KZKUP_TXT" tooltip="{i18n>CoProduct}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_KZKUP" select="fnCheckBoxLiveChange" selected="{JM_BOMTable>Kzkup}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<HBox height="1.5rem" class=" sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>MRPData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox>
+									<Label text="{i18n>LeadOffset}" id="ID_BOM_NLFZT_TXT" tooltip="{i18n>LeadOffset}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_NLFZT" value="{JM_BOMTable>Nlfzt}" tooltip="{JM_BOMTable>Nlfzt}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+											class="cl_inputField" liveChange="fnLiveChange" type="Number"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>Oproffset}" id="ID_BOM_NLFZV_TXT" tooltip="{i18n>OproffsetDes}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_NLFZV" value="{JM_BOMTable>Nlfzv}" tooltip="{JM_BOMTable>Nlfzv}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												class="cl_inputField" liveChange="fnLiveChange" type="Number"></Input>
+										</VBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_NLFMV" value="{JM_BOMTable>Nlfmv}" tooltip="{JM_BOMTable>Nlfmv}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												class="cl_inputField" liveChange="fnLiveChange" showValueHelp="true" valueHelpRequest="fnF4press"></Input>
+										</VBox>
+										<VBox width="40%">
+											<Input id="ID_BOM_NLFMV_DES" class="cl_inputDescField" value="{JM_BOMTable>NlfmvDes}" tooltip="{JM_BOMTable>NlfmvDes}" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>DistributionKey}" id="ID_BOM_VERTI_TXT" tooltip="{i18n>DistributionKey}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_VERTI" value="{JM_BOMTable>Verti}" tooltip="{JM_BOMTable>Verti}" class="cl_inputField" liveChange="fnLiveChange"
+												showValueHelp="true" valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_VERTI_DES" class="cl_inputDescField" value="{JM_BOMTable>VertiDes}" tooltip="{JM_BOMTable>VertiDes}" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>Explosiontype}" id="ID_BOM_DSPST_TXT" tooltip="{i18n>Explosiontype}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_DSPST" value="{JM_BOMTable>Dspst}" class="cl_inputField" liveChange="fnLiveChange" showValueHelp="true"
+												valueHelpRequest="fnF4press" tooltip="{JM_BOMTable>Dspst}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_DSPST_DES" value="{JM_BOMTable>DspstDes}" tooltip="{JM_BOMTable>DspstDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>SpecialProcurement}" id="ID_BOM_ITSOB_TXT" tooltip="{i18n>SpecialProcurement}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_ITSOB" value="{JM_BOMTable>Itsob}" tooltip="{JM_BOMTable>Itsob}" class="cl_inputField" liveChange="fnLiveChange"
+												showValueHelp="true" valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_ITSOB_DES" value="{JM_BOMTable>ItsobDes}" tooltip="{JM_BOMTable>ItsobDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>PhantomType}" id="ID_BOM_DUMPS_TXT" tooltip="{i18n>PhantomType}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_DUMPS" selected="{JM_BOMTable>Dumps}" select="fnCheckBoxLiveChange" editable="false" enabled="false"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L2 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+						</VBox>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>StatusLongText}">
+						<VBox>
+							<grid:Grid class="cl_item_gridRemovePadding">
+								<HBox height="1.5rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>ItemText}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox>
+									<Label text="{i18n>Line1}" id="ID_BOM_POTX1_TXT" tooltip="{i18n>Line1}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_POTX1" value="{JM_BOMTable>Potx1}" tooltip="{JM_BOMTable>Potx1}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+											class="cl_inputField" liveChange="fnLiveChange"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L6 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>Line2}" id="ID_BOM_POTX2_TXT" tooltip="{i18n>Line2}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_POTX2" value="{JM_BOMTable>Potx2}" tooltip="{JM_BOMTable>Potx2}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+											class="cl_inputField" liveChange="fnLiveChange"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L6 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<HBox height="1.5rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>ItemStatus}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox>
+									<Label text="{i18n>SparePartIndicator}" id="ID_BOM_ERSKZ_TXT" tooltip="{i18n>SparePartIndicator}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_ERSKZ" value="{JM_BOMTable>Erskz}" class="cl_inputField" liveChange="fnLiveChange" showValueHelp="true"
+												valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{JM_BOMTable>Erskz}"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_ERSKZ_DES" value="{JM_BOMTable>ErskzDes}" tooltip="{JM_BOMTable>ErskzDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>CostingRelevancy}" id="ID_BOM_SANKA_TXT" tooltip="{i18n>CostingRelevancy}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_SANKA" value="{JM_BOMTable>Sanka}" class="cl_inputField" showValueHelp="true" valueHelpRequest="fnF4press"
+												liveChange="fnLiveChange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{JM_BOMTable>Sanka}"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_SANKA_DES" value="{JM_BOMTable>SankaDes}" tooltip="{JM_BOMTable>SankaDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>RelevantSales}" id="ID_BOM_RVREL_TXT" tooltip="{i18n>RelevantSales}" class="cl_inputLabel"></Label>
+									<VBox width="100%">
+										<Input id="ID_BOM_RVREL" value="{JM_BOMTable>Rvrel}" tooltip="{JM_BOMTable>Rvrel}" class="cl_inputField" liveChange="fnLiveChange"
+											editable="false"></Input>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>Engineering}" id="ID_BOM_SANKO_TXT" tooltip="{i18n>Engineering}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_SANKO" selected="{JM_BOMTable>Sanko}" select="fnCheckBoxLiveChange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>PlantMaintenance}" id="ID_BOM_SANIN_TXT" tooltip="{i18n>PlantMaintenance}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_SANIN" selected="{JM_BOMTable>Sanin}" select="fnCheckBoxLiveChange" editable="false" enabled="false"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>ProductRelevent}" id="ID_BOM_SANFE_TXT" tooltip="{i18n>ProductRelevent}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_SANFE" selected="{JM_BOMTable>Sanfe}" editable="false" enabled="false" select="fnCheckBoxLiveChange"
+										class="cl_opr_checkbx"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<HBox height="1.5rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>AdditionalData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox>
+									<Label text="{i18n>MaterialProvision}" id="ID_BOM_BEIKZ_TXT" tooltip="{i18n>MaterialProvision}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_BEIKZ" value="{JM_BOMTable>Beikz}" class="cl_inputField" liveChange="fnLiveChange" showValueHelp="true"
+												valueHelpRequest="fnF4press" tooltip="{JM_BOMTable>Beikz}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_BEIKZ_DES" value="{JM_BOMTable>BeikzDes}" tooltip="{JM_BOMTable>BeikzDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>ProductionStorageLoc}" id="ID_BOM_LGORT_TXT" tooltip="{i18n>ProductionStorageLocDes}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_LGORT" class="cl_inputField" liveChange="fnLiveChange" value="{JM_BOMTable>Lgort}" tooltip="{JM_BOMTable>Lgort}"
+												showValueHelp="true" valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input id="ID_BOM_LGORT_DES" value="{JM_BOMTable>LgortDes}" tooltip="{JM_BOMTable>LgortDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>SupplyArea}" id="ID_BOM_PRVBE_TXT" tooltip="{i18n>SupplyArea}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="35%" class="cl_inputFieldGap">
+											<Input id="ID_BOM_PRVBE" value="{JM_BOMTable>Prvbe}" tooltip="{JM_BOMTable>Prvbe}" class="cl_inputField" liveChange="fnLiveChange"
+												showValueHelp="true" valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<VBox width="65%">
+											<Input id="ID_BOM_PRVBE_DES" value="{JM_BOMTable>PrvbeDes}" tooltip="{JM_BOMTable>PrvbeDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>BulkMaterial}" id="ID_BOM_SCHGT_TXT" tooltip="{i18n>BulkMaterial}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_SCHGT" selected="{JM_BOMTable>Schgt}" select="fnCheckBoxLiveChange" class="cl_opr_checkbx"
+										editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L1 M6 S6"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>BlkMatIndMatMst}" id="ID_BOM_SCHKZ_TXT" tooltip="{i18n>BlkMatIndMatMstDes}" class="cl_inputLabel"></Label>
+									<CheckBox id="ID_BOM_SCHKZ" selected="{JM_BOMTable>Schkz}" select="fnCheckBoxLiveChange" class="cl_opr_checkbx" editable="false"
+										enabled="false"></CheckBox>
+									<layoutData>
+										<grid:GridData span="L2 M6 S6"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+						</VBox>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>Administration}">
+						<grid:Grid class="cl_item_gridRemovePadding">
+							<HBox height="1.5rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+								<Label text="{i18n>AdminstrativeData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+								<layoutData>
+									<grid:GridData span="L12 M12 S12"/>
+								</layoutData>
+							</HBox>
+							<VBox>
+								<Label text="{i18n>ChangeNumber}" id="ID_BOM_AENNR_TXT" tooltip="{i18n>ChangeNumber}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<Input id="ID_BOM_AENNR" value="{JM_BOMTable>Aennr}" class="cl_inputField" liveChange="fnLiveChange"
+										editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>ToChangeNumber}" id="ID_BOM_AENRA_TXT" tooltip="{i18n>ToChangeNumber}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<Input id="ID_BOM_AENRA" value="{JM_BOMTable>Aenra}" class="cl_inputField" liveChange="fnLiveChange"
+										editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>ValidFrom}" tooltip="{i18n>ValidFrom}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<DatePicker value="{ path: 'JM_BOMTable>Datuv',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+										valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation" class=" cl_inputField cl_customDatePicker"
+										tooltip="{ path: 'JM_BOMTable>Datuv',formatter: '.formatter.fnDateFormater' }" editable="false"/>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>ValidTo}" tooltip="{i18n>ValidTo}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<DatePicker value="{ path: 'JM_BOMTable>Datub',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+										valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation" class="cl_inputField cl_customDatePicker"
+										tooltip="{ path: 'JM_BOMTable>Datub',formatter: '.formatter.fnDateFormater' }" editable="false"/>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>CreatedOn}" tooltip="{i18n>CreatedOn}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<DatePicker value="{ path: 'JM_BOMTable>Andat',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+										valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation" class="cl_inputField cl_customDatePicker"
+										tooltip="{ path: 'JM_BOMTable>Andat',formatter: '.formatter.fnDateFormater' }" editable="false"/>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>CreatedBy}" tooltip="{i18n>CreatedBy}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<Input value="{JM_BOMTable>Annam}" class="cl_inputField" liveChange="fnLiveChange" editable="false"></Input>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>ChangedOn}" tooltip="{i18n>ChangedOn}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<DatePicker value="{ path: 'JM_BOMTable>Aedat',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+										valueFormat="yyyy-MM-ddTHH:mm:ss" change="fnDateRangevalidation" class="cl_inputField cl_customDatePicker"
+										tooltip="{ path: 'JM_BOMTable>Aedat',formatter: '.formatter.fnDateFormater' }" editable="false"/>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+							<VBox>
+								<Label text="{i18n>ChangedBy}" tooltip="{i18n>ChangedBy}" class="cl_inputLabel"></Label>
+								<VBox width="100%">
+									<Input value="{JM_BOMTable>Aenam}" class="cl_inputField" liveChange="fnLiveChange" editable="false"></Input>
+								</VBox>
+								<layoutData>
+									<grid:GridData span="L3 M12 S12"/>
+								</layoutData>
+							</VBox>
+						</grid:Grid>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>DocumentAssignment}">
+						<RadioButtonGroup select="fnDocumentRadiolvl" id="id_radioButton" columns="2"
+							class="cl_radiobutton sapUiTinyMarginTop sapUiSmallMarginBegin">
+							<RadioButton id="id_currVersion" text="Current Version" class="cl_radiobutton"/>
+							<RadioButton id="id_allVersion" text="All Version" class="cl_radiobutton" selected="true"/>
+						</RadioButtonGroup>
+						<VBox id="id_documentTable">
+							<HBox height="1.5rem" class="sapUiSmallMarginBeginEnd sapUiTinyMarginBottom " justifyContent="SpaceBetween">
+								<Label text="{i18n>LinkedDocuments}" class="sapUiTinyMarginBegin cl_tableHeaderTxt"></Label>
+								<HBox>
+									<Image class="cl_pv_removeImgFocus cl_imagePos sapUiSmallMarginEnd" width="1.6rem" press="fnAddRow" tooltip="{i18n>Add}"
+										src="{= ${JM_ImageModel>/path} + 'PlusBtn.svg'}"/>
+									<Image class="cl_pv_removeImgFocus cl_imagePos sapUiSmallMarginEnd" width="1.6rem" press="fnDeleteRow" tooltip="{i18n>Delete}"
+										src="{= ${JM_ImageModel>/path} + 'DeleteBtn.svg'}"/>
+								</HBox>
+								<layoutData>
+									<grid:GridData span="L12 M12 S12"/>
+								</layoutData>
+							</HBox>
+							<VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom sapUiTinyMarginTop">
+								<uitable:Table id="idDynamicUITable" rows="{JM_DocumentModel>/DocumentList}" visibleRowCount="4" selectionMode="Single" class="cl_opr_Tbl">
+									<uitable:columns>
+										<uitable:Column>
+											<Label text="{i18n>DocumentType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_DocumentModel>DocType}" showValueHelp="true" class="cl_bom_tableInput"></Input>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column>
+											<Label text="{i18n>Document}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_DocumentModel>Document}" showValueHelp="true" class="cl_bom_tableInput"></Input>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column>
+											<Label text="{i18n>DocumentVersion}"/>
+											<uitable:template>
+												<VBox class="cl_item_tablenoneditBg">
+													<Input value="{JM_DocumentModel>Document}" editable="false" class="cl_bom_tableInput"></Input>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column>
+											<Label text="{i18n>DocumentPart}"/>
+											<uitable:template>
+												<VBox class="cl_item_tablenoneditBg">
+													<Input value="{JM_DocumentModel>Document}" editable="false" class="cl_bom_tableInput"></Input>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+									</uitable:columns>
+								</uitable:Table>
+							</VBox>
+						</VBox>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</VBox>
+		<buttons>
+			<Button text="{i18n>Continue}" tooltip="{i18n>Continue}" class="sapUiSizeCompact cl_primaryButton sapUiSmallMarginEnd"
+				icon="{= ${JM_ImageModel>/path} + 'Apply.svg'}" press="fnItemSubmit"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

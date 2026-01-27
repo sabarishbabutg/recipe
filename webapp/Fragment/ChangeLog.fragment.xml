@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<Dialog title="{i18n>ChangeLog}" showHeader="false" contentWidth="1000px" class="cl_customize_Dialog sapUiSizeCompact"
+		afterClose="fnDupMsgFragClose">
+		<customHeader>
+			<Toolbar class="cl_DialogToolbar" height="2.5rem">
+				<ToolbarSpacer/>
+				<Text text="{i18n>ChangeLogDetails}" class="cl_DialogToolbarTitle sapUiTinyMarginTopBottom"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom sapUiTinyMarginTop">
+			<uitable:Table rows="{JM_ChangeLog>/}" visibleRowCount="7" selectionMode="None" class="cl_opr_Tbl">
+				<uitable:columns>
+					<uitable:Column width="40%" filterProperty="FieldName" sortProperty="FieldName">
+						<Label text="{i18n>Field}"/>
+						<uitable:template>
+							<Label text="{JM_ChangeLog>FieldName}" tooltip="{JM_ChangeLog>FieldName}" class="cl_table_label sapUiSmallMarginBegin"/>
+						</uitable:template>
+					</uitable:Column>
+					<uitable:Column width="15%" filterProperty="OldValue" sortProperty="OldValue">
+						<Label text="{i18n>OldValue}"/>
+						<uitable:template>
+							<Label text="{JM_ChangeLog>OldValue}" tooltip="{JM_ChangeLog>FieldName}" class="cl_table_label sapUiTinyMarginBegin"/>
+						</uitable:template>
+					</uitable:Column>
+					<uitable:Column width="15%" filterProperty="NewValue" sortProperty="NewValue">
+						<Label text="{i18n>NewValue}"/>
+						<uitable:template>
+							<Label text="{JM_ChangeLog>NewValue}" tooltip="{JM_ChangeLog>NewValue}" class="cl_table_label sapUiTinyMarginBegin"/>
+						</uitable:template>
+					</uitable:Column>
+					<uitable:Column width="18%" filterProperty="ProcessDesc" sortProperty="ProcessDesc">
+						<Label text="{i18n>Process}"/>
+						<uitable:template>
+							<Label text="{JM_ChangeLog>ProcessDesc}" tooltip="{JM_ChangeLog>ProcessDesc}" class="cl_table_label sapUiTinyMarginBegin"/>
+						</uitable:template>
+					</uitable:Column>
+					<uitable:Column width="15%" filterProperty="ChangedBy" sortProperty="ChangedBy">
+						<Label text="{i18n>Changedby}"/>
+						<uitable:template>
+							<Label text="{JM_ChangeLog>ChangedBy}" tooltip="{JM_ChangeLog>ChangedBy}" class="cl_table_label sapUiTinyMarginBegin"/>
+						</uitable:template>
+					</uitable:Column>
+				</uitable:columns>
+			</uitable:Table>
+		</VBox>
+		<buttons>
+			<Button text="{i18n>ChangeDetails}" icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}" width="8.5rem" class="cl_secondaryButton sapUiSmallMarginEnd"
+				press="fnCloseChanLogDialog"/>
+			<Button text="{i18n>Proceed}"  icon="{= ${JM_ImageModel>/path} + 'Continue.svg'}" width="6rem" visible="false" class="cl_primaryButton sapUiSmallMarginEnd"
+				press="fnCloseChanLogDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
