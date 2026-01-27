@@ -23,10 +23,17 @@
       "path": "/sap/opu/odata",
       "target": {
         "type": "destination",
+<<<<<<< HEAD
         "name": "HD1",
         "entryPath": "/sap/opu/odata"
       },
       "description": "HD1"
+=======
+        "name": "GWD",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "GWD"
+>>>>>>> branch 'master' of https://github.com/sabarishbabutg/Recipe.git
     }
   ],
   "sendWelcomeFileRedirect": true

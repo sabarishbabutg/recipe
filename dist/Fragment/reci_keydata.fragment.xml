@@ -1,0 +1,84 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<grid:Grid hSpacing="0" defaultSpan="L12 M12 S12" class="sapUiTinyMarginTop">
+		<VBox height="auto" class="sapUiTinyMarginBottom">
+			<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+				<Label text="{i18n>Keydata}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+				<layoutData>
+					<grid:GridData span="L7 M7 S12"/>
+				</layoutData>
+			</HBox>
+			<grid:Grid class="cl_kd_grid">
+				<VBox>
+					<Label text="{i18n>Material}" id="KID_RECI_MATNR_TXT" required="true" class="cl_inputLabel"></Label>
+					<VBox width="100%">
+						<Input class="cl_inputField" value="{JM_KeyData>/Matnr}" editable="{= ${JM_KeyData>/AppId} === 'RX' ? false : true }"
+							liveChange="fnLiveChange" valueHelpRequest="fnF4press" id="KID_RECI_MATNR" showValueHelp="true" maxLength="18"
+							submit="fnValidateMaterialPlant"></Input>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>MaterialDesc}" id="KID_RECI_MAKTX_TXT" class="cl_inputLabel"></Label>
+					<VBox width="100%">
+						<Input class="cl_inputField" value="{JM_KeyData>/Maktx}" id="KID_RECI_MATNR_DES" editable="false"></Input>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>Plant}" required="true" id="KID_RECI_WERKS_TXT" class="cl_inputLabel"/>
+					<HBox>
+						<VBox width="30%" class="cl_inputFieldGap">
+							<Input showValueHelp="true" value="{JM_KeyData>/Werks}" editable="{= ${JM_KeyData>/AppId} === 'RX' ? false : true }"
+								valueHelpRequest="fnPlantF4press" valueHelpOnly="true" liveChange="fnLiveChange" id="KID_RECI_WERKS" class="cl_inputField" 
+								maxLength="4"></Input>
+						</VBox>
+						<VBox width="70%">
+							<Input width="100%" id="KID_RECI_WERKS_DES" value="{JM_KeyData>/WerksDes}" class="cl_inputDescField" editable="false"></Input>
+						</VBox>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</HBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>Profile}" required="true" id="KID_RECI_PROFID_STD_TXT" class="cl_inputLabel"/>
+					<HBox>
+						<VBox width="40%" class="cl_inputFieldGap">
+							<Input valueHelpRequest="fnF4press" value="{JM_KeyData>/Profile}" editable="{= ${JM_KeyData>/AppId} === 'RX' ? false : true }"
+								showValueHelp="true" liveChange="fnLiveChange" id="KID_RECI_PROFID_STD" class="cl_inputField" maxLength="7"></Input>
+						</VBox>
+						<VBox width="60%">
+							<Input id="KID_RECI_PROFID_STD_DES" value="{JM_KeyData>/ProfileDes}" class="cl_inputDescField" editable="false"></Input>
+						</VBox>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</HBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>RecipeDesc}" required="true" id="KID_RECI_RECIDES_TXT" class="cl_inputLabel"></Label>
+					<VBox width="100%">
+						<Input id="KID_RECI_RECIDES" value="{JM_KeyData>/ReciDes}" editable="{= ${JM_KeyData>/AppId} === 'RX' ? false : true }"
+							liveChange="fnLiveChange" class="cl_inputField" maxLength="40"></Input>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+			</grid:Grid>
+			<layoutData>
+				<grid:GridData span="L12 M12 S12"/>
+			</layoutData>
+		</VBox>
+	</grid:Grid>
+</core:FragmentDefinition>

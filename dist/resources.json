@@ -1,0 +1,178 @@
+{
+    "resources": [
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/bom_detail.controller.js"
+        },
+        {
+            "name": "controller/reci_keydata.controller.js"
+        },
+        {
+            "name": "controller/pv_detail.controller.js"
+        },
+        {
+            "name": "controller/reci_search.controller.js"
+        },
+        {
+            "name": "controller/reci_operations.controller.js"
+        },
+        {
+            "name": "controller/reci_initiator.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "Formatter/formatter.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "localService/MDM_CONFIG_SRV/metadata.xml"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/MDM_RECI_SRV/metadata.xml"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "css/reci_operations.css"
+        },
+        {
+            "name": "css/bom_detail.css"
+        },
+        {
+            "name": "css/reci_keydata.css"
+        },
+        {
+            "name": "css/pv_detail.css"
+        },
+        {
+            "name": "css/reci_search.css"
+        },
+        {
+            "name": "css/reci_initiator.css"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "css/dialog.css"
+        },
+        {
+            "name": "thirdparty/xlsx.full.min.js"
+        },
+        {
+            "name": "thirdparty/jszip.min.js"
+        },
+        {
+            "name": "thirdparty/jszip-wrapper.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "view/reci_operations.view.xml"
+        },
+        {
+            "name": "view/reci_keydata.view.xml"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/reci_initiator.view.xml"
+        },
+        {
+            "name": "view/reci_search.view.xml"
+        },
+        {
+            "name": "view/bom_detail.view.xml"
+        },
+        {
+            "name": "view/pv_detail.view.xml"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "i18n/i18n_de.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en_GB.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en_US.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "Fragment/ConfirmationExit.fragment.xml"
+        },
+        {
+            "name": "Fragment/viewDetails.fragment.xml"
+        },
+        {
+            "name": "Fragment/reci_duplicate.fragment.xml"
+        },
+        {
+            "name": "Fragment/SucessDialog.fragment.xml"
+        },
+        {
+            "name": "Fragment/ChangeLog.fragment.xml"
+        },
+        {
+            "name": "Fragment/Itemlevel.fragment.xml"
+        },
+        {
+            "name": "Fragment/reci_operations.fragment.xml"
+        },
+        {
+            "name": "Fragment/OperationList.fragment.xml"
+        },
+        {
+            "name": "Fragment/reci_attachment_comments.fragment.xml"
+        },
+        {
+            "name": "Fragment/create_varient.fragment.xml"
+        },
+        {
+            "name": "Fragment/reci_keydata.fragment.xml"
+        },
+        {
+            "name": "Fragment/F4Help.fragment.xml"
+        },
+        {
+            "name": "Fragment/SendBack.fragment.xml"
+        },
+        {
+            "name": "Fragment/customize_table.fragment.xml"
+        },
+        {
+            "name": "Fragment/NavigationBar.fragment.xml"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "neo-app.json"
+        }
+    ]
+}

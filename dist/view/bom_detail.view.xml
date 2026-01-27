@@ -1,0 +1,547 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="MANAGED_RECIPE.controller.bom_detail"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table" xmlns:fi="sap.ui.unified">
+	<App>
+		<pages>
+			<Page showHeader="true" title="{i18n>BOM}" class="cl_pageBg sapUiSizeCompact" enableScrolling="false">
+				<customHeader>
+					<OverflowToolbar class="cl_header_toolbar">
+						<Image src="{= ${JM_ImageModel>/path} + 'NavBack.svg'}" alt="{i18n>NavBack}" width="1.5rem" press="fnNavBack"
+							class="cl_pv_removeImgFocus sapUiSmallMarginBegin"/>
+						<Title id="id_title" text="{i18n>RecipeBOM}" class="cl_header_title"/>
+						<ToolbarSpacer/>
+						<Label text="{JM_UserModel>/0/Agent} - {JM_UserModel>/0/Uname}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!--<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.NavigationBar" type="XML"/>-->
+				<content>
+					<VBox>
+						<VBox class="sapUiSmallMarginBegin cl_pv_scrollStyle">
+							<grid:Grid hSpacing="0" defaultSpan="L12 M12 S12" class="sapUiTinyMarginTop">
+								<VBox height="auto" class="sapUiTinyMarginEnd" visible="{JM_Visible>/visible}">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>BasicData}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_OTHERDATA" width="16px" tooltip="{i18n>Collapse}"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" press="fnExpandCollapse" alt="{i18n>Collapse}"></Image>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid">
+										<HBox height="1.7rem" class="cl_subheading" visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>InitialData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<VBox>
+											<Label text="{i18n>MaterialNumber}" class="cl_inputLabel"/>
+											<VBox width="100%">
+												<Input id="ID_BOM_MATNR" value="{JM_KeydataModel>/Matnr}" editable="false" class="cl_inputField" liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox >
+											<Label text="Material Description" class="cl_inputLabel"/>
+											<VBox width="100%">
+												<Input id="ID_BOM_MAKTX" value="{JM_KeydataModel>/Maktx}" width="100%" class="cl_inputDescField" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input id="ID_BOM_WERKS" value="{JM_KeydataModel>/Werks}" editable="false" class="cl_inputField" liveChange="fnLiveChange"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input id="ID_BOM_WERKS_DES" value="{JM_KeydataModel>/WerksDes}" width="100%" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="Usage" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="25%" class="cl_inputFieldGap">
+													<Input id="ID_BOM_STLAN" value="{JM_PVContextModel>/Stlan}" type="Number" editable="false" class="cl_inputField" liveChange="fnLiveChange"></Input>
+												</VBox>
+												<VBox width="75%">
+													<Input id="ID_BOM_STLAN_DES" value="{JM_LocalDescriptionModel>/STLAN/desc}" width="100%" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<HBox width="100%" visible="{JM_Visible>/BasicVisible}">
+											<VBox width="50%" class="cl_inputFieldGap">
+												<Label text="{i18n>AlternativeBOM}" class="cl_inputLabel"></Label>
+												<Input id="ID_BOM_STLAL" value="{JM_PVContextModel>/Stlal}" class="cl_inputField" liveChange="fnLiveChange" editable="false"
+													showValueHelp="true"></Input>
+											</VBox>
+											<VBox width="50%">
+												<Label text="{i18n>BOMGroup}" id="ID_BOM_EXSTL_TXT" class="cl_inputLabel"></Label>
+												<Input id="ID_BOM_EXSTL" value="{JM_BOMModel>/Exstl}" class="cl_inputField" liveChange="fnLiveChange" showValueHelp="true"
+													valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>TechType}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="25%" class="cl_inputFieldGap">
+													<Input id="ID_BOM_TETYP" value="{JM_BOMModel>/Tetyp}" editable="false" class="cl_inputField" liveChange="fnLiveChange"></Input>
+												</VBox>
+												<VBox width="75%">
+													<Input id="ID_BOM_TETYP_DES" value="{JM_LocalDescriptionModel>/TETYP/desc}" width="100%" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>BOMText}" id="ID_BOM_ZTEXT_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_ZTEXT" value="{JM_BOMModel>/Ztext}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>AltText}" id="ID_BOM_STKTX_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_STKTX" value="{JM_BOMModel>/Stktx}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<HBox height="1.7rem" class="sapUiTinyMarginTop cl_subheading" visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>QtyLongText}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>BaseQuantity}" id="ID_BOM_BMENG_TXT" required="true" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input id="ID_BOM_BMENG" value="{JM_BOMModel>/Bmeng}" type="Number" showValueHelp="false" class="cl_inputField" liveChange="fnLiveChange"
+														submit="fngetComponent" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input id="ID_BOM_BMEIN" value="{JM_BOMModel>/Bmein}" width="100%" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>BOMStatus}" id="ID_BOM_STLST_TXT" required="true" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_STLST" value="{JM_BOMModel>/Stlst}" class="cl_inputField" liveChange="fnLiveChange" showValueHelp="true"
+													valueHelpRequest="fnF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>AuthGroup}" id="ID_BOM_STLBE_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_STLBE" value="{JM_BOMModel>/Stlbe}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>ValidFrom}" id="ID_BOM_ADATU_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<DatePicker id="ID_BOM_ADATU" value="{ path: 'JM_BOMModel>/Datuv',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+													valueFormat="yyyy-MM-ddTHH:mm:ss" change="fnDateRangevalidation" class="cl_inputField cl_customDatePicker" editable="false"/>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>FromLot}" id="ID_BOM_LOSVN_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_LOSVN" type="Number" value="{JM_BOMModel>/Losvn}" editable="false" class="cl_inputField" liveChange="fnLiveChange"
+													showValueHelp="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>ToLot}" id="ID_BOM_LOSBS_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_LOSBS" type="Number" value="{JM_BOMModel>/Losbs}" editable="false" class="cl_inputField" liveChange="fnLiveChange"
+													showValueHelp="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>LotSizeUnit}" class="cl_inputLabel"></Label>
+											<VBox width="40%">
+												<Input id="ID_BOM_LOSME" value="{JM_BOMModel>/Losme}" editable="false" class="cl_inputField" liveChange="fnLiveChange" showValueHelp="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<HBox height="1.7rem" class="sapUiTinyMarginTop cl_subheading" visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>AdditionalData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>LabOffice}" id="ID_BOM_LABOR_TXT" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input id="ID_BOM_LABOR" showValueHelp="true" value="{JM_BOMModel>/Labor}" type="Number" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+														class="cl_inputField" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input id="ID_BOM_LABOR_DES" value="{JM_LocalDescriptionModel>/LABOR/desc}" width="100%" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox visible="{JM_Visible>/BasicVisible}">
+											<Label text="{i18n>SizDimensions}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_BOM_GROES" class="cl_inputField" value="{JM_BOMModel>/Groes}" liveChange="fnLiveChange" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<!--<HBox class="cl_pannelHead" width="100%" justifyContent="SpaceBetween">-->
+									<HBox class="cl_pannelHead" width="100%" justifyContent="SpaceBetween">
+										<Label text="{i18n>GeneralData}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class=" cl_kd_grid">
+										<OverflowToolbar class="cl_init_toolbar">
+											<!--<Label text="{i18n>GeneralData}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>-->
+											<Button id="id_downloadTemp" text="Download Template" tooltip="Download Template" icon="{= ${JM_ImageModel>/path} + 'download1.svg'}"
+												class="cl_primaryButton cl_uploadBtnMargin sapUiTinyMarginEnd " press="fndownload"/>
+											<Input id="id_fileNameInput" placeholder="Select a file" class="cl_fileUploader cl_UploadFileInput sapUiTinyMarginEnd"
+												valueHelpRequest="fnUpload" showValueHelp="true" valueHelpOnly="true" width="10rem"></Input>
+											<fi:FileUploader id="FileUploaderId" change="fnFileSelect" uploadOnChange="false" fileType="doc,docx,xls,xlsx,wdsl,msg,eml,zip,htm,pdf"
+												class="cl_fileupload"/>
+											<Button text="Upload file" tooltip="{i18n>Upload_label}" id="id_upload" icon="{= ${JM_ImageModel>/path} + 'upload.svg'}"
+												class="cl_primaryButton cl_uploadBtnMargin" press="fnExcelUpload" enabled="{= ${JM_ContextLocalModel>/Ind} !== 'T'}"/>
+											<ToolbarSpacer/>
+											<Button text="{i18n>DeselectAll}" class="cl_opr_DeselectBtn cl_imagePos sapUiSizeCompact sapUiTinyMarginBeginEnd" press="fnDeselectAll"
+												id="ID_DESELECT_BTN" visible="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{i18n>DeselectAll}"/>
+											<Button id="ID_ADD_BTN" class="cl_item_Add_Dialog sapUiSizeCompact sapUiTinyMarginEnd" icon="{= ${JM_ImageModel>/path} + 'Plus.svg'}"
+												visible="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{i18n>Add}" press="fnAddRow"/>
+											<Button id="ID_DELETE_BTN" class="cl_item_Delete_Dialog sapUiSizeCompact sapUiTinyMarginEnd"
+												icon="{= ${JM_ImageModel>/path} + 'Delete.svg'}" visible="{= ${JM_ContextModel>/Ind} !== 'T' }" tooltip="{i18n>Delete}" press="fnDeleteFrag"/>
+											<Image width="1.6rem" src="{= ${JM_ImageModel>/path} + 'DownloadSearch.svg'}" tooltip="{i18n>DownloadData}" press="fnDownloadExcel"
+												class="cl_removeFocus sapUiTinyMarginEnd"/>
+											<Image id="id_ExpandButton" width="0.8rem" visible="{JM_Visible>/visible}" class=" cl_search_expandCollpase sapUiTinyMarginEnd"
+												press="fnExpand" src="{= ${JM_ImageModel>/path} + 'Zoom.svg'}" alt="{i18n>Expand}"/>
+											<Image width="1rem" visible="{= !${JM_Visible>/visible} }" class="sapUiTinyMarginEnd cl_search_expandCollpase" press="fnCollapse"
+												src="{= ${JM_ImageModel>/path} + 'CollapseIcon.svg'}" alt="{i18n>Collapse}"/>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</OverflowToolbar>
+										<VBox>
+											<uitable:Table id="id_bomTable" rows="{JM_BOMTable>/BOMList}" visibleRowCount="{JM_Visible>/rowCount}" enableColumnReordering="true"
+												selectionBehavior="Row" fixedColumnCount="2" class="cl_opr_Tbl" rowSelectionChange="fnRowSelectionChange" selectionMode="Multi">
+												<uitable:columns>
+													<uitable:Column width="3rem">
+														<Label text="{i18n>Item}" tooltip="{i18n>Item}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<VBox>
+																<Link text="{JM_BOMTable>Posnr}" tooltip="{JM_BOMTable>Posnr}" class="cl_HdrTableItemtext sapUiTinyMarginBegin" press="fnItemDetails"/>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="4rem">
+														<Label text="{i18n>ICt}" tooltip="{i18n>ItemCategory}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<!--editable="{= ${JM_ContextModel>/Ind} !== 'T' }"-->
+																<Input value="{JM_BOMTable>Postp}" valueState="{JM_BOMTable>POSTP}" valueStateText="{JM_BOMTable>POSTP_TXT}" tooltip="{JM_BOMTable>Postp}"
+																	id="ID_BOM_POSTP" class="cl_bom_tableInput cl_tbl_errInput " showValueHelp="true" liveChange="fnLiveChange" editable="false"
+																	valueHelpRequest="fnF4TableInput"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="8rem">
+														<Label text="{i18n>Component}" tooltip="{i18n>Component}"/>
+														<uitable:template>
+															<VBox>
+																<Input value="{JM_BOMTable>Idnrk}" valueState="{JM_BOMTable>IDNRK}" valueStateText="{JM_BOMTable>IDNRK_TXT}" tooltip="{JM_BOMTable>Idnrk}"
+																	class="cl_bom_tableInput cl_tbl_errInput " liveChange="fnLiveChange" showValueHelp="true" id="ID_BOM_IDNRK" submit="fnSubmitComponent"
+																	valueHelpRequest="fnF4TableInput" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="10rem">
+														<Label text="{i18n>ComponentDesc}" tooltip="{i18n>ComponentDescription}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input id="ID_BOM_IDNRK_DES" value="{JM_BOMTable>Ktext}" tooltip="{JM_BOMTable>Ktext}" editable="false"
+																	class="cl_bom_tableInput cl_tbl_errInput" liveChange="fnLiveChange"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="5rem">
+														<Label text="{i18n>Quantity}" tooltip="{i18n>Quantity}"/>
+														<uitable:template>
+															<VBox>
+																<Input id="ID_BOM_MENGE" value="{JM_BOMTable>Menge}" valueState="{JM_BOMTable>MENGE}" valueStateText="{JM_BOMTable>MENGE_TXT}"
+																	class="cl_bom_tableInput cl_tbl_errInput " editable="{= ${JM_ContextModel>/Ind} !== 'T' }" liveChange="fnLiveChange" width="90%"
+																	type="Number"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="5rem">
+														<Label text="{i18n>UOM}" tooltip="{i18n>UnitMeasure}"/>
+														<uitable:template>
+															<VBox>
+																<Input id="ID_BOM_MEINS" value="{JM_BOMTable>Meins}" valueState="{JM_BOMTable>MEINS}" valueStateText="{JM_BOMTable>MEINS_TXT}"
+																	tooltip="{JM_BOMTable>MEINS}" showValueHelp="true" valueHelpRequest="fnF4TableInput" class="cl_bom_tableInput cl_tbl_errInput "
+																	liveChange="fnLiveChange" valueHelpOnly="true" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="2.5rem">
+														<Label text="{i18n>Asm}" tooltip="{i18n>AssemblyIndicator}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<CheckBox selected="{JM_BOMTable>Stlkz}" class="cl_opr_checkbx" editable="false"></CheckBox>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="2.5rem">
+														<Label text="{i18n>SIs}" tooltip="{i18n>SubItemIndicator}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<CheckBox selected="{JM_BOMTable>Upskz}" class="cl_opr_checkbx" editable="false"></CheckBox>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>ValidFrom}" tooltip="{i18n>ValidFrom}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<DatePicker value="{ path: 'JM_BOMTable>Datuv',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+																	valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation"
+																	class="cl_bom_tableInput cl_tbl_errInput cl_customDatePicker" editable="false"
+																	tooltip="{ path: 'JM_BOMTable>Datuv',formatter: '.formatter.fnDateFormater' }"/>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>ValidTo}" tooltip="{i18n>ValidTo}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<DatePicker value="{ path: 'JM_BOMTable>Datub',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+																	valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation"
+																	class="cl_bom_tableInput cl_tbl_errInput cl_customDatePicker" editable="false"
+																	tooltip="{ path: 'JM_BOMTable>Datub',formatter: '.formatter.fnDateFormater' }"/>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>ChangeNo}" tooltip="{i18n>ChangeNumber}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input id="ID_BOM_AENNR" value="{JM_BOMTable>Aennr}" tooltip="{JM_BOMTable>Aennr}" editable="false"
+																	class="cl_bom_tableInput cl_tbl_errInput " liveChange="fnLiveChange"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="3rem">
+														<Label text="{i18n>PhantomItem}" tooltip="{i18n>PhantomItemIndicator}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<CheckBox selected="{JM_BOMTable>Dumps}" class="cl_opr_checkbx" editable="false"></CheckBox>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>SortString}" tooltip="{i18n>SortString}"/>
+														<uitable:template>
+															<VBox>
+																<Input id="ID_BOM_SORTF" value="{JM_BOMTable>Sortf}" tooltip="{JM_BOMTable>Sortf}" class="cl_bom_tableInput cl_tbl_errInput "
+																	editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="8rem">
+														<Label text="Prod. Stroage loc." id="ID_BOM_LGORT_LBL" tooltip="{i18n>sort_str}"/>
+														<uitable:template>
+															<VBox>
+																<Input value="{JM_BOMTable>Lgort}" valueState="{JM_BOMTable>LGORT}" valueStateText="{JM_BOMTable>LGORT_TXT}" tooltip="{JM_BOMTable>Lgort}" class="cl_bom_tableInput cl_tbl_errInput" maxLength="4"
+																	showValueHelp="true" valueHelpRequest="fnf4prodStlocpress" valueHelpOnly="true" editable="{= ${JM_ContextModel>/MsgType} !== 'T' }"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="8rem">
+														<Label text="Co product" tooltip="{i18n>sort_str}"/>
+														<uitable:template>
+															<VBox>
+																<Select id="id_variants" class="cl_Hdr_tableInput cl_coproductSelct" valueState="{JM_BOMTable>KZKUP}" valueStateText="{JM_BOMTable>KZKUP_TXT}" width="100%" selectedKey="{JM_BOMTable>key}" change="fncoProductSelect">
+																	<!-- Static items -->
+																	<core:Item key="" text=""/>
+																	<core:Item key="Y" text="Yes"/>
+																	<core:Item key="N" text="No"/>
+																</Select>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="6rem">
+														<Label text="{i18n>ItemID}" tooltip="{i18n>ItemID}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input id="ID_BOM_IDENT" value="{JM_BOMTable>Ident}" tooltip="{JM_BOMTable>Ident}" editable="false"
+																	class="cl_bom_tableInput cl_tbl_errInput " liveChange="fnLiveChange"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>ChangeNoTo}" tooltip="{i18n>ToChangeNumber}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input id="ID_BOM_AENRA" value="{JM_BOMTable>Aenra}" tooltip="{JM_BOMTable>Aenra}" editable="false"
+																	class="cl_bom_tableInput cl_tbl_errInput " liveChange="fnLiveChange"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="5rem">
+														<Label text="{i18n>Group}" tooltip="{i18n>AltItemGroup}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input id="ID_BOM_ALPGR" value="{JM_BOMTable>Alpgr}" tooltip="{JM_BOMTable>Alpgr}" editable="false"
+																	class="cl_bom_tableInput cl_tbl_errInput " liveChange="fnLiveChange"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="2.5rem">
+														<Label text="{i18n>FixedQuantity}" tooltip="{i18n>FixedQuantity}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<CheckBox selected="{JM_BOMTable>Fmeng}" class="cl_opr_checkbx" editable="false"></CheckBox>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="2.5rem">
+														<Label text="{i18n>LongText}" tooltip="{i18n>LongTextExists}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<CheckBox selected="{JM_BOMTable>Ltxpo}" class="cl_opr_checkbx" editable="false"></CheckBox>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="2.5rem">
+														<Label text="{i18n>SegmentedMaintained}" tooltip="{i18n>SegmentedMaintained}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<CheckBox selected="{JM_BOMTable>SgtCmkz}" class="cl_opr_checkbx" editable="false"></CheckBox>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>SegValue}" tooltip="{i18n>SegmentValue}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input id="ID_BOM_SGT_CATV" value="{JM_BOMTable>SgtCatv}" tooltip="{JM_BOMTable>Verti}" class="cl_bom_tableInput cl_tbl_errInput "
+																	liveChange="fnLiveChange" editable="false"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="7rem">
+														<Label text="{i18n>ObjectType}" tooltip="{i18n>ObjectType}"/>
+														<uitable:template>
+															<VBox class="cl_item_tablenoneditBg">
+																<Input value="{JM_BOMTable>Obtsp}" tooltip="{JM_BOMTable>Obtsp}" editable="false" class="cl_bom_tableInput cl_tbl_errInput "
+																	liveChange="fnLiveChange"></Input>
+															</VBox>
+														</uitable:template>
+													</uitable:Column>
+												</uitable:columns>
+											</uitable:Table>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+						</VBox>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<Label text="{i18n>PageTips}" class="cl_pageTip sapUiSmallMarginBegin"/>
+						<Image src="{= ${JM_ImageModel>/path} + 'Pagetips.svg'}" width="0.9rem" class="sapUiTinyMarginBegin" tooltip="{i18n>PageTips}"
+							alt="{i18n>PageTips}"/>
+						<ToolbarSpacer/>
+						<Button text="{i18n>Cancel}" width="5rem" icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" class="cl_secondaryButton sapUiTinyMarginEnd"
+							tooltip="{i18n>Cancel}" press="fnBomclose"/>
+						<Button text="{i18n>Changelog}" width="7.8rem" icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}"
+							class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="{i18n>Changelog}" press="fnChangelog"
+							visible="{= ${JM_KeydataModel>/AppId} === 'RX' }"/>
+						<Button text="{i18n>SaveBack}" width="9rem" icon="{= ${JM_ImageModel>/path} + 'Save.svg'}" class="cl_primaryButton sapUiSmallMarginEnd"
+							tooltip="{i18n>SaveBack}" press="fnSaveBack" visible="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

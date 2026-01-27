@@ -1,0 +1,323 @@
+/* ===========================
+   Search Screen Grid Styles
+   =========================== */
+.cl_search_grid {
+    background: #ffffff;
+    padding-top:0.7rem!important;
+    border-right: 1px solid #9AA0A7;
+    border-left: 1px solid #9AA0A7;
+    border-bottom: 1px solid #9AA0A7;
+    border-top: 1px solid #9AA0A7;
+    border-radius: 7px;
+}
+
+.cl_toolbarBorderBottomRemove{
+	border-bottom: none !important;
+	padding:0px;
+}
+
+/* ===========================
+   Select Variant Custom Styles
+   =========================== */
+.cl_s_selectVarient .sapMInputBaseInner {
+    font-family: "Segoe UI" !important;
+    font-size: 12px;
+    font-weight: 400;
+    color: #141414;
+}
+
+.cl_s_selectVarient .sapUiIcon::before {
+    color: #3393A1;
+}
+
+.cl_s_selectVarient .sapMInputBaseInner::placeholder {
+    font-family: "Segoe UI" !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.15px;
+    text-transform: capitalize;
+    color: #9AA0A7;
+    opacity: 1;
+}
+
+/* ===========================
+   Input Base Wrapper Styles
+   =========================== */
+.cl_s_selectVarient .sapMInputBaseContentWrapper {
+    box-shadow: none !important;
+    border-radius: 2px !important;
+    border: 1px solid #3393A1 !important;
+    background: #E4FBFF !important;
+}
+
+.cl_s_selectVarient.sapMInputBaseContentWrapper:not(.sapMInputBaseReadonlyWrapper):not(.sapMInputBaseContentWrapperState):not(.sapMInputBaseDisabledWrapper):hover {
+    border-color: #3393A1;
+}
+
+.cl_s_selectVarient.sapMInputBase:not(.sapMFocus).sapMInputBaseContentWrapper:not(.sapMInputBaseReadonlyWrapper):not(.sapMInputBaseContentWrapperState):not(.sapMInputBaseDisabledWrapper):hover {
+    border-color: #3393A1;
+}
+
+.cl_s_selectVarient.sapMFocus.sapMInputBase.sapMInputBaseContentWrapper:not(.sapMInputBaseDisabledWrapper)::before {
+    border: none !important;
+}
+
+/* ===========================
+   Select Box (sapMSlt) Styles
+   =========================== */
+.cl_s_selectVarient.sapMSlt {
+    background: #E4FBFF !important;
+    box-shadow: none !important;
+    border: 1px solid #3393A1 !important;
+    border-radius: 3px !important;
+}
+
+.cl_s_selectVarient.sapMSlt > .sapMSltLabel {
+    font-family: "Segoe UI" !important;
+    font-size: 12px !important;
+    letter-spacing: 0.3px;
+}
+
+/* ===========================
+   Search and Search Varient Font Styles
+   =========================== */
+.cl_subHeader {
+    font-family: 'Segoe UI' !important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #141414;
+}
+/* ===========================
+   Search Screen Radio Button Style
+   =========================== */
+
+.cl_s_radiobutton .sapMLabel {
+    font-size: 13px !important;
+    font-family: 'Segoe UI' !important;
+    font-weight: 400 !important;
+    color: #141414 !important;
+}
+/*To remove focus on radio buttons*/
+.cl_s_radiobutton .sapMRb:focus::before {
+    border: none !important;
+}
+/*Style to change the fill color of radiobuttons*/
+.cl_s_radiobutton .sapMRbSel .sapMRbBInn {
+    fill: #3393A1;
+    
+}
+/*Style for radio button border*/
+.cl_s_radiobutton .sapMRb.sapMRbSel .sapMRbB .sapMRbBOut {
+    stroke: #3393A1 !important;
+}
+
+
+/* ===========================
+	Search Screen table Border
+   =========================== */
+.cl_border{
+	border:1px solid #9AA0A7;
+	/*height:calc(100vh - 18rem);*/
+	border-radius : 7px;
+}
+.cl_borderSS{
+	border:1px solid #9AA0A7;
+	/*height:calc(100vh - 5rem);*/
+	border-radius : 7px;
+}
+
+
+/* ===========================
+	Tabel header Text and Count Txt
+   =========================== */
+.cl_search_tableHeaderTxt {
+    font-family: "Segoe UI" !important;
+    font-style: normal;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.15px;
+    color: #141414;
+}
+/*Table header*/
+.cl_search_tableCntTxt {
+    font-family: "Segoe UI" !important;
+    font-style: normal;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.15px;
+    color: #3393A1;
+}
+
+/* ===========================
+	Create New menu Button style
+   =========================== */
+.cl_createNew .sapMBtnInner {
+    background: linear-gradient(to right, #54BEBD, #0382A5);
+    font-family: Segoe UI;
+    font-size: 13px;
+    color: #FFFFFF !important;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: none !important;
+}
+.cl_createNew.sapMBtn .sapMBtnHoverable {
+    background: linear-gradient(to right, #54BEBD, #0382A5) !important;
+}
+.cl_createNew .sapMBtnInner .sapMBtnIcon.sapMImg {
+    width: 1rem !important;
+}
+.cl_createNew .sapMBtnDefault::before {
+    border: none !important;
+}
+.cl_createNew.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner::after {
+    color: white !important;
+    line-height: 1.75rem !important;
+    font-size: 13px !important;
+}
+
+.cl_createNew>.sapMBtn:hover>.sapMBtnInner {
+    background: linear-gradient(to right, #54BEBD, #0382A5) !important;
+    color: #FFFFFF !important;
+}
+.cl_createNew.sapMMenuBtn .sapMBtnInner.sapMBtnText .sapMBtnIcon{
+	margin-left: 0px ;
+}
+/*create new Drop down*/
+.cl_textmenu.sapMMenuItem{
+	width : 8rem!important;
+	border:none;
+}
+.cl_textmenu .sapMMenuItemText{
+	font-family : 'Segoe UI' !important;
+	font-weight : 400;
+	letter-spacing : 0.3px;
+}
+
+/* ===========================
+	Expand Collapse Focus remove
+   =========================== */
+.cl_search_expandCollpase.sapMImgFocusable:focus{
+	outline:none;
+	outline-offset:none	;
+	border-radius:0px;
+}
+
+.cl_removeFocus{
+	outline:none;
+	outline-offset:none;
+}
+
+
+/* ===========================
+	Table filter styles
+   =========================== */
+
+.cl_uwl_customizefilterlistitem .sapMSLIImg{
+	width:13px;
+	/* when we use sapUiTinyMargin more space will get so padding will be used*/
+	padding-right:2px;
+}
+
+.cl_uwl_wrapfilterlistitem .sapMSLIImg{
+	width:17px !important;
+}  
+
+.cl_uwl_filterlistitem .sapMSLI{
+	/* by using height only we have to controle the row height of the pop up*/
+	height:37px !important;
+	overflow:hidden;
+	border-bottom:none !important;
+}
+
+.cl_uwl_clearfilterlistitem.sapMIBar-CTX.sapMFooter-CTX{
+	border-top:none !important;
+}
+
+.cl_uwl_clearfilterlistitem.sapMLIBFocusable:focus, 
+.cl_uwl_clearfilterlistitem.sapMTblCellFocusable:focus{
+	outline:none !important;
+}
+
+.cl_uwl_clearfilterlistitem.sapMBtn:hover>.sapMBtnHoverable {
+    background: linear-gradient(to right, #54BEBD, #0382A5) !important;
+}
+
+.cl_uwl_clearfilterlistitem .sapMBtnInner {
+    background: linear-gradient(to right, #54BEBD, #0382A5);
+    font-family: Segoe UI;
+    font-size: 13px;
+    color: #FFFFFF !important;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: none !important;
+}
+
+.cl_uwl_PopOver.sapMPopover .sapMIBar.sapMHeader-CTX{
+	display:none !important;
+}
+
+.cl_uwl_TransReqWrap .cl_uwltableTxt {
+	white-space: normal !important;
+	word-wrap: break-word;
+	overflow: visible !important;
+}
+
+
+/* ===========================
+	No Data Text Styles
+   =========================== */
+
+.cl_noDataText{
+	font-family : 'Segoe UI' !important;
+	font-size : 13px;
+	font-weight : 500;
+	color : #141414;
+	letter-spacing : 0.2px;
+}
+
+
+/* ===========================
+	Searcg Field for uitable
+   =========================== */
+.cl_s_customSearchWrapper{
+	border:1px solid #B4B5C5 !important;
+	background:transparent !important;
+	border-radius:3px;
+	height:26px !important;
+}
+.cl_s_customSearchWrapper.sapMTB.sapMTBStandard{
+	border-bottom: none;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBaseContentWrapper {
+    border: none !important;
+    outline:none !important;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBaseInner {
+    box-shadow: none !important;
+    border:1px solid white !important;
+    width: 100% !important;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBaseContentWrapper::before {
+    border: none !important;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBasePlaceholder {
+    border: none !important;
+}
+.cl_s_inputNoBorderSearchField.sapMInput .sapMInputBaseContentWrapper {
+    height: 26px;
+    border-bottom: none;
+    background: transparent;
+    border: none !important;
+}

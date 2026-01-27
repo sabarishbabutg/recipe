@@ -1,0 +1,280 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="MANAGED_RECIPE.controller.reci_search"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<App>
+		<pages>
+			<Page showHeader="true" class="cl_pageBg sapUiSizeCompact" enableScrolling="true">
+				<!--Header Bar-->
+				<customHeader>
+					<OverflowToolbar class="cl_header_toolbar">
+						<Title text="{i18n>searchTitle}" class="sapUiSmallMarginBegin cl_header_title"/>
+						<ToolbarSpacer/>
+						<Label text="{JM_UserModel>/0/Uname} - {JM_UserModel>/0/Sysid}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!-- Fragment for Navigation Bar-->
+				<!--<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.NavigationBar" type="XML"/>-->
+				<content>
+					<VBox>
+						<!--Road Map Box-->
+						<HBox visible="{JM_Visible>/visible}" id="id_roadmap" justifyContent="SpaceBetween"
+							class="cl_roadmap sapUiSmallMarginBeginEnd sapUiTinyMarginTop">
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<HBox alignItems="Center" justifyContent="Center" id="id_roadmapHighlighter" class="cl_Highlightborder_roadMap">
+										<Image src="{= ${JM_ImageModel>/path} + 'SearchR.svg'}" tooltip="{i18n>Search}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+										<Label text="{i18n>Search}" visible="{RoadMapUI>/labelVisible}" class="cl_HighlightText_roadMap"/>
+									</HBox>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image src="{= ${JM_ImageModel>/path} + 'KeyData.svg'}" tooltip="{i18n>Keydata}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>Keydata}" class="cl_textStyle_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image src="{= ${JM_ImageModel>/path} + 'Recipe.svg'}" tooltip="{i18n>RecipeDetails}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>RecipeDetails}" class="cl_textStyle_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image src="{= ${JM_ImageModel>/path} + 'Reviewer.svg'}" tooltip="{i18n>Reviewer}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>Reviewer}" class="cl_textStyle_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image src="{= ${JM_ImageModel>/path} + 'Approver.svg'}" tooltip="{i18n>Approver}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>Approver}" class="cl_textStyle_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+								</HBox>
+							</VBox>
+						</HBox>
+						<!--Search Screen container-->
+						<VBox id="id_search_container" class="sapUiSmallMarginBeginEnd">
+							<grid:Grid hSpacing="0" defaultSpan="L12 M12 S12">
+								<VBox visible="{JM_Visible>/visible}" height="auto" class="sapUiTinyMarginTop">
+									<grid:Grid class="cl_search_grid">
+										<OverflowToolbar class="cl_toolbarBorderBottomRemove">
+											<HBox class="cl_subheading">
+												<Text text="{i18n>Search}" visible="{JMVisible>/visible}" class="cl_subHeader sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+											</HBox>
+											<ToolbarSpacer/>
+											<HBox class="cl_subheading ">
+												<Text text="{i18n>SearchVarient}" visible="{JMVisible>/visible}" class=" cl_subHeader sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+											</HBox>
+											<Select id="id_combo" class="cl_s_selectVarient cl_combobox" width="16.5rem" selectedKey="{i18n>SelectedKey}" change="fnVarinatSelect"
+												items="{JMListVariant>/}">
+												<core:Item key="{JMListVariant>VariantName}" text="{JMListVariant>VariantName}"/>
+											</Select>
+											<Image src="{= ${JM_ImageModel>/path} + 'SaveVariant.svg'}" tooltip="{i18n>AddandDltVarient}" press="fnOpenVariant" width="1.6rem"/>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</OverflowToolbar>
+										<VBox>
+											<Label text="{i18n>Material}" class="cl_inputLabel"></Label>
+											<Input liveChange="fnLiveChange" valueHelpRequest="fnF4press" id="SID_RECI_MATNR" class="cl_inputField" showValueHelp="true" maxLength="18"></Input>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>MaterialDesc}" class="cl_inputLabel"></Label>
+											<Input class="cl_inputField" id="SID_RECI_MATNR_DES" editable="false"></Input>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="26%" class="cl_inputFieldGap">
+													<Input showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press" id="SID_RECI_WERKS" class="cl_inputField" maxLength="4"></Input>
+												</VBox>
+												<VBox width="73%">
+													<Input width="100%" id="SID_RECI_WERKS_DES" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Group}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="35%" class="cl_inputFieldGap">
+													<Input showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press" id="SID_RECI_PLNNR" class="cl_inputField" maxLength="9"></Input>
+												</VBox>
+												<VBox width="65%">
+													<Input width="100%" id="SID_RECI_PLNNR_DES" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<OverflowToolbar class="cl_toolbarBorderBottomRemove">
+											<ToolbarSpacer/>
+											<RadioButtonGroup select="fnRadioChange" columns="2" id="idRBGroup" class="cl_s_radiobutton sapUiSmallMarginBegin">
+												<RadioButton enabled="{viewModel>/isEditable}" text="{i18n>AND}" id="id_and" class="cl_s_radiobutton"/>
+												<RadioButton enabled="{viewModel>/isEditable}" text="{i18n>OR}" id="id_or" class="cl_s_radiobutton"/>
+											</RadioButtonGroup>
+											<Button text="{i18n>ClearAll}" tooltip="{i18n>ClearAll}" class="cl_secondaryButton sapUiTinyMarginEnd" press="fnClearAllfields"
+												icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}" width="5.7rem"/>
+											<Button text="{i18n>Search}" tooltip="{i18n>Search}" class="cl_primaryButton" press="fnSearch"
+												icon="{= ${JM_ImageModel>/path} + 'Search.svg'}" width="5rem"/>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</OverflowToolbar>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox id="id_searchTableBox" class="sapUiTinyMarginTop cl_border">
+									<OverflowToolbar class="cl_toolbarBorderBottomRemove sapUiSmallMarginBegin sapUiTinyMarginTopBottom sapUiSmallMarginEnd">
+										<Image width="1.6rem" src="{= ${JM_ImageModel>/path} + 'ColumnFilter.svg'}" tooltip="{i18n>TableFilter}" press="fnTableFilter"/>
+										<Label text="{i18n>ResultList}" class="sapUiTinyMarginBegin cl_search_tableHeaderTxt"></Label>
+										<Label text="{JM_Recidetails>/total}" class="sapUiTinyMarginBegin cl_search_tableCntTxt"></Label>
+										<ToolbarSpacer/>
+										<!--<Input width="13rem" liveChange="fnSearchTable" placeholder="" class="cl_inputField"/>-->
+										<Toolbar visible="{RoadMapUI>/labelVisible}" class="cl_s_customSearchWrapper sapUiSizeCompact" width="12rem">
+											<Image src="{= ${JM_ImageModel>/path} + 'SearchInputIcon.svg'}" tooltip="{i18n>SearchHere}" class="searchIcon" width="18px" height="18px"/>
+											<Input id="Id_SearchHere" liveChange="fnSearchTable" change="onsearchByFilter" placeholder="{i18n>SearchHere}"
+												class="cl_s_inputNoBorderSearchField cl_inputField"/>
+										</Toolbar>
+										<MenuButton text="{i18n>CreateNew}" icon="{= ${JM_ImageModel>/path} + 'Createnew.svg'}" width="9rem"
+											class="sapUiSmallMarginBegin cl_createNew">
+											<menu>
+												<Menu class="cl_createnewMenu" itemSelected="fnMenu">
+													<MenuItem text="{i18n>Create}" class="cl_textmenu" key="RECI_CREATE"/>
+													<MenuItem text="{i18n>Change}" class="cl_textmenu" key="RECI_CHANGE"/>
+												</Menu>
+											</menu>
+										</MenuButton>
+										<Image width="1.6rem" src="{= ${JM_ImageModel>/path} + 'DownloadSearch.svg'}" tooltip="{i18n>DownloadData}" press="fnDownloadTable"
+											class="cl_removeFocus sapUiSmallMarginBegin"/>
+										<Image width="0.8rem" visible="{JM_Visible>/visible}" tooltip="{i18n>Expand}" class="sapUiSmallMarginBegin cl_search_expandCollpase"
+											press="fnExpand" src="{= ${JM_ImageModel>/path} + 'Zoom.svg'}"/>
+										<Image width="1rem" visible="{= !${JM_Visible>/visible} }" tooltip="{i18n>Collapse}" class="sapUiSmallMarginBegin cl_search_expandCollpase"
+											press="fnCollapse" src="{= ${JM_ImageModel>/path} + 'CollapseIcon.svg'}"/>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</OverflowToolbar>
+									<uitable:Table id="id_search_table" rows="{JM_Recidetails>/records}" visibleRowCount="{JM_Visible>/rowCount}" selectionMode="Single"
+										selectionBehavior="Row" visibleRowCountMode="Interactive" class="cl_opr_Tbl sapUiSmallMarginBeginEnd sapUiSmallMarginBottom"
+										rowSelectionChange="fnSelectBomRow">
+										<uitable:noData>
+											<VBox alignItems="Center" justifyContent="Center">
+												<Image src="{= ${JM_ImageModel>/path} + 'Nodatafound.gif'}" tooltip="{i18n>NoDatafound}"/>
+												<Label text="{i18n>NoDatafound}" class="cl_noDataText"/>
+											</VBox>
+										</uitable:noData>
+										<uitable:columns>
+											<uitable:Column filterProperty="Matnr" sortProperty="Matnr" tooltip="{i18n>Material}">
+												<Label text="{i18n>Material}" tooltip="{i18n>Material}"/>
+												<uitable:template>
+													<HBox>
+														<Image src="{ path: 'JM_Recidetails>Status', formatter: '.formatter.fnConverStatusToIcon' }"
+															tooltip="{ path: 'JM_Recidetails>Status', formatter: '.formatter.fnConverStatustoTooltip' }"></Image>
+														<Label text="{JM_Recidetails>Matnr}" class="sapUiTinyMarginBegin cl_table_label"/>
+													</HBox>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column width="10%" filterProperty="Maktx" sortProperty="Maktx" tooltip="{i18n>MaterialDesc}">
+												<Label text="{i18n>MaterialDes}" tooltip="{i18n>MaterialDesc}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Maktx}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Plnnr" sortProperty="Plnnr" tooltip="{i18n>Group}">
+												<Label text="{i18n>Group}" tooltip="{i18n>Group}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Plnnr}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Plnty" sortProperty="Plnty" tooltip="{i18n>TaskListType}">
+												<Label text="{i18n>TLType}" tooltip="{i18n>TaskListType}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Plnty}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Plnal" sortProperty="Plnal" tooltip="{i18n>GroupCounter}">
+												<Label text="{i18n>GrC}" tooltip="{i18n>GroupCounter}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Plnal}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Zkriz" sortProperty="Zkriz" tooltip="{i18n>Counter}">
+												<Label text="{i18n>Counter}" tooltip="{i18n>Counter}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Zkriz}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column width="7rem" filterProperty="Verid" sortProperty="Verid" tooltip="{i18n>ProductionVersion}">
+												<Label text="{i18n>ProdVersion}" tooltip="{i18n>ProductionVersion}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Verid}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Stlal" sortProperty="Stlal" tooltip="{i18n>AlternativeBOM}">
+												<Label text="{i18n>AltBOM}" tooltip="{i18n>AlternativeBOM}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Stlal}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Stlan" sortProperty="Stlan" tooltip="{i18n>Usage}">
+												<Label text="{i18n>Usage}" tooltip="{i18n>Usage}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Stlan}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Aennr" sortProperty="Aennr" tooltip="{i18n>Change}">
+												<Label text="{i18n>Change}" tooltip="{i18n>Change}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Aennr}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Aennr" sortProperty="Annam" tooltip="{i18n>User}">
+												<Label text="{i18n>User}" tooltip="{i18n>User}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Annam}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Werks" sortProperty="Werks" tooltip="{i18n>Plant}">
+												<Label text="{i18n>Plant}" tooltip="{i18n>Plant}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Werks}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Statu" sortProperty="Statu" tooltip="{i18n>Status}">
+												<Label text="{i18n>Status}" tooltip="{i18n>Status}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Statu}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+											<uitable:Column filterProperty="Plnme" sortProperty="Plnme" tooltip="{i18n>UnitofMeasures}">
+												<Label text="{i18n>UOM}" tooltip="{i18n>UnitofMeasures}"/>
+												<uitable:template>
+													<Label text="{JM_Recidetails>Plnme}" class="sapUiTinyMarginBegin cl_table_label"/>
+												</uitable:template>
+											</uitable:Column>
+										</uitable:columns>
+									</uitable:Table>
+								</VBox>
+							</grid:Grid>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,374 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table"
+	controllerName="MANAGED_RECIPE.controller.reci_initiator" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page showHeader="true" title="Application" class="cl_pageBg sapUiSizeCompact" enableScrolling="false">
+				<customHeader>
+					<OverflowToolbar class="cl_header_toolbar">
+						<Image src="{= ${JM_ImageModel>/path} + 'NavBack.svg'}" tooltip="{i18n>navBack}" width="1.5rem" press="fnNavBack"
+							class="cl_pv_removeImgFocus sapUiSmallMarginBegin"/>
+						<Title id="id_title" text="{i18n>title}" class="cl_header_title"/>
+						<ToolbarSpacer/>
+						<!--added by srikanth-->
+						<Label text="{JM_UserModel>/0/Agent} - {JM_UserModel>/0/Uname}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!--<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.NavigationBar" type="XML"/>-->
+				<content>
+					<VBox>
+						<HBox id="id_roadmap" class="cl_init_roadmap sapUiSmallMarginBeginEnd sapUiTinyMarginTop">
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image src="{= ${JM_ImageModel>/path} + 'SearchR.svg'}" tooltip="{i18n>Search}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label id="id_roadMap_search" text="{i18n>Search}" visible="{RoadMapUI>/labelVisible}" class="cl_textStyle_roadMap"/>
+								</HBox>
+							</VBox>
+							<HBox visible="{RoadMapUI>/labelVisible}" class="cl_Vline_roadMap"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image src="{= ${JM_ImageModel>/path} + 'KeyData.svg'}" tooltip="{i18n>Keydata}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label id="id_roadMap_keydata" text="{i18n>Keydata}" visible="{RoadMapUI>/labelVisible}" class="cl_textStyle_roadMap"/>
+								</HBox>
+							</VBox>
+							<HBox visible="{RoadMapUI>/labelVisible}" class="cl_Vline_roadMap"></HBox>
+							<VBox id="id_initiator" width="20%"></VBox>
+							<HBox visible="{RoadMapUI>/labelVisible}" class="cl_Vline_roadMap"></HBox>
+							<VBox id="id_reviewer" width="20%"></VBox>
+							<HBox visible="{RoadMapUI>/labelVisible}" class="cl_Vline_roadMap"></HBox>
+							<VBox id="id_approver" width="20%"></VBox>
+						</HBox>
+						<VBox class="sapUiSmallMarginBegin cl_init_scrollStyle">
+							<grid:Grid hSpacing="0" defaultSpan="L12 M12 S12" class="sapUiTinyMarginTop">
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>RecipeHeader}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid">
+										<VBox>
+											<Label text="{i18n>Material}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input class="cl_inputField" value="{JM_KeydataModel>/Matnr}" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>MaterialDesc}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input class="cl_inputField" value="{JM_KeydataModel>/Maktx}" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="35%" class="cl_inputFieldGap">
+													<Input editable="false" value="{JM_KeydataModel>/Werks}" class="cl_inputField"></Input>
+												</VBox>
+												<VBox width="65%">
+													<Input width="100%" value="{JM_KeydataModel>/WerksDes}" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Group}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input class="cl_inputField" value="{JM_KeydataModel>/Plnnr}" editable="false"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input width="100%" value="{JM_KeydataModel>/ReciDes}" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>GroupCounter}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input class="cl_inputField" value="{JM_KeydataModel>/Plnal}" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<OverflowToolbar class="cl_init_toolbar">
+									<Button text="{i18n>Operations}" class="cl_primaryButton sapUiTinyMarginEnd" icon="{= ${JM_ImageModel>/path} + 'Operations.svg'}"
+										press="fnNavOperation" width="7rem"/>
+									<Button text="{i18n>Material}" class="cl_primaryButton" press="fnNavProductionVersion" icon="{= ${JM_ImageModel>/path} + 'Materials.svg'}"
+										width="6rem"/>
+									<ToolbarSpacer/>
+									<Button text="{i18n>CollapseAll}" id="id_ExpandCollapse" class="cl_primaryButton sapUiTinyMarginEnd" press="fnCollpaseExpandAll"/>
+								</OverflowToolbar>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginEnd">
+									<HBox id="ID_RECI_ASSIGN_HEADER" class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>Assignment}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_RECI_ASSIGN" width="16px" tooltip="{i18n>Collapse}"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" press="fnExpandCollapse"></Image>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" id="ID_RECI_ASSIGN_GRID">
+										<VBox>
+											<Label text="{i18n>Status}" id="ID_RECI_STATU_TXT" required="true" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input value="{JM_InitiatorModel>/Statu}" showValueHelp="true" valueHelpRequest="fnNewF4press" liveChange="fnLiveChange" id="ID_RECI_STATU"
+														class="cl_inputField" maxLength="3" editable="{= !${JM_ContextModel>/Ind} || ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input width="100%" id="ID_RECI_STATU_DES" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Usage}" id="ID_RECI_VERWE_TXT" required="true" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="23%" class="cl_inputFieldGap">
+													<Input value="{JM_InitiatorModel>/Verwe}" id="ID_RECI_VERWE" valueHelpRequest="fnNewF4press" liveChange="fnLiveChange" showValueHelp="true"
+														class="cl_inputField" maxLength="3" editable="{= !${JM_ContextModel>/Ind} || ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+												</VBox>
+												<VBox width="77%">
+													<Input id="ID_RECI_VERWE_DES" width="100%" class="cl_inputDescField" editable="false" maxLength="3"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>PlannerGroup}" id="ID_RECI_VAGRP_TXT" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input value="{JM_InitiatorModel>/Vagrp}" id="ID_RECI_VAGRP" valueHelpRequest="fnNewF4press" liveChange="fnLiveChange" showValueHelp="true"
+														class="cl_inputField" maxLength="3" editable="{= ${JM_ContextModel>/Ind} !== 'T'}"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input width="100%" id="ID_RECI_VAGRP_DES" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>ResourceNetwork}" id="ID_RECI_NNAME_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input value="{JM_InitiatorModel>/Nname}" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" id="ID_RECI_NNAME" valueHelpRequest="fnNewF4press"
+													liveChange="fnLiveChange" class="cl_inputField" showValueHelp="true"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" id="ID_RECI_CQR_HEADER" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>ChargeQuantityRange}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_RECI_CQR" width="16px" tooltip="collapse"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" press="fnExpandCollapse"></Image>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid id="ID_RECI_CQR_GRID" class="cl_kd_grid">
+										<VBox>
+											<Label text="{i18n>From}" id="ID_RECI_LOSVN_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_RECI_LOSVN" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" value="{JM_InitiatorModel>/Losvn}"
+													liveChange="fnQuanDataElementValidation" type="Number" class="cl_inputField" maxLength="13"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>To}" id="ID_RECI_LOSBS_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_RECI_LOSBS" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" value="{JM_InitiatorModel>/Losbs}"
+													liveChange="fnQuanDataElementValidation" type="Number" class="cl_inputField" maxLength="13"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>TaskListUnit}" id="ID_RECI_PLNME_TXT" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="25%" class="cl_inputFieldGap">
+													<Input value="{JM_InitiatorModel>/Plnme}" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" id="ID_RECI_PLNME" valueHelpRequest="fnNewF4press"
+														liveChange="fnLiveChange" showValueHelp="true" class="cl_inputField"></Input>
+												</VBox>
+												<VBox width="75%">
+													<Input width="100%" class="cl_inputDescField" id="ID_RECI_PLNME_DES" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" id="ID_RECI_DEFAULT_HEADER" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>defaultValuesOpPhasesSecRes}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_RECI_DEFAULT" width="16px" tooltip="{i18n>Collapse}"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" press="fnExpandCollapse"></Image>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid id="ID_RECI_DEFAULT_GRID" class="cl_kd_grid">
+										<VBox>
+											<Label text="{i18n>BaseQuantity}" id="ID_RECI_BMSCH_TXT" required="true" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_RECI_BMSCH" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" value="{JM_InitiatorModel>/Bmsch}"
+													liveChange="fnQuanDataElementValidation" type="Number" class="cl_inputField" maxLength="13"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>OpUnit}" id="ID_RECI_MEINH_TXT" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="25%" class="cl_inputFieldGap">
+													<Input value="{JM_InitiatorModel>/Meinh}" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" showValueHelp="true" id="ID_RECI_MEINH"
+														valueHelpRequest="fnNewF4press" liveChange="fnLiveChange" class="cl_inputField" maxLength="2"></Input>
+												</VBox>
+												<VBox width="75%">
+													<Input width="100%" id="ID_RECI_MEINH_DES" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<HBox justifyContent="Center">
+												<VBox width="45%">
+													<Label text="{i18n>ChargeQuantity}" id="ID_RECI_UMREZ_TXT" class="cl_inputLabel"></Label>
+													<Input id="ID_RECI_UMREZ" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" value="{JM_InitiatorModel>/Umrez}"
+														liveChange="fnNumberFieldValidation" type="Number" class="cl_inputField" maxLength="5"></Input>
+												</VBox>
+												<VBox width="10%">
+													<Label text="{i18n>Equalto}" id="ID_RECI_UMREN_TXT" class="sapUiMediumMarginTop sapUiTinyMarginBegin cl_inputLabel"></Label>
+												</VBox>
+												<VBox width="45%">
+													<Label text="{i18n>OperationQuantity}" class="cl_inputLabel"></Label>
+													<Input id="ID_RECI_UMREN" editable="{= ${JM_ContextModel>/Ind} !== 'T'}" value="{JM_InitiatorModel>/Umren}"
+														liveChange="fnNumberFieldValidation" type="Number" class="cl_inputField" maxLength="5"></Input>
+												</VBox>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L6 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" id="ID_RECI_CP_HEADER" width="100%" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>ChangeParameter}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_RECI_CP" width="16px" tooltip="{i18n>Collapse}"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" press="fnExpandCollapse"></Image>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid id="ID_RECI_CP_GRID" class="cl_kd_grid">
+										<VBox>
+											<Label text="{i18n>ChangeRule}" id="ID_RECI_CHRULE_TXT" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Select id="ID_RECI_CHRULE" class="cl_comboBox cl_combobox" selectedKey="{JM_InitiatorModel>/Chrule}" change="fnSelectedLivechange"
+													items="{JM_ChangeRule>/}">
+													<core:Item key="{JM_ChangeRule>key}" text="{JM_ChangeRule>value}"/>
+												</Select>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+							<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.reci_attachment_comments" type="XML"/>
+						</VBox>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<Label text="{i18n>PageTips}" class="cl_pageTip sapUiSmallMarginBegin"/>
+						<Image src="{= ${JM_ImageModel>/path} + 'Pagetips.svg'}" width="0.9rem" class="sapUiTinyMarginBegin" tooltip="Page Tip"/>
+						<ToolbarSpacer/>
+						<Button text="{i18n>Changelog}" width="7.5rem" visible="{= (${JM_KeyData>/AppId} === 'RX') || (${JM_ContextModel>/Appid} === 'RX') }"
+							icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}" class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="Continue" press="fnChangelog"/>
+						<Button text="{i18n>Reject}" visible="{JM_FooterBtnModel>/Reject}" width="5.5rem" icon="{= ${JM_ImageModel>/path} + 'RejectW.svg'}"
+							class="cl_primaryButton sapUiSmallMarginEnd" tooltip="Continue" press="fnReject"/>
+						<Button text="{i18n>Sendback}" visible="{JM_FooterBtnModel>/sendBack}" width="7rem" icon="{= ${JM_ImageModel>/path} + 'SendbackW.svg'}"
+							class="cl_primaryButton sapUiSmallMarginEnd" tooltip="Continue" press="fnSendBackDialog"/>
+						<Button text="{i18n>SaveasDraft}" visible="{JM_FooterBtnModel>/Draft}" id="id_saveDraft" width="7.8rem"
+							icon="{= ${JM_ImageModel>/path} + 'Save.svg'}" class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="Continue" press="fnDraft"/>
+						<Button text="{i18n>CheckDuplicate}" visible="{JM_FooterBtnModel>/CheckDup}" width="9rem" icon="{= ${JM_ImageModel>/path} + 'Continue.svg'}"
+							class="cl_primaryButton sapUiTinyMarginEnd" tooltip="Continue" press="fnCheckDuplicate"/>
+						<Button text="{i18n>Submit}" id="id_submit" width="5.5rem" visible="{JM_FooterBtnModel>/submit}"
+							icon="{= ${JM_ImageModel>/path} + 'Submit.svg'}" class="cl_primaryButton cl_submitIconWidth sapUiSmallMarginEnd" tooltip="Continue"
+							press="fnsaveRecipe"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

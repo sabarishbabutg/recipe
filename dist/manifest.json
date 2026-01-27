@@ -1,0 +1,295 @@
+{
+    "_version": "1.7.0",
+    "sap.app": {
+        "id": "MANAGED_RECIPE",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "servicecatalog.connectivityComponent",
+            "version": "0.0.0"
+        },
+        "dataSources": {
+            "MDM_CONFIG_SRV": {
+                "uri": "/sap/opu/odata/exl/MDM_CONFIG_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/MDM_CONFIG_SRV/metadata.xml"
+                }
+            },
+            "MDM_RECI_SRV": {
+                "uri": "/sap/opu/odata/exl/MDM_RECI_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/MDM_RECI_SRV/metadata.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "MANAGED_RECIPE.view.App",
+            "type": "XML"
+        },
+        "dependencies": {
+            "minUI5Version": "1.30.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.layout": {},
+                "sap.ushell": {},
+                "sap.collaboration": {},
+                "sap.ui.comp": {},
+                "sap.uxap": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "MANAGED_RECIPE.i18n.i18n"
+                }
+            },
+            "": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneTime",
+                    "defaultCountMode": "Request"
+                },
+                "dataSource": "MDM_RECI_SRV",
+                "preload": true
+            },
+            "JMConfig": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneTime",
+                    "defaultCountMode": "Request"
+                },
+                "dataSource": "MDM_CONFIG_SRV",
+                "preload": true
+            },
+            "JM_Recipe": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_Operation": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_KeyData": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_WfParm": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_ProductionVrsn": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_Bom": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_ContextModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_ChangeLog": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "JM_InitialDatas": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                },
+                {
+                    "uri": "css/reci_initiator.css"
+                },
+                {
+                    "uri": "css/reci_keydata.css"
+                },
+                {
+                    "uri": "css/reci_search.css"
+                },
+                {
+                    "uri": "css/pv_detail.css"
+                },
+                {
+                    "uri": "css/bom_detail.css"
+                },
+                {
+                    "uri": "css/dialog.css"
+                },
+                {
+                    "uri": "css/reci_operations.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "viewPath": "MANAGED_RECIPE.view",
+                "routerClass": "sap.m.routing.Router",
+                "controlId": "id_app"
+            },
+            "targets": {
+                "reci_keydata": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearAggregation": true,
+                    "viewName": "reci_keydata",
+                    "viewLevel": 2,
+                    "controlAggregation": "pages"
+                },
+                "reci_initiator": {
+                    "viewType": "XML",
+                    "viewName": "reci_initiator",
+                    "transition": "slide",
+                    "clearAggregation": true,
+                    "viewLevel": 3,
+                    "controlAggregation": "pages"
+                },
+                "reci_search": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearAggregation": true,
+                    "viewName": "reci_search",
+                    "viewLevel": 1,
+                    "controlAggregation": "pages"
+                },
+                "pv_detail": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearAggregation": true,
+                    "viewName": "pv_detail",
+                    "viewLevel": 5,
+                    "controlAggregation": "pages"
+                },
+                "bom_detail": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearAggregation": true,
+                    "viewName": "bom_detail",
+                    "viewLevel": 5,
+                    "controlAggregation": "pages"
+                },
+                "reci_operations": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearAggregation": true,
+                    "viewName": "reci_operations",
+                    "viewLevel": 6,
+                    "controlAggregation": "pages"
+                }
+            },
+            "routes": [
+                {
+                    "name": "reci_search",
+                    "pattern": "",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "reci_search"
+                    ]
+                },
+                {
+                    "name": "reci_keydata",
+                    "pattern": "reci_keydata",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "reci_keydata"
+                    ]
+                },
+                {
+                    "name": "reci_initiator",
+                    "pattern": "reci_initiator",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "reci_initiator"
+                    ]
+                },
+                {
+                    "name": "pv_detail",
+                    "pattern": "pv_detail",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "pv_detail"
+                    ]
+                },
+                {
+                    "name": "bom_detail",
+                    "pattern": "bom_detail",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "bom_detail"
+                    ]
+                },
+                {
+                    "name": "reci_operations",
+                    "pattern": "reci_operations",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "reci_operations"
+                    ]
+                }
+            ]
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/exl/mdm_recipe",
+        "_version": "1.1.0"
+    }
+}

@@ -1,0 +1,638 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="MANAGED_RECIPE.controller.reci_operations"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<App>
+		<pages>
+			<Page showHeader="true" title="Application" class="cl_pageBg sapUiSizeCompact" enableScrolling="false">
+				<customHeader>
+					<OverflowToolbar class="cl_header_toolbar">
+						<Image src="{= ${JM_ImageModel>/path} + 'NavBack.svg'}" tooltip="{i18n>navBack}" width="1.5rem" press="fnBackConfirmation"
+							class="cl_pv_removeImgFocus sapUiSmallMarginBegin"/>
+						<Title id="id_title" text="{}" class="cl_header_title"/>
+						<ToolbarSpacer/>
+						<!--added by srikanth-->
+						<Label text="{JM_UserModel>/0/Agent} - {JM_UserModel>/0/Uname}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!--<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.NavigationBar" type="XML"/>-->
+				<content>
+					<VBox>
+						<VBox class="sapUiSmallMarginBeginEnd sapUiTinyMarginTop">
+							<grid:Grid class="cl_search_grid">
+								<VBox>
+									<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="30%" class="cl_inputFieldGap">
+											<Input value="{JM_KeydataModel>/Werks}" class="cl_inputField" editable="false" maxLength="4"></Input>
+										</VBox>
+										<VBox width="70%">
+											<Input width="100%" value="{JM_KeydataModel>/WerksDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>RecipeGroup}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="23%" class="cl_inputFieldGap">
+											<Input showValueHelp="true" value="{JM_KeydataModel>/Plnnr}" editable="false" class="cl_inputField" maxLength="4"></Input>
+										</VBox>
+										<VBox width="77%">
+											<Input width="100%" value="{JM_KeydataModel>/ReciDes}" class="cl_inputDescField" editable="false"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Label text="{i18n>GroupCounter}" class="cl_inputLabel"/>
+									<HBox>
+										<VBox width="35%" class="cl_inputFieldGap">
+											<Input editable="false" value="{JM_KeydataModel>/Plnal}" class="cl_inputField" maxLength="4"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+							<VBox class="cl_reci_dupDialog_tableBox sapUiSmallMarginTop">
+								<OverflowToolbar class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop cl_init_toolbar">
+									<Image press="fnCustomTable" width="1.6rem" src="{= ${JM_ImageModel>/path} + 'ColumnFilter.svg'}" tooltip="{i18n>TableFilter}"/>
+									<Label text="{i18n>ResultList}" class="sapUiTinyMarginBegin cl_search_tableHeaderTxt"></Label>
+									<Label text="{}" class="sapUiTinyMarginBegin cl_search_tableCntTxt"></Label>
+									<ToolbarSpacer/>
+									<Button id="id_DeselectAll" text="{i18n>DeselectAll}" class="cl_opr_DeselectBtn sapUiSizeCompact" press="fnDeselectAll"/>
+									<Input width="13rem" liveChange="fnFilterDBTable" change="fnFilterDBTable" submit="fnNextTable" placeholder="{i18n>SearchHere}"
+										class="cl_inputField sapUiTinyMarginEnd"/>
+									<Button text="{i18n>Operations}" class="cl_primaryButton sapUiTinyMarginEnd" icon="{= ${JM_ImageModel>/path} + 'Operations.svg'}"
+										press="fnOperationDialog" width="7rem"/>
+									<Button class="cl_item_Add_Dialog sapUiSizeCompact sapUiTinyMarginEnd" icon="{= ${JM_ImageModel>/path} + 'Plus.svg'}"
+										tooltip="{i18n>addRow}" press="fnAddRow"/>
+									<Button class="cl_item_Delete_Dialog sapUiSizeCompact" icon="{= ${JM_ImageModel>/path} + 'Delete.svg'}" tooltip="{i18n>deleteRow}"
+										press="fnDeleteRow"/>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</OverflowToolbar>
+								<uitable:Table id="id_OperationTable" rows="{JM_ReciOperations>/Operations}" visibleRowCount="10" fixedColumnCount="3"
+									class="cl_opr_Tbl sapUiSmallMarginBeginEnd sapUiTinyMarginBottom sapUiTinyMarginTop">
+									<uitable:columns>
+										<uitable:Column filterProperty="Vornr" sortProperty="Vornr" tooltip="{i18n>Operations}" width="5rem">
+											<Label text="{i18n>Operation}" tooltip="{i18n>Operations}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vornr}" class="cl_opr_tableInput" maxLength="4"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vornr' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vornr' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Phflg" sortProperty="Phflg" tooltip="{i18n>Phase}" width="3.4rem">
+											<Label text="{i18n>Phase}" tooltip="{i18n>Phase}"/>
+											<uitable:template>
+												<VBox>
+													<CheckBox selected="{JM_ReciOperations>Phflg}" class="cl_opr_checkbx" select="fnPhaseSelect"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Phflg' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Phflg' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Pvznr" sortProperty="Pvznr" tooltip="{i18n>SupOperation}" width="7rem">
+											<Label text="{i18n>SupOperation}" tooltip="{i18n>SupOperation}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Pvznr}" maxLength="4" type="Number" id="PVZNR" submit="fnSupOperation"
+														liveChange="fnSupOperationLiveChange" class="cl_opr_tableInput"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Pvznr' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Pvznr' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Phseq" sortProperty="Phseq" tooltip="{i18n>Destination}" width="7rem">
+											<Label text="{i18n>Destination}" tooltip="{i18n>Destination}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Phseq}" id="ID_OPER_PHSEQ" liveChange="fnDestinationLiveChange" valueHelpRequest="fnF4press"
+														showValueHelp="true" submit="fnDestinationSubmit" class="cl_opr_tableInput" maxLength="2" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Phseq' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Phseq' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Arbpl" sortProperty="Arbpl" tooltip="{i18n>Resource}" width="7rem">
+											<Label text="{i18n>Resource}" tooltip="{i18n>Resource}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Arbpl}" id="ID_OPER_ARBPL" liveChange="fnResourceLiveChange" submit="fnResourceSubmit"
+														valueHelpRequest="fnF4press" showValueHelp="true" class="cl_opr_tableInput" maxLength="8"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Arbpl' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Arbpl' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Steus" sortProperty="Steus" tooltip="{i18n>ControlKey}" width="6rem">
+											<Label text="{i18n>ControlKey}" tooltip="{i18n>ControlKey}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Steus}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="fnF4press" maxLength="4"
+														class="cl_opr_tableInput" tooltip="{JM_ReciOperations>ControlKey}" id="ID_OPER_STEUS"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Steus' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Steus' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Txtkz" sortProperty="Txtkz" tooltip="{i18n>LongText}" visible="{JMColumnVis>/LongText}" width="4rem">
+											<Label text="{i18n>LngTxt}" tooltip="{i18n>LongText}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<CheckBox selected="{JM_ReciOperations>Txtkz}" editable="false" class="cl_opr_checkbx"/>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Ktsch" sortProperty="Ktsch" tooltip="{i18n>StdKeyText}" visible="{JMColumnVis>/StandardKeyText}"
+											width="10rem">
+											<Label text="{i18n>StandardKeyText}" tooltip="{i18n>StdKeyText}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Ktsch}" id="ID_OPER_KTSCH" valueHelpRequest="fnF4press" liveChange="fnStdKeyTextLiveChange" maxLength="7"
+														showValueHelp="true" class="cl_opr_tableInput"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Ktsch' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Ktsch' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Ltxa1" sortProperty="Ltxa1" tooltip="{i18n>Description}" visible="{JMColumnVis>/Description}" width="10rem">
+											<Label text="{i18n>Description}" tooltip="{i18n>Description}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Ltxa1}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Description}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Ltxa1' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Ltxa1' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Txtsp" sortProperty="Txtsp" tooltip="{i18n>Language}" visible="{JMColumnVis>/Language}" width="6rem">
+											<Label text="{i18n>Language}" tooltip="{i18n>Language}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<Input value="{JM_ReciOperations>Txtsp}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Language}"/>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Ckselkz" sortProperty="Ckselkz" tooltip="{i18n>RelevangytoCostingIndicator}"
+											visible="{JMColumnVis>/RelevancyToCostingIndicator}" width="5rem">
+											<Label text="{i18n>RelevangytoCostingIndicator}" tooltip="{i18n>RelevangytoCostingIndicator}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<Input value="{JM_ReciOperations>Ckselkz}" id="ID_OPER_CKSELKZ" valueHelpRequest="fnF4press" valueHelpOnly="true" showValueHelp="true"
+														class="cl_opr_tableInput"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Ckselkz' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Ckselkz' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Klakz" sortProperty="Klakz" tooltip="{i18n>Classification}" visible="{JMColumnVis>/Classification}"
+											width="5rem">
+											<Label text="{i18n>Classif}" tooltip="{i18n>Classification}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<CheckBox selected="{JM_ReciOperations>Klakz}" class="cl_opr_checkbx"/>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Bezkz" sortProperty="Bezkz" tooltip="{i18n>ObjectDevelops}" visible="{JMColumnVis>/ObjectDeps}" width="5rem">
+											<Label text="{i18n>ObjectDeps}" tooltip="{i18n>ObjectDevelops}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<CheckBox selected="{JM_ReciOperations>Bezkz}" class="cl_opr_checkbx"/>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Bmsch" sortProperty="Bmsch" tooltip="{i18n>BaseQuantity}" visible="{JMColumnVis>/BaseQty}" width="7rem">
+											<Label text="{i18n>BaseQty}" tooltip="{i18n>BaseQuantity}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Bmsch}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>BaseQty}"
+														liveChange="fnQuanDataElementValidation" maxLength="13"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Bmsch' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Bmsch' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Meinh" sortProperty="Meinh" tooltip="{i18n>OperationUnit}" visible="{JMColumnVis>/OperationUnit}"
+											width="7rem">
+											<Label text="{i18n>OperationUnit}" tooltip="{i18n>OperationUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Meinh}" id="ID_OPER_MEINH" valueHelpRequest="fnF4press" liveChange="fnOpeartionUnitLiveChange"
+														showValueHelp="true" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>OperationUnit}" maxLength="3"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Meinh' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Meinh' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<!--1st Stad Value Seation-->
+										<uitable:Column filterProperty="Vgw01" sortProperty="Vgw01" tooltip="{i18n>1stStandardValue}" width="7rem">
+											<Label text="{i18n>1stStdValue}" tooltip="{i18n>1stStandardValue}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vgw01}" class="cl_opr_tableInput" liveChange="fnQuanDataElementValidation"
+														tooltip="{JM_ReciOperations>StandardValueKey}" maxLength="12" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vgw01' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vgw01' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Vge01" sortProperty="Vge01" tooltip="{i18n>1stStandardUnit}" width="7rem">
+											<Label text="{i18n>1stStdUnit}" tooltip="{i18n>1stStandardUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vge01}" id="ID_OPER_VGE01" maxLength="3" valueHelpRequest="fnF4press" showValueHelp="true"
+														class="cl_opr_tableInput" tooltip="{JM_ReciOperations>StandardValue1}" liveChange="fnActivtystdUnitLiveChange"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vge01' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vge01' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Lar01" sortProperty="Lar01" tooltip="{i18n>ActivityType}" width="7rem">
+											<Label text="{i18n>ActivityType}" tooltip="{i18n>ActivityType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Lar01}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Lar01}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Lar01' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Lar01' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<!--2nd Stad Value Seation-->
+										<uitable:Column filterProperty="Vgw02" sortProperty="Vgw02" tooltip="{i18n>2ndStandardValue}" width="7rem">
+											<Label text="{i18n>2ndStdValue}" tooltip="{i18n>2ndStandardValue}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vgw02}" liveChange="fnQuanDataElementValidation" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vgw02}" maxLength="12" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vgw02' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vgw02' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Vge02" sortProperty="Vge02" tooltip="{i18n>2ndStandardUnit}" width="7rem">
+											<Label text="{i18n>2ndStdUnit}" tooltip="{i18n>2ndStandardUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vge02}" id="ID_OPER_VGE02" maxLength="3" valueHelpRequest="fnF4press" showValueHelp="true"
+														class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Vge02}" liveChange="fnActivtystdUnitLiveChange"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vge02' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vge02' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Lar02" sortProperty="Lar02" tooltip="{i18n>ActivityType}" width="7rem">
+											<Label text="{i18n>ActivityType}" tooltip="{i18n>ActivityType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Lar02}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Lar02}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Lar02' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Lar02' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<!--3rd Stad Value Seation-->
+										<uitable:Column filterProperty="Vgw03" sortProperty="Vgw03" tooltip="{i18n>3rdStandardValue}" width="7rem">
+											<Label text="{i18n>3rdStdValue}" tooltip="{i18n>3rdStandardValue}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vgw03}" liveChange="fnQuanDataElementValidation" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vgw03}" maxLength="12" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vgw03' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vgw03' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Vge03" sortProperty="Vge03" tooltip="{i18n>3rdStandardUnit}" width="7rem">
+											<Label text="{i18n>3rdStdUnit}" tooltip="{i18n>3rdStandardUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vge03}" id="ID_OPER_VGE03" valueHelpRequest="fnF4press" showValueHelp="true" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vge03}" liveChange="fnActivtystdUnitLiveChange"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vge03' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vge03' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Lar03" sortProperty="Lar03" tooltip="{i18n>ActivityType}" width="7rem">
+											<Label text="{i18n>ActivityType}" tooltip="{i18n>ActivityType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Lar03}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Lar03}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Lar03' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Lar03' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<!--4th Stad Value Seation-->
+										<uitable:Column filterProperty="Vgw04" sortProperty="Vgw04" tooltip="{i18n>4thStandardValue}" width="7rem">
+											<Label text="{i18n>4thStdValue}" tooltip="{i18n>4thStandardValue}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vgw04}" liveChange="fnQuanDataElementValidation" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vgw04}" maxLength="12" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vgw04' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vgw04' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Vge04" sortProperty="Vge04" tooltip="Std Value Unit" visible="{JMColumnVis>/StandardValue1}" width="7rem">
+											<Label text="{i18n>4thStdUnit}" tooltip="{i18n>3rdStandardUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vge04}" id="ID_OPER_VGE04" valueHelpRequest="fnF4press" showValueHelp="true" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vge04}" liveChange="fnActivtystdUnitLiveChange"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vge04' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vge04' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Lar04" sortProperty="Lar04" tooltip="{i18n>ActivityType}" width="7rem">
+											<Label text="{i18n>ActivityType}" tooltip="{i18n>ActivityType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Lar04}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Lar04}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Lar04' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Lar04' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<!--5th Stad Value Seation-->
+										<uitable:Column filterProperty="Vgw05" sortProperty="Vgw05" tooltip="{i18n>5thStandardValue}" visible="{JMColumnVis>/StandardValueKey}"
+											width="7rem">
+											<Label text="{i18n>5thStdValue}" tooltip="{i18n>5thStandardValue}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vgw05}" liveChange="fnQuanDataElementValidation" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vgw05}" maxLength="12" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vgw05' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vgw05' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Vge05" sortProperty="Vge05" tooltip="{i18n>5thStandardUnit}" width="7rem">
+											<Label text="{i18n>5thStdUnit}" tooltip="{i18n>5thStandardUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vge05}" id="ID_OPER_VGE05" valueHelpRequest="fnF4press" showValueHelp="true" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vge05}" liveChange="fnActivtystdUnitLiveChange"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vge05' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vge05' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Lar05" sortProperty="Lar05" tooltip="{i18n>ActivityType}" width="7rem">
+											<Label text="{i18n>ActivityType}" tooltip="{i18n>ActivityType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Lar05}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>StandardValue2}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Lar05' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Lar05' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<!--6th Stad Value Seation-->
+										<uitable:Column filterProperty="Vgw06" sortProperty="Vgw06" tooltip="{i18n>6thStandardValue}" visible="{JMColumnVis>/StandardValueKey}"
+											width="7rem">
+											<Label text="{i18n>6thStdValue}" tooltip="{i18n>6thStandardValue}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vgw06}" liveChange="fnQuanDataElementValidation" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vgw06}" maxLength="12" type="Number"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vgw06' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vgw06' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Vge06" sortProperty="Vge06" tooltip="{i18n>6thStandardUnit}" width="7rem">
+											<Label text="{i18n>6thStdUnit}" tooltip="{i18n>6thStandardUnit}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Vge06}" id="ID_OPER_VGE06" valueHelpRequest="fnF4press" showValueHelp="true" class="cl_opr_tableInput"
+														tooltip="{JM_ReciOperations>Vge06}" liveChange="fnActivtystdUnitLiveChange"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Vge06' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Vge06' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Lar06" sortProperty="Lar06" tooltip="Activity Type" visible="{JMColumnVis>/StandardValue2}" width="7rem">
+											<Label text="{i18n>ActivityType}" tooltip="{i18n>ActivityType}"/>
+											<uitable:template>
+												<VBox>
+													<Input value="{JM_ReciOperations>Lar06}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>Lar06}"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Lar06' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Lar06' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Werks" sortProperty="Werks" tooltip="Plant" width="4rem">
+											<Label text="{i18n>Plant}" tooltip="{i18n>Plant}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<Input class="cl_opr_tableInput" value="{JM_ReciOperations>Werks}" tooltip="{JM_ReciOperations>Werks}"/>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Felx" sortProperty="Felx" tooltip="{i18n>FlexDuration}" width="8rem">
+											<Label text="{i18n>FlexDuration}" tooltip="{i18n>FlexDuration}"/>
+											<uitable:template>
+												<VBox>
+													<CheckBox selected="{JM_ReciOperations>Ddehn}" class="cl_opr_checkbx"
+														editable="{ parts : [{path : 'JM_ReciOperations>Vornr'}, { path: 'JM_EditableModel>' }, { value: 'Ddehn' }], formatter: '.formatter.fnEditableState' }"/>
+													<customData>
+														<core:CustomData key="flag"
+															value="{ parts: [ { path: 'JM_ReciOperations>Vornr' }, { path: 'JM_EditableModel>' }, { value: 'Ddehn' } ], formatter: '.formatter.fnGetSateForOperaTbl' }"
+															writeToDom="true"/>
+													</customData>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Aennr" sortProperty="Aennr" tooltip="{i18n>ChangeNumber}" width="8rem">
+											<Label text="{i18n>ChangeNumber}" tooltip="{i18n>ChangeNumber}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<Input class="cl_opr_tableInput" value="{JM_ReciOperations>Aennr}" tooltip="{JM_ReciOperations>/Aennr}"/>
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Datuv" sortProperty="Datuv" tooltip="{i18n>ValidFrom}" visible="{JMColumnVis>/ValidFrom}" width="5.5rem">
+											<Label text="{i18n>ValidFrom}" tooltip="{i18n>ValidFrom}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<DatePicker value="{ path: 'JM_ReciOperations>Datuv',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+														valueFormat="yyyy-MM-ddTHH:mm:ss" placeholder=" " change="fnDateRangevalidation"
+														class="cl_bom_tableInput cl_tbl_errInput cl_customDatePicker" editable="false"/>
+													<!--<Input value="{JM_ReciOperations>Datuv}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>ValidTo}"/>-->
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+										<uitable:Column filterProperty="Datub" sortProperty="Datub" tooltip="{i18n>ValidTo}" visible="{JMColumnVis>/ValidTo}" width="5rem">
+											<Label text="{i18n>ValidTo}" tooltip="{i18n>ValidTo}"/>
+											<uitable:template>
+												<VBox class="cl_tableFieldnonEdit">
+													<DatePicker value="{ path: 'JM_ReciOperations>Datub',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+														valueFormat="yyyy-MM-ddTHH:mm:ss" class="cl_bom_tableInput cl_tbl_errInput cl_customDatePicker" editable="false"/>
+													<!--<Input value="{JM_ReciOperations>Datub}" class="cl_opr_tableInput" tooltip="{JM_ReciOperations>ValidTo}"/>-->
+												</VBox>
+											</uitable:template>
+										</uitable:Column>
+									</uitable:columns>
+								</uitable:Table>
+							</VBox>
+						</VBox>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar >
+						<Label text="Page Tips" class="cl_pageTip sapUiSmallMarginBegin"/>
+						<Image src="{= ${JM_ImageModel>/path} + 'Pagetips.svg'}" width="0.9rem" class="sapUiTinyMarginBegin" tooltip="Page Tip"/>
+						<ToolbarSpacer/>
+						<Button text="Change log" width="7.8rem" id="changelog"
+							visible="{= (${JM_KeyData>/AppId} === 'RX') || (${JM_ContextModel>/Appid} === 'RX') }" icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}"
+							class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="Continue" press="fnChangelog"/>
+						<Button text="Cancel" width="5rem" icon="{= ${JM_ImageModel>/path} + 'Continue.svg'}" class="cl_secondaryButton sapUiTinyMarginEnd"
+							tooltip="Continue" press="fnCancelback" visible="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+						<Button text="Save and Back" width="9.5rem" icon="{= ${JM_ImageModel>/path} + 'Save.svg'}" class="cl_primaryButton sapUiTinyMarginEnd"
+							tooltip="Continue" press="fnsaveOperation" visible="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+						<Button text="Close" width="5rem" icon="{= ${JM_ImageModel>/path} + 'Continue.svg'}" class="cl_secondaryButton sapUiTinyMarginEnd"
+							tooltip="Continue" press="fnback" visible="{= ${JM_ContextModel>/Ind} === 'T' }"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

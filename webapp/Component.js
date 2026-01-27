@@ -21,6 +21,14 @@ sap.ui.define([
 			UIComponent.prototype.init.apply(this, arguments);
 
 			this.getRouter().initialize();
+<<<<<<< HEAD
+=======
+			
+			jQuery.sap.includeScript(
+                jQuery.sap.getModulePath("MANAGED_RECIPE") + "/thirdparty/xlsx.full.min.js"
+            );
+			
+>>>>>>> branch 'master' of https://github.com/sabarishbabutg/Recipe.git
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 		}

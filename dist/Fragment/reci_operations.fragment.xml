@@ -1,0 +1,990 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<Dialog title="{i18n>OpeartionsDialog}" showHeader="false" class="cl_operation_Dialog sapUiSizeCompact" afterClose="fnDupMsgFragClose">
+		<customHeader>
+			<Toolbar class="cl_DialogToolbar" height="2.7rem">
+				<ToolbarSpacer/>
+				<Text text="{i18n>OperationDialogtitle}" class="cl_DialogToolbarTitle sapUiTinyMarginTopBottom"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<VBox class="sapUiSmallMargin">
+			<grid:Grid class="cl_search_grid">
+				<VBox>
+					<Label text="{i18n>RecipeGroup}" class="cl_inputLabel"/>
+					<HBox>
+						<VBox width="40%" class="cl_inputFieldGap">
+							<Input showValueHelp="true" value="{JM_KeydataModel>/Plnnr}" tooltip="{JM_KeydataModel>/Plnnr}" editable="false" class="cl_inputField"
+								maxLength="4"></Input>
+						</VBox>
+						<VBox width="60%">
+							<Input width="100%" value="{JM_KeydataModel>/ReciDes}" tooltip="{JM_KeydataModel>/ReciDes}" class="cl_inputDescField" editable="false"></Input>
+						</VBox>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</HBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<HBox width="100%">
+					<VBox width="50%" class="sapUiSmallMarginEnd">
+						<Label text="{i18n>GrpCounter}" class="cl_inputLabel"/>
+						<Input editable="false" value="{JM_KeydataModel>/Plnal}" tooltip="{JM_KeydataModel>/Plnal}" class="cl_inputField" maxLength="4"></Input>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</VBox>
+					<VBox width="50%">
+						<Label text="{i18n>ControlKey}" class="cl_inputLabel"/>
+						<Input showValueHelp="true" id="ID_OPER_STEUS_F" value="{JM_ReciOperationsDialog>/Steus}" tooltip="{JM_ReciOperationsDialog>/Steus}"
+							valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4" editable="{= !${JM_ReciOperationsDialog>/Phflg}}"></Input>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</HBox>
+				<VBox>
+					<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+					<HBox>
+						<VBox width="30%" class="cl_inputFieldGap">
+							<Input value="{JM_KeydataModel>/Werks}" class="cl_inputField" editable="false" maxLength="4"></Input>
+						</VBox>
+						<VBox width="70%">
+							<Input width="100%" value="{JM_KeydataModel>/WerksDes}" class="cl_inputDescField" editable="false"></Input>
+						</VBox>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</HBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>StandardKeyText}" class="cl_inputLabel"/>
+					<Input class="cl_inputField" value="{JM_ReciOperationsDialog>/Ktsch}" editable="false" maxLength="4"></Input>
+					<layoutData>
+						<grid:GridData span="L2 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<HBox>
+					<VBox width="25%" class="cl_inputFieldGap">
+						<Label text="{i18n>Activity}" class="cl_inputLabel"/>
+						<Input editable="false" value="{JM_ReciOperationsDialog>/Vornr}" class="cl_inputField" maxLength="4"></Input>
+						<layoutData>
+							<grid:GridData span="L2 M12 S12"/>
+						</layoutData>
+					</VBox>
+					<VBox width="75%">
+						<Label text="{i18n>Description}" class="cl_inputLabel"/>
+						<Input class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Ltxa1}" maxLength="40"></Input>
+						<layoutData>
+							<grid:GridData span="L2 M12 S12"/>
+						</layoutData>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</HBox>
+				<HBox>
+					<VBox width="50%" class="sapUiSmallMarginEnd">
+						<Label text="{i18n>SupOperation}" class="cl_inputLabel"/>
+						<Input value="{JM_ReciOperationsDialog>/Pvznr}" class="cl_inputField" editable="false" maxLength="4"></Input>
+					</VBox>
+					<VBox width="50%">
+						<Label text="{i18n>Phase}" class="cl_inputLabel"></Label>
+						<CheckBox selected="{JM_ReciOperationsDialog>/Phflg}" editable="false" class="cl_opr_checkbx cl_checkbox"></CheckBox>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</HBox>
+			</grid:Grid>
+			<VBox class="sapUiSmallMarginTop cl_item_headerBox">
+				<IconTabBar id="id_icontabbar" selectedKey="ID_STD_VALUES" class="cl_item_iconTab_Dialog">
+					<items>
+						<IconTabFilter id="ID_GEN_VALUES" text="General Data">
+							<VBox class="sapUiTinyMarginTop cl_item_scrollfrag">
+								<grid:Grid class="cl_item_gridRemovePadding">
+									<HBox height="1.7rem" class="sapUiTinyMarginTop sapUiTinyMarginBottom cl_subheading">
+										<Label text="{i18n>GeneralData}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<VBox>
+										<Label text="{i18n>CostRel}" id="ID_OPER_CKSELKZ_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="30%" class="cl_inputFieldGap">
+												<Input editable="{JM_ReciOperationsDialog>/Phflg}" showValueHelp="true" id="ID_OPER_CKSELKZ_F" liveChange="fnFragLivechange"
+													value="{JM_ReciOperationsDialog>/Ckselkz}" valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4"></Input>
+											</VBox>
+											<VBox width="70%">
+												<Input width="100%" class="cl_inputDescField" value="{JM_ReciOperationsDialog>/CkselkzDes}" id="ID_OPER_CKSELKZ_F_DES" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>NumberOfTimeTickets}" id="ID_OPER_LOANZ_F_TXT" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" liveChange="fnNumberFieldValidationFrag" id="ID_OPER_LOANZ_F" type="Number" maxLength="3"
+												editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Loanz}"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>Noofempl}" class="cl_inputLabel" id="ID_OPER_ANZMA_F_TXT"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" liveChange="fnQuanDataElementValidation2DecFrag" id="ID_OPER_ANZMA_F" type="Number" maxLength="5"
+												value="{JM_ReciOperationsDialog>/Anzma}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>WageType}" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input showValueHelp="true" maxLength="4" value="{JM_ReciOperationsDialog>/Loart}" class="cl_inputField"
+												editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>WageGroup}" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input showValueHelp="true" maxLength="3" value="{JM_ReciOperationsDialog>/Logrp}" class="cl_inputField"
+												editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>NumberOfConfirmation}" class="cl_inputLabel" id="ID_OPER_RSANZ_F_TXT"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" liveChange="fnNumberFieldValidationFrag" id="ID_OPER_RSANZ_F" type="Number" maxLength="3"
+												value="{JM_ReciOperationsDialog>/Rsanz}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>BusinessProcess}" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" showValueHelp="true" maxLength="12" value="{JM_ReciOperationsDialog>/Prz01}"
+												editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<HBox height="1.7rem" visible="{JM_ReciOperationsDialog>/Phflg}" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+										<Label text="{i18n>ExternalProcessing}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>InspectionType}" id="ID_OPER_QPART_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="40%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_QPART_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Qpart}"
+													valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="60%">
+												<Input width="100%" class="cl_inputDescField" value="{JM_ReciOperationsDialog>/QpartDes}" id="ID_OPER_QPART_F_DES" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>PurchasingInfoRec}" id="ID_OPER_INFNR_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="100%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_INFNR_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Infnr}"
+													valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>PurchaseOrganization}" id="ID_OPER_EKORG_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="100%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_EKORG_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Ekorg}"
+													valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>Subcontracting}" id="ID_OPER_FRDLB_F_TXT" class="cl_inputLabel"></Label>
+										<CheckBox class="cl_checkbox" id="ID_OPER_FRDLB_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+											selected="{JM_ReciOperationsDialog>/Frdlb}"></CheckBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>OutlineAgreement}" id="ID_OPER_EBELN_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="100%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_EBELN_F" liveChange="fnFragLivechange" valueHelpRequest="fnFragF4press"
+													value="{JM_ReciOperationsDialog>/Ebeln}" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>ItemOnlineAgreement}" id="ID_OPER_EBELP_F_TXT" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" id="ID_OPER_EBELP_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Ebelp}"
+												showValueHelp="true" valueHelpRequest="fnFragF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>ShortTerm}" class="cl_inputLabel" id="ID_OPER_SORTL_F_TXT"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" liveChange="fnFragLivechange" id="ID_OPER_SORTL_F" value="{JM_ReciOperationsDialog>/Sortl}"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>PlannedDeliveryTime}" class="cl_inputLabel" id="ID_OPER_PLIFZ_F_TXT"></Label>
+										<HBox>
+											<VBox width="50%">
+												<Input class="cl_inputField" liveChange="fnFragLivechange" id="ID_OPER_PLIFZ_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													value="{JM_ReciOperationsDialog>/Plifz}"></Input>
+											</VBox>
+											<VBox class="sapUiSmallMarginBegin sapUiTinyMarginTop">
+												<Label text="Days" class="cl_inputLabel"></Label>
+											</VBox>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>MaterialGroup}" id="ID_OPER_MATKL_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="40%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_MATKL_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Matkl}"
+													valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="60%">
+												<Input width="100%" id="ID_OPER_MATKL_F_DES" value="{JM_ReciOperationsDialog>/MatklDes}" class="cl_inputDescField" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>PurchasingGroup}" id="ID_OPER_EKGRP_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="30%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_EKGRP_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Ekgrp}"
+													valueHelpRequest="fnFragF4press" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="70%">
+												<Input width="100%" id="ID_OPER_EKGRP_F_DES" value="{JM_ReciOperationsDialog>/EkgrpDes}" class="cl_inputDescField" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>Vendor}" id="ID_OPER_LIFNR_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="50%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" id="ID_OPER_LIFNR_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Lifnr}"
+													class="cl_inputField" valueHelpRequest="fnFragF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="50%">
+												<Input width="100%" class="cl_inputDescField" value="{JM_ReciOperationsDialog>/LifnrDes}" id="ID_OPER_LIFNR_F_DES" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>PriceUnit}" class="cl_inputLabel" id="ID_OPER_PEINH_F_TXT"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" liveChange="fnFragLivechange" id="ID_OPER_PEINH_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												value="{JM_ReciOperationsDialog>/Peinh}"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>CostElement}" id="ID_OPER_SAKTO_F_TXT" class="cl_inputLabel"></Label>
+										<HBox>
+											<VBox width="50%" class="cl_inputFieldGap">
+												<Input class="cl_inputField" id="ID_OPER_SAKTO_F" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Sakto}"
+													valueHelpRequest="fnFragF4press" showValueHelp="true" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="50%">
+												<Input class="cl_inputDescField" id="ID_OPER_SAKTO_F_DES" value="{JM_ReciOperationsDialog>/SaktoDes}" editable="false"></Input>
+											</VBox>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>NetPrice}" id="ID_OPER_PREIS_F_TXT" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" id="ID_OPER_PREIS_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												liveChange="fnQuanDataElementValidation2DecFrag" value="{JM_ReciOperationsDialog>/Preis}"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{JM_ReciOperationsDialog>/Phflg}">
+										<Label text="{i18n>Currency}" id="ID_OPER_WAERS_F_TXT" class="cl_inputLabel"></Label>
+										<HBox>
+											<VBox width="30%" class="cl_inputFieldGap">
+												<Input class="cl_inputField" id="ID_OPER_WAERS_F" value="{JM_ReciOperationsDialog>/Waers}" liveChange="fnFragLivechange"
+													valueHelpRequest="fnFragF4press" showValueHelp="true" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="70%">
+												<Input class="cl_inputDescField" id="ID_OPER_WAERS_F_DES" editable="false"></Input>
+											</VBox>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<HBox height="1.7rem" class=" sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+										<Label text="{i18n>SetupFamily}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<VBox>
+										<Label text="{i18n>SetupTypeKey}" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="100%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" liveChange="fnFragLivechange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													value="{JM_ReciOperationsDialog>/Rasch}" class="cl_inputField" maxLength="4"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>Group}" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="100%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" liveChange="fnFragLivechange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													value="{JM_ReciOperationsDialog>/Rfgrp}" class="cl_inputField" maxLength="4"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>Key}" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="100%" class="cl_inputFieldGap">
+												<Input showValueHelp="true" liveChange="fnFragLivechange" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													value="{JM_ReciOperationsDialog>/Rfsch}" class="cl_inputField" maxLength="4"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<HBox height="1.7rem" class=" sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+										<Label text="{i18n>Qulification}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<VBox>
+										<Label text="{i18n>SearchTerm}" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" value="{JM_ReciOperationsDialog>/QlSearch}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												showValueHelp="true"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>ReleatedToCapacityCategory}" class="cl_inputLabel"></Label>
+										<VBox width="100%">
+											<Input class="cl_inputField" id="ID_OPER_QLKAPAR_F" value="{JM_ReciOperationsDialog>/Qlkapar}" valueHelpRequest="fnFragF4press"
+												showValueHelp="true" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L3 M6 S6"/>
+										</layoutData>
+									</VBox>
+									<HBox>
+										<RadioButtonGroup select="fnDocumentRadiolvl" id="id_radioButton" columns="3" class="sapUiSmallMarginTop cl_radiobutton">
+											<RadioButton text="{i18n>RequirementsProfile}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_radiobutton"
+												selected="{JM_ReciOperationsDialog>/Qsel1}"/>
+											<RadioButton text="{i18n>Job}" class="cl_radiobutton" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												selected="{JM_ReciOperationsDialog>/Qsel2}"/>
+											<RadioButton text="{i18n>Postion}" class="cl_radiobutton" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+												selected="{JM_ReciOperationsDialog>/Qsel3}"/>
+										</RadioButtonGroup>
+										<layoutData>
+											<grid:GridData span="L6 M6 S6"/>
+										</layoutData>
+									</HBox>
+								</grid:Grid>
+							</VBox>
+						</IconTabFilter>
+						<IconTabFilter id="ID_STD_VALUES" text="Standard Values">
+							<VBox class="sapUiTinyMarginTop cl_item_scrollfrag">
+								<grid:Grid class="cl_item_gridRemovePadding">
+									<HBox height="1.7rem" class="sapUiTinyMarginTop cl_subheading">
+										<Label text="{i18n>StandardValues}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+										<layoutData>
+											<grid:GridData span="L12 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<VBox>
+										<Label text="{i18n>BaseQuantity}" id="ID_OPER_BMSCH_F_TXT" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="65%" class="cl_inputFieldGap">
+												<Input value="{JM_ReciOperationsDialog>/Bmsch}" id="ID_OPER_BMSCH_F" liveChange="fnQuanDataElementValidationFrag" maxLength="12"
+													editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"></Input>
+											</VBox>
+											<VBox width="35%">
+												<Input width="100%" value="{JM_ReciOperationsDialog>/Meinh}" liveChange="fnFragLivechange" showValueHelp="true" class="cl_inputField"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<HBox>
+										<VBox width="40%">
+											<Label text="{i18n>ChargeQuantity}" id="ID_OPER_UMREZ_F_TXT" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="65%" class="cl_inputFieldGap">
+													<Input value="{JM_ReciOperationsDialog>/Umrez}" liveChange="fnNumberFieldValidationFrag" id="ID_OPER_UMREZ_F"
+														editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField" maxLength="5"></Input>
+												</VBox>
+												<VBox width="35%">
+													<Input editable="false" value="{JM_RecipeData>/Plnme}" width="100%" class="cl_inputField"></Input>
+												</VBox>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L6 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox width="20%" class="sapUiSmallMarginBeginEnd">
+											<Label text="{i18n>Equalto}" class="sapUiSmallMarginTop cl_inputLabel"></Label>
+										</VBox>
+										<VBox width="40%">
+											<Label text="{i18n>OperationQuantity}" id="ID_OPER_UMREN_F_TXT" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="65%" class="cl_inputFieldGap">
+													<Input value="{JM_ReciOperationsDialog>/Umren}" id="ID_OPER_UMREN_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+														liveChange="fnNumberFieldValidationFrag" class="cl_inputField" maxLength="5"></Input>
+												</VBox>
+												<VBox width="35%">
+													<Input width="100%" value="{JM_ReciOperationsDialog>/Meinh}" editable="false" class="cl_inputField"></Input>
+												</VBox>
+											</HBox>
+										</VBox>
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<VBox>
+										<Label text="{i18n>Resource}" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="35%" class="cl_inputFieldGap">
+												<Input editable="false" value="{JM_ReciOperationsDialog>/Arbpl}" class="cl_inputField" maxLength="4"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+										<HBox>
+											<VBox width="35%" class="cl_inputFieldGap">
+												<Input editable="false" value="{JM_KeydataModel>/Werks}" class="cl_inputField" maxLength="4"></Input>
+											</VBox>
+											<VBox width="65%">
+												<Input width="100%" value="{JM_KeydataModel>/WerksDes}" class="cl_inputDescField" editable="false"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+								</grid:Grid>
+								<ScrollContainer width="100%" height="260px" horizontal="true" vertical="false" visible="{JM_ReciOperationsDialog>/Phflg}" focusable="true">
+									<VBox class="sapUiSmallMarginBeginEnd sapUiTinyMarginTop" visible="{JM_ReciOperationsDialog>/Phflg}">
+										<HBox width="100%">
+											<VBox width="10rem">
+												<Label width="10rem" class="cl_inputLabel"/>
+												<layoutData>
+													<grid:GridData span="L2 M12 S12"/>
+												</layoutData>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Label text="{i18n>Duration}" width="12rem" class="cl_inputLabel"/>
+												<layoutData>
+													<grid:GridData span="L2 M12 S12"/>
+												</layoutData>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Label text="{i18n>Unit}" width="12rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox>
+												<Label text="{i18n>ActivityType}" width="12rem" class="cl_inputLabel"/>
+											</VBox>
+										</HBox>
+										<HBox width="100%" alignContent="Center" visible="{= !!${JM_ReciOperationsDialog>/Vgtl1} }">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="{JM_ReciOperationsDialog>/Vgtl1}" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" id="ID_OPER_VGW01_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Vgw01}"
+													class="cl_inputField" liveChange="fnQuanDataElementValidationFrag" maxLength="12"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Vge01}" liveChange="fnFragLivechange" showValueHelp="true" id="ID_OPER_VGE01_F"
+													valueHelpRequest="fnFragF4press" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Lar01}" class="cl_inputField"></Input>
+											</VBox>
+										</HBox>
+										<HBox width="100%" visible="{= !!${JM_ReciOperationsDialog>/Vgtl2} }">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="{JM_ReciOperationsDialog>/Vgtl2}" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" id="ID_OPER_VGW02_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Vgw02}"
+													class="cl_inputField" liveChange="fnQuanDataElementValidationFrag" maxLength="12"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Vge02}" liveChange="fnFragLivechange" showValueHelp="true" id="ID_OPER_VGE02_F"
+													valueHelpRequest="fnFragF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Lar02}" class="cl_inputField"></Input>
+											</VBox>
+										</HBox>
+										<HBox width="100%" visible="{= !!${JM_ReciOperationsDialog>/Vgtl3} }">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="{JM_ReciOperationsDialog>/Vgtl3}" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" id="ID_OPER_VGW03_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Vgw03}"
+													class="cl_inputField" liveChange="fnQuanDataElementValidationFrag" maxLength="12"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input showValueHelp="true" value="{JM_ReciOperationsDialog>/Vge03}" liveChange="fnFragLivechange" width="12rem" class="cl_inputField"
+													id="ID_OPER_VGE03_F" valueHelpRequest="fnFragF4press" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Lar03}" class="cl_inputField"></Input>
+											</VBox>
+										</HBox>
+										<HBox width="100%" visible="{= !!${JM_ReciOperationsDialog>/Vgtl4} }">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="{JM_ReciOperationsDialog>/Vgtl4}" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" id="ID_OPER_VGW04_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Vgw04}"
+													class="cl_inputField" liveChange="fnQuanDataElementValidationFrag" maxLength="12"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input showValueHelp="true" value="{JM_ReciOperationsDialog>/Vge04}" liveChange="fnFragLivechange" id="ID_OPER_VGE04_F"
+													valueHelpRequest="fnFragF4press" width="12rem" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Lar04}" class="cl_inputField"></Input>
+											</VBox>
+										</HBox>
+										<HBox width="100%" visible="{= !!${JM_ReciOperationsDialog>/Vgtl5} }">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="{JM_ReciOperationsDialog>/Vgtl5}" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" id="ID_OPER_VGW05_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Vgw05}"
+													class="cl_inputField" liveChange="fnQuanDataElementValidationFrag" maxLength="12"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input showValueHelp="true" liveChange="fnFragLivechange" value="{JM_ReciOperationsDialog>/Vge05}" id="ID_OPER_VGE05_F"
+													valueHelpRequest="fnFragF4press" width="12rem" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Lar05}" class="cl_inputField"></Input>
+											</VBox>
+										</HBox>
+										<HBox width="100%" visible="{= !!${JM_ReciOperationsDialog>/Vgtl6} }">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="{JM_ReciOperationsDialog>/Vgtl6}" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" id="ID_OPER_VGW06_F" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ReciOperationsDialog>/Vgw06}"
+													class="cl_inputField" liveChange="fnQuanDataElementValidationFrag" maxLength="12"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input showValueHelp="true" value="{JM_ReciOperationsDialog>/Vge06}" id="ID_OPER_VGE06_F" liveChange="fnFragLivechange"
+													valueHelpRequest="fnFragF4press" width="12rem" class="cl_inputField" maxLength="4" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+											</VBox>
+											<VBox width="12rem" class="sapUiSmallMarginEnd">
+												<Input width="12rem" value="{JM_ReciOperationsDialog>/Lar06}" class="cl_inputField"></Input>
+											</VBox>
+										</HBox>
+										<HBox width="100%">
+											<VBox width="10rem" alignContent="Center" justifyContent="Center">
+												<Label text="FLEX. DURATION" width="10rem" class="cl_inputLabel"/>
+											</VBox>
+											<VBox width="12rem" alignContent="Center" justifyContent="Center">
+												<CheckBox class="cl_checkbox" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" selected="{JM_ReciOperationsDialog>/Ddehn}"></CheckBox>
+											</VBox>
+										</HBox>
+										<layoutData>
+											<grid:GridData span="L3 M12 S12"/>
+										</layoutData>
+									</VBox>
+								</ScrollContainer>
+							</VBox>
+						</IconTabFilter>
+						<IconTabFilter text="{i18n>UserFields}">
+							<grid:Grid class="cl_item_gridRemovePadding">
+								<HBox width="100%" height="1.7rem" class="sapUiTinyMarginBottom sapUiTinyMarginTop cl_subheading">
+									<Label text="{i18n>FieldKey}" class="sapUiTinyMarginBegin cl_subheadingFont"></Label>
+									<layoutData>
+										<grid:GridData span="L1 M12 S12"/>
+									</layoutData>
+								</HBox>
+								<VBox class="sapUiTinyMarginTop">
+									<VBox width="100%">
+										<Select id="id_userfield" class="cl_s_selectVarient cl_combobox" selectedKey="{JM_ReciOperationsDialog>/Slwid}" change="fnUserFields"
+											items="{JM_UFModel>/}">
+											<core:Item key="{JM_UFModel>Key}" text="{JM_UFModel>text}"/>
+										</Select>
+									</VBox>
+									<layoutData>
+										<grid:GridData span="L3 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+							<grid:Grid hSpacing="0" defaultSpan="L6 M12 S12" visible="{JM_UFTemplate>/Visible}">
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginBeginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>GeneralFields}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" defaultSpan="L12 M12 S12">
+										<ScrollContainer width="100%" height="130px" horizontal="true" vertical="false" focusable="true">
+											<VBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt0} }" id="ID_OPER_SWRT0_F_TXT" text="{JM_UFTextTemplate>/Swrt0}" width="10rem"
+															class="sapUiSmallMarginEnd cl_inputLabel"/>
+													</VBox>
+													<VBox width="26rem" class="sapUiSmallMarginEnd">
+														<Input editable="{= ${JM_ContextModel>/Ind} !== 'T' }" visible="{= !!${JM_UFTextTemplate>/Swrt0} }" value="{JM_ReciOperationsDialog>/Usr00}"
+															width="26rem" class="cl_inputField"></Input>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt1} }" id="ID_OPER_SWRT1_F_TXT" text="{JM_UFTextTemplate>/Swrt1}" width="10rem"
+															class="sapUiSmallMarginEnd cl_inputLabel"/>
+													</VBox>
+													<VBox width="26rem" class="sapUiSmallMarginEnd">
+														<Input editable="{= ${JM_ContextModel>/Ind} !== 'T' }" visible="{= !!${JM_UFTextTemplate>/Swrt1} }" value="{JM_ReciOperationsDialog>/Usr01}"
+															width="26rem" class="cl_inputField"></Input>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt2} }" id="ID_OPER_SWRT2_F_TXT" text="{JM_UFTextTemplate>/Swrt2}" width="10rem"
+															class="sapUiSmallMarginEnd cl_inputLabel"/>
+													</VBox>
+													<VBox width="26rem" class="sapUiSmallMarginEnd">
+														<Input editable="{= ${JM_ContextModel>/Ind} !== 'T' }" visible="{= !!${JM_UFTextTemplate>/Swrt2} }" value="{JM_ReciOperationsDialog>/Usr02}"
+															width="26rem" class="cl_inputField"></Input>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt3} }" id="ID_OPER_SWRT3_F_TXT" text="{JM_UFTextTemplate>/Swrt3}" width="10rem"
+															class="sapUiSmallMarginEnd cl_inputLabel"/>
+													</VBox>
+													<VBox width="26rem" class="sapUiSmallMarginEnd">
+														<Input editable="{= ${JM_ContextModel>/Ind} !== 'T' }" visible="{= !!${JM_UFTextTemplate>/Swrt3} }" value="{JM_ReciOperationsDialog>/Usr03}"
+															width="26rem" class="cl_inputField"></Input>
+													</VBox>
+												</HBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</VBox>
+										</ScrollContainer>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L6 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginBeginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>NumericFields}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" defaultSpan="L12 M12 S12">
+										<ScrollContainer width="100%" height="130px" horizontal="true" vertical="false" focusable="true">
+											<VBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt4} }" id="ID_OPER_USTEXT01" text="{JM_UFTextTemplate>/Swrt4}" width="10rem"
+															class="cl_inputLabel"/>
+													</VBox>
+													<VBox width="19rem" class="sapUiSmallMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt4} }" id="ID_OPER_USR04" liveChange="fnQuanDataElementValidationFrag" maxLength="13"
+															value="{JM_ReciOperationsDialog>/Usr04}" width="19rem" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+													<VBox width="7rem" class="sapUiTinyMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt4} }" liveChange="fnFragLivechange" id="ID_RECI_USE04" valueHelpRequest="fnFragF4press"
+															value="{JM_ReciOperationsDialog>/Use04}" width="7rem" showValueHelp="true" class="cl_inputField"></Input>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt5} }" id="ID_OPER_USTEXT02" text="{JM_UFTextTemplate>/Swrt5}" width="10rem"
+															class="cl_inputLabel"/>
+													</VBox>
+													<VBox width="19rem" class="sapUiSmallMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt5} }" id="ID_OPER_USR05" liveChange="fnQuanDataElementValidationFrag" maxLength="13"
+															value="{JM_ReciOperationsDialog>/Usr05}" width="19rem" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+													<VBox width="7rem" class="sapUiTinyMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt5} }" liveChange="fnFragLivechange" id="ID_RECI_USE05" valueHelpRequest="fnFragF4press"
+															value="{JM_ReciOperationsDialog>/Use05}" width="7rem" showValueHelp="true" class="cl_inputField"
+															editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt6} }" id="ID_OPER_USTEXT03" text="{JM_UFTextTemplate>/Swrt6}" width="10rem"
+															class="cl_inputLabel"/>
+													</VBox>
+													<VBox width="19rem" class="sapUiSmallMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt6} }" id="ID_OPER_USR06" liveChange="fnQuanDataElementValidationFrag" maxLength="13"
+															value="{JM_ReciOperationsDialog>/Usr06}" width="19rem" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+													<VBox width="7rem" class="sapUiTinyMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt6} }" liveChange="fnFragLivechange" id="ID_RECI_USE06" valueHelpRequest="fnFragF4press"
+															value="{JM_ReciOperationsDialog>/Use06}" width="7rem" showValueHelp="true" class="cl_inputField"
+															editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt7} }" id="ID_OPER_USTEXT04" text="{JM_UFTextTemplate>/Swrt7}" width="10rem"
+															class="cl_inputLabel"/>
+													</VBox>
+													<VBox width="19rem" class="sapUiSmallMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt7} }" id="ID_OPER_USR07" liveChange="fnQuanDataElementValidationFrag" maxLength="13"
+															value="{JM_ReciOperationsDialog>/Usr07}" width="19rem" class="cl_inputField" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+													<VBox width="7rem" class="sapUiTinyMarginEnd">
+														<Input visible="{= !!${JM_UFTextTemplate>/Swrt7} }" liveChange="fnFragLivechange" id="ID_RECI_USE07" valueHelpRequest="fnFragF4press"
+															value="{JM_ReciOperationsDialog>/Use07}" width="7rem" showValueHelp="true" class="cl_inputField"
+															editable="{= ${JM_ContextModel>/Ind} !== 'T' }"></Input>
+													</VBox>
+												</HBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</VBox>
+										</ScrollContainer>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L6 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginBeginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>DateTimes}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" defaultSpan="L12 M12 S12">
+										<ScrollContainer width="100%" height="70px" horizontal="true" vertical="false" focusable="true">
+											<VBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt8} }" text="{JM_UFTextTemplate>/Swrt8}" width="10rem" class="cl_inputLabel"/>
+													</VBox>
+													<VBox width="26rem" class="sapUiSmallMarginEnd">
+														<!--<DatePicker visible="{= !!${JM_UFTextTemplate>/Swrt8} }" value="{JM_ReciOperationsDialog>/Usr08}" width="26rem" placeholder=" "-->
+														<!--	editable="{= ${JM_ContextModel>/Ind} !== 'T' }" change="fnDateRangevalidation" class="cl_inputField"/>-->
+														<DatePicker visible="{= !!${JM_UFTextTemplate>/Swrt8} }"
+															value="{JM_ReciOperationsDialog>/Usr08}" displayFormat="dd.MM.yyyy"
+															valueFormat="yyyy-MM-ddTHH:mm:ss" width="26rem" placeholder=" " editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+														class="cl_inputField"/>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt9} }" text="{JM_UFTextTemplate>/Swrt9}" width="10rem" class="cl_inputLabel"/>
+													</VBox>
+													<VBox width="26rem" class="sapUiSmallMarginEnd">
+														<!--value="{JM_ReciOperationsDialog>/Usr09}"-->
+														<DatePicker visible="{= !!${JM_UFTextTemplate>/Swrt9} }"
+															value="{JM_ReciOperationsDialog>/Usr09}" displayFormat="dd.MM.yyyy"
+															valueFormat="yyyy-MM-ddTHH:mm:ss" width="26rem" placeholder=" " editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+														 class="cl_inputField"/>
+													</VBox>
+												</HBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</VBox>
+										</ScrollContainer>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L6 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginBottom sapUiTinyMarginBeginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>CheckBox}" class="sapUiSmallMargin cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L6 M12 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" defaultSpan="L12 M12 S12">
+										<ScrollContainer width="100%" height="70px" horizontal="true" vertical="false" focusable="true">
+											<VBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="1.7rem" alignContent="Center" justifyContent="Center">
+														<CheckBox editable="{= ${JM_ContextModel>/Ind} !== 'T' }" visible="{= !!${JM_UFTextTemplate>/Swrt10} }"
+															selected="{JM_ReciOperationsDialog>/Usr10}" class="cl_checkbox"></CheckBox>
+													</VBox>
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt10} }" text="{JM_UFTextTemplate>/Swrt10}" width="10rem" class="cl_inputLabel"/>
+													</VBox>
+												</HBox>
+												<HBox width="100%" alignContent="Center">
+													<VBox width="1.7rem" alignContent="Center" justifyContent="Center">
+														<CheckBox editable="{= ${JM_ContextModel>/Ind} !== 'T' }" visible="{= !!${JM_UFTextTemplate>/Swrt11} }"
+															selected="{JM_ReciOperationsDialog>/Usr11}" class="cl_checkbox"></CheckBox>
+													</VBox>
+													<VBox width="7rem" alignContent="Center" justifyContent="Center">
+														<Label visible="{= !!${JM_UFTextTemplate>/Swrt11} }" text="{JM_UFTextTemplate>/Swrt11}" width="10rem" class="cl_inputLabel"/>
+													</VBox>
+												</HBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</VBox>
+										</ScrollContainer>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L6 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+			</VBox>
+		</VBox>
+		<buttons>
+			<Button text="{i18n>Close}" visible="{= ${JM_ContextModel>/Ind} === 'T' }" icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" width="5.7rem"
+				class="cl_secondaryButton sapUiSmallMarginEnd" press="fnDialogClose"/>
+			<Button text="{i18n>Cancel}" visible="{= ${JM_ContextModel>/Ind} !== 'T' }" icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" width="5.7rem"
+				class="cl_secondaryButton sapUiSmallMarginEnd" press="fncloseDialog"/>
+			<Button text="{i18n>SaveandBack}" visible="{= ${JM_ContextModel>/Ind} !== 'T' }" icon="{= ${JM_ImageModel>/path} + 'Save.svg'}" width="9rem"
+				class="cl_primaryButton sapUiSmallMarginEnd" press="fnNavtoOperaHeader"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,137 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<Dialog title="{i18n>DuplicateRecipe}" showHeader="false" class="cl_Dup_Sendback_Dialog sapUiSizeCompact" afterClose="fnDupMsgFragClose">
+		<customHeader>
+			<Toolbar class="cl_DialogToolbar" height="2.5rem">
+				<ToolbarSpacer/>
+				<Text text="{i18n>DuplicateRecipe}" class="cl_DialogToolbarTitle sapUiTinyMarginTopBottom"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<VBox class="sapUiSmallMarginTop">
+			<grid:Grid>
+				<VBox>
+					<Label text="{i18n>MaterialCode}" class="cl_inputLabel"></Label>
+					<VBox width="100%">
+						<Input class="cl_inputField" value = "{JM_KeyData>/Matnr}" editable="false"></Input>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>MaterialDesc}" class="cl_inputLabel"></Label>
+					<VBox width="100%">
+						<Input class="cl_inputField" value = "{JM_KeyData>/Maktx}" editable="false"></Input>
+					</VBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox>
+					<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+					<HBox>
+						<VBox width="30%" class="cl_inputFieldGap">
+							<Input value = "{JM_KeyData>/Werks}" editable="false" class="cl_inputField" maxLength="4"></Input>
+						</VBox>
+						<VBox width="70%">
+							<Input width="100%" class="cl_inputDescField" value = "{JM_KeyData>/WerksDes}" editable="false"></Input>
+						</VBox>
+						<layoutData>
+							<grid:GridData span="L3 M12 S12"/>
+						</layoutData>
+					</HBox>
+					<layoutData>
+						<grid:GridData span="L3 M12 S12"/>
+					</layoutData>
+				</VBox>
+				<VBox class="cl_reci_dupDialog_tableBox sapUiTinyMarginTopBottom">
+					<HBox height="1.5rem" class="sapUiSmallMarginBeginEnd sapUiTinyMarginTopBottom ">
+						<Label text="{i18n>TotalNumberofRecords}" class="sapUiTinyMarginBegin cl_tableHeaderTxt"></Label>
+						<Label text = "{JM_ReciDuplicate>/length}" class="sapUiTinyMarginBegin cl_tableHeaderCntTxt"></Label>
+						<layoutData>
+							<grid:GridData span="L12 M12 S12"/>
+						</layoutData>
+					</HBox>
+					<uitable:Table rows="{JM_ReciDuplicate>/Duplicate}" visibleRowCount="9" selectionMode="Single"
+						class="cl_opr_Tbl sapUiSmallMarginBeginEnd sapUiSmallMarginBottom sapUiTinyMarginTop">
+						<uitable:columns>
+							<uitable:Column width = "5rem">
+								<Label text="{i18n>Group}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Plnnr}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "4rem">
+								<Label text="{i18n>GrC}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Plnal}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column>
+								<Label text="{i18n>GroupDescription}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Ktext}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "4rem">
+								<Label text="{i18n>Status}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Statu}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "4rem">
+								<Label text="{i18n>Usage}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Verwe}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "4rem">
+								<Label text="{i18n>Plant}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Werks}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "7rem">
+								<Label text="{i18n>BaseQuantity}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Bmsch}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "6rem">
+								<Label text="{i18n>ProdVrsn}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Verid}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "6rem">
+								<Label text="{i18n>LSizeFrom}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Losvn}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "6rem">
+								<Label text="{i18n>LSizeTo}"/>
+								<uitable:template>
+									<Label text="{JM_ReciDuplicate>Losbs}" class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+							<uitable:Column width = "6rem">
+								<Label  text="{i18n>ValidFrom}"/>
+								<uitable:template>
+									<Label  text="{path: 'JM_ReciDuplicate>Datuv', formatter: '.formatter.fnDateFormater'}"  class="sapUiTinyMarginBegin cl_table_label"/>
+								</uitable:template>
+							</uitable:Column>
+						</uitable:columns>
+					</uitable:Table>
+					<layoutData>
+						<grid:GridData span="L12 M12 S12"/>
+					</layoutData>
+				</VBox>
+			</grid:Grid>
+		</VBox>
+		<buttons>
+			<Button text="{i18n>Cancel}"  icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" width="5.5rem" class="cl_secondaryButton sapUiSmallMarginEnd" press="fncloseDialog"/>
+			<Button text="{i18n>IgnoreandContinue}" id = "id_dupSubmit" icon="{= ${JM_ImageModel>/path} + 'Continue.svg'}" width="11.5rem" class="cl_primaryButton sapUiSmallMarginEnd" press="fnNavInitiator"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

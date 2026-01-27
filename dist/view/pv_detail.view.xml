@@ -1,0 +1,597 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="MANAGED_RECIPE.controller.pv_detail"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout" xmlns:uitable="sap.ui.table">
+	<App>
+		<pages>
+			<Page showHeader="true" title="{i18n>ProductionVersion}" class="cl_pageBg sapUiSizeCompact" enableScrolling="false">
+				<customHeader>
+					<OverflowToolbar class="cl_header_toolbar">
+						<Image src="{= ${JM_ImageModel>/path} + 'NavBack.svg'}" alt="{i18n>NavBack}" width="1.5rem" press="fnNavBack"
+							class="cl_pv_removeImgFocus sapUiSmallMarginBegin"/>
+						<Title id="id_title" text="{i18n>PVCreation}" class="cl_header_title"/>
+						<ToolbarSpacer/>
+						<Label text="{JM_UserModel>/0/Agent} - {JM_UserModel>/0/Uname}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!--<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.NavigationBar" type="XML"/>-->
+				<content>
+					<VBox>
+						<VBox class="sapUiSmallMarginBegin cl_pv_scrollStyle">
+							<grid:Grid hSpacing="0" defaultSpan="L12 M12 S12" class="sapUiTinyMarginTop">
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>PVTitle}" id="ID_PV_SUBHEADING" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid">
+										<VBox>
+											<Label text="{i18n>Plant}" class="cl_inputLabel"/>
+											<HBox>
+												<VBox width="30%" class="cl_inputFieldGap">
+													<Input id="ID_PV_WERKS" editable="false" value="{JM_KeydataModel>/Werks}" showValueHelp="true" liveChange="fnLiveChange"
+														valueHelpRequest="fnF4press" class="cl_inputField"></Input>
+												</VBox>
+												<VBox width="70%">
+													<Input width="100%" value="{JM_KeydataModel>/WerksDes}" class="cl_inputDescField" editable="false"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>MaterialNumber}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_MATNR" editable="false" value="{JM_KeydataModel>/Matnr}" class="cl_inputField"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label text="{i18n>Description}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_MAKTX" editable="false" value="{JM_KeydataModel>/Maktx}" class="cl_inputField"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<HBox>
+												<VBox width="35%" class="cl_inputFieldGap">
+													<Label text="{i18n>PVersion}" tooltip="{i18n>ProducVersion}" required="true" class="cl_inputLabel"/>
+													<Input id="ID_PV_VERID" value="{JM_ProductionModel>/Verid}" type="Number" showValueHelp="true" liveChange="fnLiveChange"
+														valueHelpRequest="fnF4press" class="cl_inputField"
+														editable="{= ${JM_KeydataModel>/AppId} !== 'RX' &amp;&amp; ${JM_ContextModel>/Ind} !== 'T' &amp;&amp; ${JM_ContextModel>/Level} !== 'R' &amp;&amp; ${JM_ContextModel>/Level} !== 'A' }"></Input>
+												</VBox>
+												<VBox width="65%">
+													<Label text="{i18n>pvDesp}" tooltip="{i18n>ProdVersDesp}" required="true" class="cl_inputLabel"/>
+													<Input id="ID_PV_TEXT1" value="{JM_ProductionModel>/Text1}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" liveChange="fnLiveChange"
+														width="100%" class="cl_inputField"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>ProducVersion}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid">
+										<VBox>
+											<Label id="ID_PV_MKSP_TXT" text="{i18n>Lock}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<ComboBox id="ID_PV_MKSP" width="100%" enabled="true" class="cl_combobox" selectedKey="{JM_ProductionModel>/Mksp}" selectionChange="fnComboBoxLiveChange"
+													editable="{= ${JM_ContextModel>/Ind} !== 'T' }">
+													<core:Item key="0" text="{i18n>Notlocked}"/>
+													<core:Item key="1" text="{i18n>LockedUsage}"/>
+													<core:Item key="2" text="{i18n>LockedSourcing}"/>
+												</ComboBox>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_BSTMI_TXT" text="{i18n>FromLot}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_BSTMI" type="Number" value="{JM_ProductionModel>/Bstmi}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													liveChange="fnLiveChange" class="cl_inputField"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_BSTMA_TXT" text="{i18n>ToLot}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_BSTMA" type="Number" value="{JM_ProductionModel>/Bstma}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													liveChange="fnLiveChange" class="cl_inputField"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<HBox>
+												<VBox width="50%" class="cl_inputFieldGap">
+													<Label id="ID_PV_ADATU_TXT" text="{i18n>ValidFrom}" class="cl_inputLabel"/>
+													<DatePicker id="ID_PV_ADATU" value="{ path: 'JM_ProductionModel>/Adatu',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+														valueFormat="yyyy-MM-ddTHH:mm:ss" class="cl_inputField"
+														tooltip="{ path: 'JM_ProductionModel>Adatu',formatter: '.formatter.fnDateFormater' }"
+														editable="{= ${JM_KeydataModel>/AppId} !== 'RX' &amp;&amp; ${JM_ContextModel>/Ind} !== 'T' }" change="fnDateLiveChange"/>
+												</VBox>
+												<VBox width="50%">
+													<Label id="ID_PV_BDATU_TXT" text="{i18n>ValidTo}" class="cl_inputLabel"/>
+													<DatePicker id="ID_PV_BDATU" value="{ path: 'JM_ProductionModel>/Bdatu',formatter: '.formatter.fnDateFormater' }" displayFormat="dd.MM.yyyy"
+														valueFormat="yyyy-MM-ddTHH:mm:ss" class="cl_inputField" change="fnDateLiveChange"
+														editable="{= ${JM_KeydataModel>/AppId} !== 'RX' &amp;&amp; ${JM_ContextModel>/Ind} !== 'T' }"/>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>PlantData}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid">
+										<HBox alignContent="Center">
+											<VBox width="38%" justifyContent="Center" class="cl_inputFieldGap">
+												<Label text="{i18n>DetailedPlanning}" class="cl_inputLabel sapUiSmallMarginTop sapUiSmallMarginEnd"/>
+											</VBox>
+											<VBox width="62%" class="sapUiSmallMarginBegin">
+												<Label id="ID_PV_PLNTY_TXT" text="{i18n>TaskListType}" class="cl_inputLabel"></Label>
+												<VBox width="100%">
+													<!--<Input id="ID_PV_PLNTY" class="cl_inputField"></Input>-->
+													<ComboBox id="ID_PV_PLNTY" editable="true" enabled="false" width="100%" class="cl_combobox" selectedKey="2"
+														selectionChange="fnComboBoxLiveChange">
+														<core:Item key="*" text="{i18n>Wildcard}"/>
+														<core:Item key="0" text="{i18n>StandardNetwork}"/>
+														<core:Item key="2" text="{i18n>MasterRecipe}"/>
+														<core:Item key="3" text="{i18n>RoughCutPlanning}"/>
+														<core:Item key="A" text="{i18n>GeneralMaintTaskList}"/>
+														<core:Item key="E" text="{i18n>EquipmentTaskList}"/>
+														<core:Item key="F" text="{i18n>ReferenceTemplateRouting}"/>
+														<core:Item key="M" text="{i18n>ReferenceRateRouting}"/>
+														<core:Item key="N" text="{i18n>Routing}"/>
+														<core:Item key="P" text="{i18n>PlanningRouting}"/>
+														<core:Item key="Q" text="{i18n>InspectionPlan}"/>
+														<core:Item key="R" text="{i18n>RateRouting}"/>
+														<core:Item key="S" text="{i18n>ReferenceOperationSet}"/>
+														<core:Item key="T" text="{i18n>TaskListForFuncLoc}"/>
+														<core:Item key="V" text="{i18n>ShopFloorRouting}"/>
+													</ComboBox>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L2 M12 S12"/>
+												</layoutData>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</HBox>
+										<VBox>
+											<HBox>
+												<VBox width="50%" class="cl_inputFieldGap">
+													<Label id="ID_PV_PLNNR_TXT" text="{i18n>Group}" class="cl_inputLabel"></Label>
+													<Input id="ID_PV_PLNNR" value="{JM_ProductionModel>/Plnnr}" class="cl_inputField" liveChange="fnLiveChange" editable="false"></Input>
+												</VBox>
+												<VBox width="50%">
+													<Label id="ID_PV_ALNAL_TXT" text="{i18n>GroupCounter}" class="cl_inputLabel"></Label>
+													<Input id="ID_PV_ALNAL" value="{JM_ProductionModel>/Alnal}" class="cl_inputField" liveChange="fnLiveChange" editable="false"></Input>
+												</VBox>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox class="sapUiSmallMarginTop">
+											<HBox>
+												<VBox width="20%" justifyContent="Center">
+													<HBox id="ID_PVIND" class="cl_indicator" visible="false">
+														<Button id="ID_PVIND_BTN" class="cl_Indicator"></Button>
+													</HBox>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>BOMData}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid">
+										<VBox>
+											<HBox>
+												<VBox width="50%" class="cl_inputFieldGap">
+													<Label id="ID_PV_STLAL_TXT" text="{i18n>AlternativeBOM}" required="true" class="cl_inputLabel"></Label>
+													<Input id="ID_PV_STLAL" value="{JM_ProductionModel>/Stlal}" class="cl_inputField" type="Number" showValueHelp="true"
+														liveChange="fnLiveChange"
+														editable="{= ${JM_KeydataModel>/AppId} !== 'RX' &amp;&amp; ${JM_ContextModel>/Ind} !== 'T' &amp;&amp; ${JM_ContextModel>/Level} !== 'R' &amp;&amp; ${JM_ContextModel>/Level} !== 'A' }"
+														valueHelpRequest="fnF4press"></Input>
+												</VBox>
+												<VBox width="50%">
+													<Label id="ID_PV_STLAN_TXT" text="{i18n>BOMUsage}" required="true" class="cl_inputLabel"></Label>
+													<Input id="ID_PV_STLAN" value="{JM_ProductionModel>/Stlan}" class="cl_inputField" type="Number" showValueHelp="true"
+														liveChange="fnLiveChange"
+														editable="{= ${JM_KeydataModel>/AppId} !== 'RX' &amp;&amp; ${JM_ContextModel>/Ind} !== 'T' &amp;&amp; ${JM_ContextModel>/Level} !== 'R' &amp;&amp; ${JM_ContextModel>/Level} !== 'A' }"
+														valueHelpRequest="fnF4press"></Input>
+												</VBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_CSPLT_TXT" text="{i18n>ApportionmentStructure}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_CSPLT" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" value="{JM_ProductionModel>/Csplt}" class="cl_inputField"
+													showValueHelp="false" liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox alignContent="End">
+											<Label class="cl_inputLabel"/>
+											<HBox justifyContent="SpaceBetween" alignItems="Center">
+												<HBox id="ID_BOMIND" class="cl_indicator" visible="false">
+													<Button id="ID_BOMIND_BTN" class="cl_Indicator"></Button>
+												</HBox>
+												<layoutData>
+													<grid:GridData span="L3 M12 S12"/>
+												</layoutData>
+											</HBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label class="cl_inputLabel"/>
+											<VBox width="100%" class="cl_kd_marginEnd" alignItems="End">
+												<Button text="{i18n>BOM}" icon="{= ${JM_ImageModel>/path} + 'BOM.svg'}" tooltip="{i18n>GOTOBOM}" press="fnNavBom"
+													class="cl_primaryButton sapUiSizeCompact"/>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<OverflowToolbar class="sapUiSmallMarginTop cl_cont_toolbar">
+										<Label text="{i18n>MaterialComponentAssign}" class="sapUiSmallMarginBegin cl_pannelTitleFont"/>
+										<ToolbarSpacer/>
+										<Button id="ID_OPERATION_BTN" class="sapUiSizeCompact cl_IconNavBTN sapUiTinyMarginEnd" icon="{= ${JM_ImageModel>/path} + 'Copy.svg'}"
+											tooltip="{i18n>CreateAssignment}" press="fnOperationDetails" visible="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+										<Button id="ID_OPDELETE_BTN" class="sapUiSizeCompact sapUiTinyMarginEnd cl_IconNavBTN" icon="{= ${JM_ImageModel>/path} + 'Delete.svg'}"
+											tooltip="{i18n>Delete}" press="fnDeleteFrag" visible="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+										<layoutData>
+											<grid:GridData span="L8 M12 S12"/>
+										</layoutData>
+									</OverflowToolbar>
+									<grid:Grid class="cl_kd_grid">
+										<VBox>
+											<uitable:Table id="idMaterialComTable" rows="{JM_ProductionModel>/NavPV_MaterialCompData}" selectionMode="Multi"
+												class="cl_opr_Tbl sapUiSmallMarginBottom">
+												<uitable:noData>
+													<VBox alignItems="Center" justifyContent="Center">
+														<Image src="{= ${JM_ImageModel>/path} + 'Nodatafound.gif'}" tooltip="{i18n>NoDatafound}"/>
+														<Label text="{i18n>NoDatafound}" class="cl_noDataText"/>
+													</VBox>
+												</uitable:noData>
+												<uitable:columns>
+													<uitable:Column>
+														<Label text="{i18n>Component}" tooltip="{i18n>Component}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Idnrk}" tooltip="{JM_ProductionModel>Idnrk}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column >
+														<Label text="{i18n>Activity}" tooltip="{i18n>ActivityOperation}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Vornr}" tooltip="{JM_ProductionModel>Vornr}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column >
+														<Label text="{i18n>IndPhase}" tooltip="{i18n>IndicatorPhase}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<CheckBox selected="{JM_ProductionModel>Phflg}" class="cl_opr_checkbx" editable="false"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column >
+														<Label text="{i18n>SupOperation}" tooltip="{i18n>SuperiorOperation}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Pvznr}" tooltip="{JM_ProductionModel>Pvznr}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column >
+														<Label text="{i18n>OperationDescription}" tooltip="{i18n>OperationShortText}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Ltxa1}" tooltip="{JM_ProductionModel>Ltxa1}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column>
+														<Label text="{i18n>Quantity}" tooltip="{i18n>Quantity}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Menge}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column>
+														<Label text="{i18n>UOM}" width="2rem" tooltip="{i18n>UnitMeasure}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Meins}" tooltip="{JM_ProductionModel>Meins}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column >
+														<Label text="{i18n>Backflush}" width="4rem" tooltip="{i18n>Backflush}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<CheckBox selected="{JM_ProductionModel>Rgekz}" class="cl_opr_checkbx" editable="false"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column width="9rem">
+														<Label text="{i18n>ItemDescription}" tooltip="{i18n>MaterialDescription}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Maktx}" tooltip="{JM_ProductionModel>Maktx}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column>
+														<Label text="{i18n>ItemNumber}" tooltip="{i18n>ItemNumber}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Posnr}" tooltip="{JM_ProductionModel>Posnr}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column>
+														<Label text="{i18n>ItemCategory}" tooltip="{i18n>ItemCategory}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Postp}" tooltip="{JM_ProductionModel>Postp}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+													<uitable:Column>
+														<Label text="{i18n>Material}" tooltip="{i18n>Material}" class="cl_table_headerTxt"/>
+														<uitable:template>
+															<Label text="{JM_ProductionModel>Matnr}" tooltip="{JM_ProductionModel>Matnr}" class="sapUiTinyMarginBegin cl_table_label"/>
+														</uitable:template>
+													</uitable:Column>
+												</uitable:columns>
+											</uitable:Table>
+											<layoutData>
+												<grid:GridData span="L12 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" id="ID_PERMAN_HEADER" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>RepetitiveManufacturing}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_PERMAN" width="16px" tooltip="{i18n>Collapse}"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" alt="{i18n>Collapse}" press="fnExpandCollapse"></Image>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" id="ID_PERMAN_GRID">
+										<VBox>
+											<Label id="ID_PV_MDV01_TXT" text="{i18n>ProductionLine}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_MDV01" value="{JM_ProductionModel>/Mdv01}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_MDV02_TXT" text="{i18n>PlanningID}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_MDV02" value="{JM_ProductionModel>/Mdv02}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="false" liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_PNGUID_TXT" text="{i18n>LineNetwork}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_PNGUID" value="{JM_ProductionModel>/Pnguid}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_SERKZ_TXT" text="{i18n>Remallowed}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<CheckBox id="ID_PV_SERKZ" select="fnCheckBoxLiveChange" selected="{JM_ProductionModel>/Serkz}" class="cl_opr_checkbx"
+													editable="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+												<!--<Input id="ID_PV_SERKZ" value="{JM_ProductionModel>/Serkz}" class="cl_inputField" liveChange="fnLiveChange"></Input>-->
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+								<VBox height="auto" class="sapUiTinyMarginEnd">
+									<HBox class="cl_pannelHead" id="ID_OTHERDATA_HEADER" justifyContent="SpaceBetween" alignItems="Center">
+										<Label text="{i18n>OtherData}" class="sapUiSmallMarginBeginEnd cl_pannelTitleFont"/>
+										<Image src="{= ${JM_ImageModel>/path} + 'Collapse.svg'}" id="ID_OTHERDATA" width="16px" tooltip="{i18n>Collapse}"
+											class="cl_ImageTopAlign_roadMap cl_pv_removeImgFocus sapUiTinyMarginBeginEnd" press="fnExpandCollapse"></Image>
+										<layoutData>
+											<grid:GridData span="L7 M7 S12"/>
+										</layoutData>
+									</HBox>
+									<grid:Grid class="cl_kd_grid" id="ID_OTHERDATA_GRID">
+										<VBox>
+											<Label id="ID_PV_MATKO_TXT" text="{i18n>OtherHeaderMaterial}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_MATKO" class="cl_inputField" value="{JM_ProductionModel>/Matko}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_VERTO_TXT" text="{i18n>DistributionKey}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_VERTO" value="{JM_ProductionModel>/Verto}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="false" liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_ELPRO_TXT" text="{i18n>IssueStorageLocation}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_ELPRO" value="{JM_ProductionModel>/Elpro}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_EWM_LGNUM_TXT" text="{i18n>WarehouseNumber}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_EWM_LGNUM" value="{JM_ProductionModel>/EwmLgnum}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_ALORT_TXT" text="{i18n>ReceivingLocation}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_ALORT" value="{JM_ProductionModel>/Alort}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_UCMAT_TXT" text="{i18n>OBReferenceMaterial}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_UCMAT" value="{JM_ProductionModel>/Ucmat}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_EWM_LGPLA_TXT" text="{i18n>DestinationBin}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_EWM_LGPLA" value="{JM_ProductionModel>/EwmLgpla}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="false" liveChange="fnLiveChange"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_TSA_PRVBE_TXT" text="{i18n>TargetPSA}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_TSA_PRVBE" value="{JM_ProductionModel>/TsaPrvbe}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+										<VBox>
+											<Label id="ID_PV_PRVBE_TXT" text="{i18n>DefaultSupplyArea}" class="cl_inputLabel"></Label>
+											<VBox width="100%">
+												<Input id="ID_PV_PRVBE" value="{JM_ProductionModel>/Prvbe}" editable="{= ${JM_ContextModel>/Ind} !== 'T' }" class="cl_inputField"
+													showValueHelp="true" liveChange="fnLiveChange" valueHelpRequest="fnF4press"></Input>
+											</VBox>
+											<layoutData>
+												<grid:GridData span="L3 M12 S12"/>
+											</layoutData>
+										</VBox>
+									</grid:Grid>
+									<layoutData>
+										<grid:GridData span="L12 M12 S12"/>
+									</layoutData>
+								</VBox>
+							</grid:Grid>
+						</VBox>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<Label text="{i18n>PageTips}" class="cl_pageTip sapUiSmallMarginBegin"/>
+						<Image src="{= ${JM_ImageModel>/path} + 'Pagetips.svg'}" alt="{i18n>PageTips}" width="0.9rem" class="sapUiTinyMarginBegin"/>
+						<ToolbarSpacer/>
+						<Button text="{i18n>Cancel}" id="ID_CANCEL_BTN" width="5rem" icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}"
+							class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="{i18n>Cancel}" press="fnclose"/>
+						<Button text="{i18n>Changelog}" width="7.8rem" icon="{= ${JM_ImageModel>/path} + 'Clearall.svg'}"
+							class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="{i18n>Changelog}" press="fnChangelog"
+							visible="{= ${JM_KeydataModel>/AppId} === 'RX' }"/>
+						<Button text="{i18n>SaveBack}" width="9rem" icon="{= ${JM_ImageModel>/path} + 'Save.svg'}" class="cl_primaryButton sapUiSmallMarginEnd"
+							tooltip="{i18n>SaveBack}" press="fnSaveBack" visible="{= ${JM_ContextModel>/Ind} !== 'T' }"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -48,6 +48,7 @@
 					</layoutData>
 				</VBox>
 				<VBox>
+<<<<<<< HEAD
 					<Label text="{i18n>Profile}" required="true" id="KID_RECI_PROFIDNETZ_TXT" class="cl_inputLabel"/>
 					<HBox>
 						<VBox width="40%" class="cl_inputFieldGap">
@@ -56,6 +57,16 @@
 						</VBox>
 						<VBox width="60%">
 							<Input id="KID_RECI_PROFIDNETZ_DES" value="{JM_KeyData>/ProfileDes}" class="cl_inputDescField" editable="false"></Input>
+=======
+					<Label text="{i18n>Profile}" required="true" id="KID_RECI_PROFID_STD_TXT" class="cl_inputLabel"/>
+					<HBox>
+						<VBox width="40%" class="cl_inputFieldGap">
+							<Input valueHelpRequest="fnF4press" value="{JM_KeyData>/Profile}" editable="{= ${JM_KeyData>/AppId} === 'RX' ? false : true }"
+								showValueHelp="true" liveChange="fnLiveChange" id="KID_RECI_PROFID_STD" class="cl_inputField" maxLength="7"></Input>
+						</VBox>
+						<VBox width="60%">
+							<Input id="KID_RECI_PROFID_STD_DES" value="{JM_KeyData>/ProfileDes}" class="cl_inputDescField" editable="false"></Input>
+>>>>>>> branch 'master' of https://github.com/sabarishbabutg/Recipe.git
 						</VBox>
 						<layoutData>
 							<grid:GridData span="L3 M12 S12"/>

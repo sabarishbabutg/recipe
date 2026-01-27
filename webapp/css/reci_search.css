@@ -190,6 +190,7 @@
     color: #FFFFFF !important;
 }
 .cl_createNew.sapMMenuBtn .sapMBtnInner.sapMBtnText .sapMBtnIcon{
+<<<<<<< HEAD
 	margin-left:-16px ;
 }
 /*create new Drop down*/
@@ -286,3 +287,136 @@
 	color : #141414;
 	letter-spacing : 0.2px;
 }
+=======
+	margin-left: 0px ;
+}
+/*create new Drop down*/
+.cl_textmenu.sapMMenuItem{
+	width : 8rem!important;
+	border:none;
+}
+.cl_textmenu .sapMMenuItemText{
+	font-family : 'Segoe UI' !important;
+	font-weight : 400;
+	letter-spacing : 0.3px;
+}
+
+/* ===========================
+	Expand Collapse Focus remove
+   =========================== */
+.cl_search_expandCollpase.sapMImgFocusable:focus{
+	outline:none;
+	outline-offset:none	;
+	border-radius:0px;
+}
+
+.cl_removeFocus{
+	outline:none;
+	outline-offset:none;
+}
+
+
+/* ===========================
+	Table filter styles
+   =========================== */
+
+.cl_uwl_customizefilterlistitem .sapMSLIImg{
+	width:13px;
+	/* when we use sapUiTinyMargin more space will get so padding will be used*/
+	padding-right:2px;
+}
+
+.cl_uwl_wrapfilterlistitem .sapMSLIImg{
+	width:17px !important;
+}  
+
+.cl_uwl_filterlistitem .sapMSLI{
+	/* by using height only we have to controle the row height of the pop up*/
+	height:37px !important;
+	overflow:hidden;
+	border-bottom:none !important;
+}
+
+.cl_uwl_clearfilterlistitem.sapMIBar-CTX.sapMFooter-CTX{
+	border-top:none !important;
+}
+
+.cl_uwl_clearfilterlistitem.sapMLIBFocusable:focus, 
+.cl_uwl_clearfilterlistitem.sapMTblCellFocusable:focus{
+	outline:none !important;
+}
+
+.cl_uwl_clearfilterlistitem.sapMBtn:hover>.sapMBtnHoverable {
+    background: linear-gradient(to right, #54BEBD, #0382A5) !important;
+}
+
+.cl_uwl_clearfilterlistitem .sapMBtnInner {
+    background: linear-gradient(to right, #54BEBD, #0382A5);
+    font-family: Segoe UI;
+    font-size: 13px;
+    color: #FFFFFF !important;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: none !important;
+}
+
+.cl_uwl_PopOver.sapMPopover .sapMIBar.sapMHeader-CTX{
+	display:none !important;
+}
+
+.cl_uwl_TransReqWrap .cl_uwltableTxt {
+	white-space: normal !important;
+	word-wrap: break-word;
+	overflow: visible !important;
+}
+
+
+/* ===========================
+	No Data Text Styles
+   =========================== */
+
+.cl_noDataText{
+	font-family : 'Segoe UI' !important;
+	font-size : 13px;
+	font-weight : 500;
+	color : #141414;
+	letter-spacing : 0.2px;
+}
+
+
+/* ===========================
+	Searcg Field for uitable
+   =========================== */
+.cl_s_customSearchWrapper{
+	border:1px solid #B4B5C5 !important;
+	background:transparent !important;
+	border-radius:3px;
+	height:26px !important;
+}
+.cl_s_customSearchWrapper.sapMTB.sapMTBStandard{
+	border-bottom: none;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBaseContentWrapper {
+    border: none !important;
+    outline:none !important;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBaseInner {
+    box-shadow: none !important;
+    border:1px solid white !important;
+    width: 100% !important;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBaseContentWrapper::before {
+    border: none !important;
+}
+.cl_s_inputNoBorderSearchField .sapMInputBasePlaceholder {
+    border: none !important;
+}
+.cl_s_inputNoBorderSearchField.sapMInput .sapMInputBaseContentWrapper {
+    height: 26px;
+    border-bottom: none;
+    background: transparent;
+    border: none !important;
+}
+>>>>>>> branch 'master' of https://github.com/sabarishbabutg/Recipe.git

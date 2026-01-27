@@ -1,0 +1,80 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="MANAGED_RECIPE.controller.reci_keydata"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page showHeader="true" title="Application" class="cl_pageBg sapUiSizeCompact" enableScrolling="false">
+				<!--Header Bar-->
+				<customHeader>
+					<OverflowToolbar class="cl_header_toolbar">
+						<Title id="id_title" text="{}" class="sapUiSmallMarginBegin cl_header_title"/>
+						<ToolbarSpacer/>
+						<Label text="{JM_UserModel>/0/Agent} - {JM_UserModel>/0/Uname}" class="cl_userid_font sapUiSmallMarginEnd"/>
+					</OverflowToolbar>
+				</customHeader>
+				<!-- Fragment for Navigation Bar-->
+				<!--<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.NavigationBar" type="XML"/>-->
+				<content>
+					<VBox>
+						<!--Road Map Box-->
+						<HBox id = "id_roadmap" class="cl_roadmap sapUiSmallMarginBeginEnd sapUiTinyMarginTop">
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image   src="{= ${JM_ImageModel>/path} + 'SearchR.svg'}"  tooltip="{i18n>Search}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>Search}" class="cl_textStyle_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<HBox alignItems="Center" justifyContent="Center" id = "id_roadmapHighlighter" class="cl_Highlightborder_roadMap">
+										<Image src="{= ${JM_ImageModel>/path} + 'KeyData.svg'}"  tooltip="{i18n>Keydata}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+										<Label text="{i18n>Keydata}" class="cl_HighlightText_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+									</HBox>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image  src="{= ${JM_ImageModel>/path} + 'Recipe.svg'}"  tooltip="{i18n>RecipeDetails}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>RecipeDetails}" visible="{RoadMapUI>/labelVisible}" class="cl_textStyle_roadMap"/>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image  src="{= ${JM_ImageModel>/path} + 'Reviewer.svg'}"  tooltip="{i18n>Reviewer}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>Reviewer}" class="cl_textStyle_roadMap" visible="{RoadMapUI>/labelVisible}"/>
+								</HBox>
+							</VBox>
+							<HBox class="cl_Vline_roadMap" visible="{RoadMapUI>/labelVisible}"></HBox>
+							<VBox width="20%">
+								<HBox alignItems="Center" justifyContent="Center">
+									<Image  src="{= ${JM_ImageModel>/path} + 'Approver.svg'}"  tooltip="{i18n>Approver}" class="cl_ImageTopAlign_roadMap sapUiTinyMarginEnd"></Image>
+									<Label text="{i18n>Approver}" visible="{RoadMapUI>/labelVisible}" class="cl_textStyle_roadMap"/>
+								</HBox>
+							</VBox>
+						</HBox>
+						<VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+							<!-- Key Data Fragment -->
+							<core:Fragment fragmentName="MANAGED_RECIPE.Fragment.reci_keydata" type="XML"/>
+						</VBox>
+					</VBox>
+					<HBox class="cl_imageContainer" alignContent="Center">
+						<!-- Key data Image-->
+						<Image  src="{= ${JM_ImageModel>/path} + 'keydataFrame.svg'}"  tooltip="{i18n>Keydata}" class="cl_fitImage"/>
+					</HBox>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<Label text="{i18n>PageTips}" class="cl_pageTip sapUiSmallMarginBegin"/>
+						<Image  src="{= ${JM_ImageModel>/path} + 'Pagetips.svg'}"  width="0.9rem" class="sapUiTinyMarginBegin" tooltip="{i18n>PageTips}"/>
+						<ToolbarSpacer/>
+						<Button text="Cancel" width="5rem"  icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}"  class="cl_secondaryButton sapUiTinyMarginEnd" tooltip="Continue" press="fnCancel"/>
+						<Button text="Continue" width="6rem"  icon="{= ${JM_ImageModel>/path} + 'Continue.svg'}"  class="cl_primaryButton sapUiSmallMarginEnd" tooltip="Continue"
+							press="fnContinue"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,199 @@
+/* ===========================
+   Item Level Dialog Style
+   =========================== */
+   
+.cl_bomitem_Dialog {
+    width: 90% !important;
+    height: 93% !important;
+}
+.cl_bomitem_Dialog .sapMTB.sapMFooter-CTX {
+    background: #E8E8E8 !important;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.cl_bomitem_Dialog .sapMTBSpacer {
+    display: none;
+}
+.cl_item_Toolbar_Dlg {
+    background: linear-gradient(to left, #56C4CD, #9DFAF6) !important;
+    justify-content: space-between !important;
+}
+.cl_item_Toolbar_Dlg.sapMTB.sapMTBStandard {
+    border-bottom: none !important;
+}
+
+.cl_bomitem_headerBox {
+    border: 1px solid #9AA0A7;
+    border-radius: 7px;
+    position: fixed;
+}
+.cl_item_iconTab_Dlg .sapMITH {
+    padding: 0px !important;
+    border-top-left-radius: 10px !important;
+}
+.cl_item_iconTab_Dlg .sapMITBHead {
+    padding: 0px !important;
+    border-top-left-radius: 8px !important;
+}
+.cl_item_gridRemovePadding.sapUiRespGrid.sapUiRespGridHSpace1{
+	padding-top:0px !important;
+	padding-bottom:0px !important;
+}
+
+
+.cl_bomitem_headerBox {
+    border: 1px solid #9AA0A7;
+    border-radius: 7px;
+    position: relative !important;
+}
+
+.cl_ImageFocusremove.sapMImgFocusable:focus {
+    outline: none !important;
+}
+
+/* ===========================
+   BOM Item Table Style
+   =========================== */
+
+.cl_item_tablenoneditBg{
+	background:#f3f3f3;
+}
+
+.cl_HdrTableItemtext.sapMLnk {
+    color: #3393A1 !important;
+}
+
+.cl_HdrTableItemtext.sapMLnk:visited {
+    color: #3393A1;
+}
+
+.cl_HdrTableItemtext.sapMLnk:not(.sapMLnkWrapping) .sapMLnkText {
+    color: #3393A1;
+}
+
+.cl_HdrTableItemtext.sapMLnk:not(.sapMLnkDsbl):focus {
+    background-color: transparent !important;
+ }
+ 
+ .cl_opr_Tbl .sapUiTableRowSel {
+    background-image: linear-gradient(to right, #56bdcd 0px, #ebfcff 0px) !important;
+     border-left: none !important; 
+}
+
+.cl_bom_tableInput .sapMInputBaseContentWrapper::before {
+    border: none !important;
+}
+.cl_bom_tableInput .sapMInputBaseInner:not(.sapMInputBaseReadonlyInner):not(.sapMInputBaseStateInner):focus {
+    border-color: #56bdcd00;
+}
+.cl_bom_tableInput .sapMInputBaseContentWrapper {
+    background: none !important;
+    background-color: none !important;
+    border: none !important;
+    border-outline: none !important;
+}
+.cl_bom_tableInput .sapMInputBaseContentWrapper:not(.sapMInputBaseReadonlyWrapper):not(.sapMInputBaseContentWrapperState) {
+    box-shadow: none !important;
+    height: 1.5rem !important;
+}
+.cl_bom_tableInput .sapMInputBaseReadonlyInner {
+    height: 1.5rem;
+    font-family: 'Segoe UI' !important;
+    font-size: 12px;
+}
+.cl_bom_tableInput .sapMInputValHelpInner {
+    line-height: 1.5rem;
+    color: #9298c3;
+}
+.cl_bom_tableInput .sapMInputBaseInner {
+    color: #000000 !important;
+    border: 1px solid #bfbfbf00 !important;
+    font-size: 12px !important;
+    font-family: "Segoe UI" !important;
+}
+.cl_bom_tableInput .sapMInputBaseIcon::before {
+    color: #3393A1 !important;
+}
+
+.cl_tbl_errInput .sapMInputBaseContentWrapperError {
+    background: #f53232 !important;
+    background-color: #ffeaf4 !important;
+    border-bottom: 1.5px solid #B7080A !important;
+    /* border: 1px solid #A8A7A7 !important; */
+    box-shadow: inset 0 0 0 .0625rem rgba(255, 142, 196, 0.45) !important;
+}
+.cl_item_tablenoneditBg{
+	background:#f3f3f3;
+}
+
+ /* ===========================
+   Button Style
+   =========================== */
+
+.cl_imagePos{
+	position: relative;
+    top: 3px;
+}
+.cl_imagePos.sapMImgFocusable:focus {
+     border-radius: 0rem !important;  
+}
+
+.cl_opr_DeselectBtn.sapMBtn:focus-visible>.sapMFocusable:not(.sapMBadgeIndicator)::before,
+.cl_opr_DeselectBtn.sapMBtn:focus>.sapMFocusable:not(.sapMBadgeIndicator)::before {
+    border:none !important;
+}
+
+.cl_item_Add_Dialog.sapMBtn:focus-visible>.sapMFocusable:not(.sapMBadgeIndicator)::before,
+.cl_item_Add_Dialog.sapMBtn:focus>.sapMFocusable:not(.sapMBadgeIndicator)::before {
+    border: none !important;
+}
+
+
+ /* ===========================
+   CheckBox button Style
+   =========================== */
+   
+.cl_checkboxError .sapMCbBg.sapMCbMarkChecked {
+    height: 15px;
+    width: 15px;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: #e74c3c !important;
+    border: none !important;
+}
+.cl_checkboxError .sapMCbBg.sapMCbMarkChecked::before {
+    font-size: 0.75rem !important;
+    color: white !important;
+}
+.cl_checkboxError.sapMCb:focus::before {
+    content: '';
+    border: none !important;
+}
+
+ /* ===========================
+   Toolbar Style
+   =========================== */
+
+
+.cl_cont_toolbar.sapMTB.sapMTBStandard {
+    background-color: #E4FBFF !important;
+    border: 1px solid #a8b3bd !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 2.3rem;
+    box-shadow: 0px 2px 4px 0px #0000001A;
+    border-bottom: none !important;
+}
+
+
+.cl_coproductSelct.sapMSlt{
+	background-image : none !important;
+	box-shadow: none !important; 
+}
+.cl_coproductSelct .sapMSltLabelError{
+    background: #f53232 !important;
+    background-color: #ffeaf4 !important;
+    border-bottom: 1.5px solid #B7080A !important;
+    box-shadow: inset 0 0 0 .0625rem rgba(255, 142, 196, 0.45) !important;
+}

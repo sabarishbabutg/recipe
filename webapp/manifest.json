@@ -19,6 +19,7 @@
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
+<<<<<<< HEAD
 					"localUri": "localService/metadata.xml"
 				}
 			},
@@ -174,6 +175,160 @@
 				},
 				{
 					"uri": "css/reci_dashboard.css"
+=======
+					"localUri": "localService/MDM_CONFIG_SRV/metadata.xml"
+				}
+			},
+			"MDM_RECI_SRV": {
+				"uri": "/sap/opu/odata/exl/MDM_RECI_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/MDM_RECI_SRV/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "MANAGED_RECIPE.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "MANAGED_RECIPE.i18n.i18n"
+				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "MDM_RECI_SRV",
+				"preload": true
+			},
+			"JMConfig": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "MDM_CONFIG_SRV",
+				"preload": true
+			},
+			"JM_Recipe": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_Operation": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_KeyData": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_WfParm": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_ProductionVrsn": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_Bom": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_ContextModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_ChangeLog": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"JM_InitialDatas": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				},
+				{
+					"uri": "css/reci_initiator.css"
+				},
+				{
+					"uri": "css/reci_keydata.css"
+				},
+				{
+					"uri": "css/reci_search.css"
+				},
+				{
+					"uri": "css/pv_detail.css"
+				},
+				{
+					"uri": "css/bom_detail.css"
+				},
+				{
+					"uri": "css/dialog.css"
+				},
+				{
+					"uri": "css/reci_operations.css"
+>>>>>>> branch 'master' of https://github.com/sabarishbabutg/Recipe.git
 				}
 			]
 		},

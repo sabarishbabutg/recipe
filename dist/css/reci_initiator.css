@@ -1,0 +1,22 @@
+.cl_init_scrollStyle{
+	overflow-y:scroll;
+	height:calc(100vh - 9.2rem);
+}
+.cl_init_toolbar{
+	border-bottom: none !important;
+	padding:0px;
+}
+.cl_search_rotateImage {
+	margin-top:4px !important;
+	transform: rotate(180deg) !important;
+}
+.cl_fileupload{
+	display:none !important;
+}
+
+.cl_attachIconWidth .sapMBtnInner.sapMBtnText .sapMBtnIcon{
+	min-width:13px !important;
+}
+.cl_submitIconWidth .sapMBtnInner.sapMBtnText .sapMBtnIcon{
+	min-width:13px !important;
+}

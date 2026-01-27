@@ -163,6 +163,7 @@ MANAGED_RECIPE.Formatter.formatter = {
 		return this.AppId === "RX";
 	}.bind(this),
 
+<<<<<<< HEAD
 	fnConverStatusToIcon: function(sStatus) {
 		if (sStatus === "I" || sStatus === "S" || sStatus === "D") {
 			return "Image/NodesOrg.svg"; // In-progress
@@ -175,6 +176,27 @@ MANAGED_RECIPE.Formatter.formatter = {
 		}
 		return ""; // Default or error
 	},
+=======
+	fnConverStatusToIcon: function (sStatus) {
+    var sBasePath = this.getView()
+        .getModel("JM_ImageModel")
+        .getProperty("/path");
+
+    if (sStatus === "C") {
+        return sBasePath + "NodesGrn.svg";
+    }
+
+    if (sStatus === "I" || sStatus === "D" || sStatus === "S" || sStatus === "01" || sStatus === "04") {
+        return sBasePath + "NodesOrg.svg";
+    }
+
+    if (sStatus === "R" || sStatus === "6") {
+        return sBasePath + "NodesRed.svg";
+    }
+
+    return "";
+},
+>>>>>>> branch 'master' of https://github.com/sabarishbabutg/Recipe.git
 	
 	fnConverStatustoTooltip:function(sStatus){
 		if (sStatus === "I" ) {

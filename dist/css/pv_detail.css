@@ -1,0 +1,147 @@
+/* ===========================
+   Scrollbar Style
+   =========================== */
+
+.cl_pv_scrollStyle {
+    overflow-y: scroll;
+    height: calc(100vh - 8rem);
+}
+
+
+/* ===========================
+		Image Style
+   =========================== */
+
+.cl_pv_removeImgFocus.sapMImgFocusable:focus {
+    outline: none;
+    outline-offset: none;
+}
+
+
+/* ===========================
+		Indicator Button Style
+   =========================== */
+
+.cl_IndicatorS .sapMBtnInner {
+    color: #158D1A !important;
+    background-color: #DFFFE0 !important;
+    height: 1.2rem !important;
+    border: none !important;
+    position: relative;
+    top: 4px;
+    font-size: 10px !important;
+}
+
+.cl_IndicatorS span.sapMBtnInner.sapMBtnEmphasized {
+    background-color: #DFFFE0 !important;
+}
+
+.cl_IndicatorS .sapMBtnContent {
+    line-height: 1.2rem !important;
+}
+
+.cl_IndicatorS.sapMBtn:hover>.sapMBtnHoverable {
+    background-image: none;
+    background-color: #DFFFE0 !important;
+}
+.cl_IndicatorS .sapMBtnInner.sapMBtnText .sapMBtnIcon.sapMImg {
+    height: 0.7rem !important;
+    width: auto;
+    position: relative !important;
+    top: 4px !important;
+}
+
+.cl_IndicatorP .sapMBtnInner {
+    color: #FF8D28 !important;
+    background-color: #FFE9D5 !important;
+    height: 1.2rem !important;
+    border: none !important;
+    position: relative;
+    top: 4px;
+    font-size: 10px !important;
+}
+
+.cl_IndicatorP span.sapMBtnInner.sapMBtnEmphasized {
+    background-color: #FFE9D5 !important;
+}
+
+.cl_IndicatorP .sapMBtnContent {
+    line-height: 1.2rem !important;
+}
+
+.cl_IndicatorP.sapMBtn:hover>.sapMBtnHoverable {
+    background-image: none;
+    background-color: #FFE9D5 !important;
+}
+
+.cl_IndicatorR .sapMBtnInner {
+    color: #B93A29 !important;
+    background-color: #FFE1DF !important;
+    height: 1.2rem !important;
+    border: none !important;
+    position: relative;
+    top: 4px;
+    font-size: 10px !important;
+}
+
+.cl_IndicatorR span.sapMBtnInner.sapMBtnEmphasized {
+    background-color: #FFE1DF !important;
+}
+
+.cl_IndicatorR .sapMBtnContent {
+    line-height: 1.2rem !important;
+}
+
+.cl_IndicatorR.sapMBtn:hover>.sapMBtnHoverable {
+    background-image: none;
+    background-color: #FFE1DF !important;
+}
+
+.cl_IndicatorR .sapMBtnInner.sapMBtnText .sapMBtnIcon.sapMImg {
+    height: 0.7rem !important;
+    width: auto;
+    position: relative !important;
+    top: 4px !important;
+}
+
+.cl_IndicatorP .sapMBtnInner.sapMBtnText .sapMBtnIcon.sapMImg {
+    height: 0.7rem !important;
+    width: auto;
+    position: relative !important;
+    top: 4px !important;
+}
+
+
+
+.cl_Indicator.sapMBtn:focus-visible>.sapMFocusable:not(.sapMBadgeIndicator)::before,
+.cl_Indicator.sapMBtn:focus>.sapMFocusable:not(.sapMBadgeIndicator)::before {
+    border: none !important;
+}
+
+
+/* ===========================
+   Icon Navigation Button Style
+   =========================== */
+
+.cl_IconNavBTN .sapMBtnInner {
+    font-size: 0.875rem;
+    height: 1.6rem !important;
+    min-width: 1.6rem !important;
+    background: linear-gradient(to right, #54BEBD, #0382A5) !important;
+    border: none !important;
+    border-radius: 3px !important;
+    color: #3393A1 !important;
+}
+
+.cl_IconNavBTN.sapMBtn .sapMBtnIcon {
+    cursor: inherit;
+    height: 16px !important;
+    margin-top: 5px !important;
+    margin-left: 0px;
+}
+
+
+.cl_IconNavBTN.sapMBtn:focus-visible>.sapMFocusable:not(.sapMBadgeIndicator)::before,
+.cl_IconNavBTN.sapMBtn:focus>.sapMFocusable:not(.sapMBadgeIndicator)::before {
+    border: none !important;
+}

@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table">
+	<Dialog title="{i18n>MaterialDetails}" class="cl_customize_Dialog sapUiSizeCompact" stretch="false" horizontalScrolling="false"
+		verticalScrolling="true" contentWidth="600px" contentHeight="auto" draggable="false" resizable="false">
+		<customHeader>
+			<Toolbar class="cl_DialogToolbar" height="2.5rem">
+				<ToolbarSpacer/>
+				<Text text="{i18n>TransactionDetails}" class="cl_DialogToolbarTitle sapUiTinyMarginTopBottom"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<HBox justifyContent="Start" class="sapUiSmallMarginBegin" width="100%"></HBox>
+		<t:Table id="idMatDetailsTable" rows="{oDetailModel>/}" selectionMode="Single" selectionBehavior="Row" visibleRowCount="6"
+			class=" sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom cl_MatDetailTableDB"></t:Table>
+		<endButton>
+			<Button text="Close"   icon="{= ${JM_ImageModel>/path} + 'Cancel.svg'}" class="cl_secondaryButton" press="fnCancelDetails"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
