@@ -3031,23 +3031,23 @@ sap.ui.define([
 					"JM_ContextModel"
 				);
 			}
-		}
+		},
 
 		// added by sabarish 20.11.2025
-		// fnMobileViewChanges: function() {
-		// 	this.getView().getModel("RoadMapUI").setProperty("/labelVisible", false);
-		// 	this.getView().byId("id_roadmap").removeStyleClass("cl_init_roadmap");
-		// 	this.getView().byId("id_roadmap").addStyleClass("cl_init_roadmapSS");
-		// 	// this.getView().byId("id_roadmapHighlighter").removeStyleClass("cl_Highlightborder_roadMap");
-		// 	// this.getView().byId("id_roadmapHighlighter").addStyleClass("cl_Highlightborder_roadMapSS");
-		// },
-		// fnTabDesktopViewChanges: function() {
-		// 	this.getView().getModel("RoadMapUI").setProperty("/labelVisible", true);
-		// 	this.getView().byId("id_roadmap").removeStyleClass("cl_init_roadmapSS");
-		// 	this.getView().byId("id_roadmap").addStyleClass("cl_init_roadmap");
-		// 	// this.getView().byId("id_roadmapHighlighter").removeStyleClass("cl_Highlightborder_roadMapSS");
-		// 	// this.getView().byId("id_roadmapHighlighter").addStyleClass("cl_Highlightborder_roadMap");
-		// },
+		fnMobileViewChanges: function() {
+			this.getView().getModel("RoadMapUI").setProperty("/labelVisible", false);
+			this.getView().byId("id_roadmap").removeStyleClass("cl_init_roadmap");
+			this.getView().byId("id_roadmap").addStyleClass("cl_init_roadmapSS");
+			// this.getView().byId("id_roadmapHighlighter").removeStyleClass("cl_Highlightborder_roadMap");
+			// this.getView().byId("id_roadmapHighlighter").addStyleClass("cl_Highlightborder_roadMapSS");
+		},
+		fnTabDesktopViewChanges: function() {
+			this.getView().getModel("RoadMapUI").setProperty("/labelVisible", true);
+			this.getView().byId("id_roadmap").removeStyleClass("cl_init_roadmapSS");
+			this.getView().byId("id_roadmap").addStyleClass("cl_init_roadmap");
+			// this.getView().byId("id_roadmapHighlighter").removeStyleClass("cl_Highlightborder_roadMapSS");
+			// this.getView().byId("id_roadmapHighlighter").addStyleClass("cl_Highlightborder_roadMap");
+		},
 		// _onResize: function() {
 		// 	var oRange = sap.ui.Device.media.getCurrentRange(sap.ui.Device.media.RANGESETS.SAP_STANDARD);
 
