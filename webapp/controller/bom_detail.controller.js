@@ -1,4 +1,3 @@
-/* global XLSX */
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/Filter",
@@ -6,16 +5,11 @@ sap.ui.define([
 	"MANAGED_RECIPE/controller/ErrorHandler",
 	"MANAGED_RECIPE/Formatter/formatter",
 	"sap/ui/core/Fragment",
-	"sap/ui/model/resource/ResourceModel",
-	"sap/ui/model/json/JSONModel",
-	"sap/ui/export/Spreadsheet",
-	"sap/ui/export/library"
-], function(Controller, Filter, FilterOperator, ErrorHandler, formatter, Fragment, ResourceModel, JSONModel, Spreadsheet, exportLibrary) {
+	"sap/ui/model/resource/ResourceModel"
+], function(Controller, Filter, FilterOperator, ErrorHandler, formatter, Fragment, ResourceModel) {
 	"use strict";
 
 	var i18n;
-	var EdmType = exportLibrary.EdmType;
-	var busyDialog = new sap.m.BusyDialog();
 	var frontEndId = [
 		"ID_BOM_AVOAU", "ID_BOM_AUSCH", "ID_BOM_ALPGR", "ID_BOM_RFPNT",
 		"ID_BOM_NLFZT", "ID_BOM_NLFZV", "ID_BOM_NLFMV", "ID_BOM_VERTI",
@@ -65,18 +59,6 @@ sap.ui.define([
 			});
 			this.getView().setModel(oVisibleModel, "JM_Visible");
 			// **********************************************************
-
-			var oMainModel = new JSONModel({
-				uploadedFileName: ""
-			});
-			this.getView().setModel(oMainModel, "JMUploadermodel");
-
-			var oMainModel = new sap.ui.model.json.JSONModel({
-				uploadedFileName: "",
-				FileName: ""
-			});
-
-			this.getView().setModel(oMainModel, "JMUploadFileModel"); // added by sabarish 19-12-2025
 
 			var oKeyDataModel = this.getOwnerComponent().getModel("JM_KeyData");
 			var oGobalProductionmodel = this.getOwnerComponent().getModel("JM_ProductionVrsn");
@@ -252,7 +234,6 @@ sap.ui.define([
 
 					aItems[i].SgtCmkz = aItems[i].SgtCmkz === "X";
 					aItems[i].Stlkz = aItems[i].Stlkz === "X";
-					aItems[i].key = aItems[i].Kzkup ? "Y" : "N";
 					aItems[i].Ltxpo = aItems[i].Ltxpo === "X";
 					var sPosnr = aItems[i].Posnr;
 					var sIdnrk = aItems[i].Idnrk;
@@ -495,16 +476,15 @@ sap.ui.define([
 		},
 
 		fnBindBomDetails: function(oData, oUwlData) {
-			var navHeaderResults = oData.NavBomHeader && oData.NavBomHeader.results;
-			var oHeader = (navHeaderResults && navHeaderResults.length > 0) ? navHeaderResults[0] : {};
-			var aODataItems = (oData.NavBomItem && oData.NavBomItem.results) ? oData.NavBomItem.results : [];
-
-			this.fnbuildBOMHeaderModel(oHeader);
-
-			this.fnbuildBOMItemsModel(oHeader, aODataItems);
-
 			this.fngetComponent().then(function(status) { // added by sabarish 14-01-2025
 				if (status) {
+					var navHeaderResults = oData.NavBomHeader && oData.NavBomHeader.results;
+					var oHeader = (navHeaderResults && navHeaderResults.length > 0) ? navHeaderResults[0] : {};
+					var aODataItems = (oData.NavBomItem && oData.NavBomItem.results) ? oData.NavBomItem.results : [];
+
+					this.fnbuildBOMHeaderModel(oHeader);
+
+					this.fnbuildBOMItemsModel(oHeader, aODataItems);
 
 					if (oUwlData) {
 						this.fnChangeLogHighlighter(oUwlData);
@@ -533,8 +513,8 @@ sap.ui.define([
 					Stktx: oHeader.Stktx,
 					Exstl: oHeader.Exstl,
 					Bmein: oHeader.Bmein,
-					Losvn: oHeader.Losvn || 1.000,
-					Losbs: oHeader.Losbs || 99999.999,
+					Losvn: oHeader.Losvn,
+					Losbs: oHeader.Losbs,
 					Losme: oHeader.Losme || oHeader.Bmein,
 					Stlst: oHeader.Stlst,
 					Stlbe: oHeader.Stlbe,
@@ -559,8 +539,8 @@ sap.ui.define([
 					Stktx: "",
 					Exstl: "",
 					Bmein: "",
-					Losvn: "1.000",
-					Losbs: "99999.999",
+					Losvn: null,
+					Losbs: null,
 					Losme: "",
 					Stlst: "01",
 					Stlbe: "",
@@ -571,7 +551,6 @@ sap.ui.define([
 			}
 
 			view.setModel(oBOMModel, "JM_BOMModel");
-			return true;
 		},
 
 		fnbuildBOMItemsModel: function(oHeader, aODataItems) {
@@ -628,7 +607,6 @@ sap.ui.define([
 						Rekrs: item.Rekrs || null,
 						Rekri: item.Rekri || null,
 						Kzkup: item.Kzkup || null,
-						key: (item.Kzkup) ? "Y" : "N",
 						Nlfzt: item.Nlfzt || null,
 						Nlfzv: item.Nlfzv || null,
 						Nlfmv: item.Nlfmv || "",
@@ -706,7 +684,7 @@ sap.ui.define([
 		fncreateEmptyBOMItem: function(sPosnr) {
 			return {
 				Posnr: sPosnr,
-				Postp: "L",
+				Postp: "",
 				Idnrk: "",
 				Ktext: "",
 				Menge: "",
@@ -724,9 +702,8 @@ sap.ui.define([
 				Upskz: null,
 				Stlkz: false,
 				Sortf: "",
-				key: "",
 				// Alekz: false,
-				Cadpo: false,
+				// Cadpo: false,
 				Aennr: "",
 				Fmeng: false,
 				Ltxpo: false,
@@ -782,7 +759,7 @@ sap.ui.define([
 		},
 
 		fnDeleteFrag: function() {
-			var that = this;
+
 			var oTable = this.byId("id_bomTable");
 
 			var aSelectedIndices = oTable.getSelectedIndices();
@@ -794,9 +771,9 @@ sap.ui.define([
 				title: "Information",
 				text: "Do you want to delete this row ?",
 				negativeButton: "Cancel",
-				negativeIcon: that.getView().getModel("JM_ImageModel").getProperty("/path") + "Cancel.svg",
+				negativeIcon: "Image/Cancel.svg",
 				positiveButton: "Proceed",
-				positiveIcon: that.getView().getModel("JM_ImageModel").getProperty("/path") + "Apply.svg",
+				positiveIcon: "Image/Apply.svg",
 				Indicator: "BOM_DELETE"
 			});
 			// Set model with name
@@ -921,7 +898,7 @@ sap.ui.define([
 			oModel.setProperty("/BOMList", aData);
 			oTable.clearSelection();
 
-			ErrorHandler.showCustomSnackbar(i18n.getText("RowsDeletedSuccess"), "success", this);
+			ErrorHandler.showCustomSnackbar(i18n.getText("RowsDeletedSuccess"), "success");
 		},
 
 		fnRowSelectionChange: function(oEvent) {
@@ -1090,97 +1067,6 @@ sap.ui.define([
 			var item = oContext.getProperty("col1"); // main value
 			var item1 = oContext.getProperty("col2"); // description (if applicable)
 
-			// Added by sabarish 11-12-2025
-			if (this.prdStrogeLocFlag && this._selectedFieldEvent && this.sRowPath) {
-
-				var oldValue = this._selectedFieldEvent.getValue(); //Added by srikanth
-				var newValue = item; //Added by srikanth
-				this._selectedFieldEvent.setValue(item);
-				this._selectedFieldEvent.setValueState("None");
-
-				this.getView().getModel("JM_BOMTable").setProperty(this.sRowPath + "/LgortDes", item1);
-
-				this.fnAfterCloseFragment();
-
-				// Added by srikanth 12-12-2025
-
-				var oChangeLogModel = this.getView().getModel("JM_ChangeLogModel");
-				if (!oChangeLogModel) {
-					oChangeLogModel = new JSONModel([]);
-					this.getView().setModel(oChangeLogModel, "JM_ChangeLogModel");
-				}
-
-				var aChangeLogData = oChangeLogModel.getData();
-				if (!Array.isArray(aChangeLogData)) {
-					aChangeLogData = [];
-				}
-
-				var vId = "ID_BOM_LGORT";
-				var oView = this.getView();
-
-				var oContext = this._selectedFieldEvent.getBindingContext("JM_BOMTable");
-				var sItemNo = oContext.getProperty("Posnr");
-
-				var FieldName = "";
-				if (this.getView().byId(vId + "_LBL")) {
-					FieldName = this.getView().byId(vId + "_LBL").getText();
-					if (sItemNo) {
-						FieldName = FieldName + " - " + sItemNo;
-					}
-
-				} else if (sap.ui.getCore().byId(vId + "_LBL")) {
-					FieldName = sap.ui.getCore().byId(vId + "_LBL").getText();
-					if (sItemNo) {
-						FieldName = FieldName + " - " + sItemNo;
-					}
-				}
-
-				var oNewEntry = {
-					Transid: "",
-					Werks: oView.byId("ID_BOM_WERKS").getValue(),
-					ItemNo: sItemNo || "0000",
-					Stlan: oView.byId("ID_BOM_STLAN").getValue(),
-					Matnr: oView.byId("ID_BOM_MATNR").getValue(),
-					Stlal: oView.byId("ID_BOM_STLAL").getValue(),
-					FieldId: vId,
-					OldValue: oldValue || "",
-					FieldName: FieldName || "",
-					NewValue: newValue,
-					ChangedBy: this.User,
-					ChangedOn: new Date()
-				};
-
-				if (oldValue === newValue) {
-					var iIndexToRemove = aChangeLogData.findIndex(function(entry) {
-						return entry.ItemNo === oNewEntry.ItemNo && entry.FieldId === oNewEntry.FieldId;
-					});
-
-					if (iIndexToRemove !== -1) {
-						aChangeLogData.splice(iIndexToRemove, 1);
-					}
-				} else {
-					var oExistingEntry = aChangeLogData.find(function(entry) {
-						return entry.ItemNo === oNewEntry.ItemNo && entry.FieldId === oNewEntry.FieldId;
-					});
-
-					if (oExistingEntry) {
-						oExistingEntry.NewValue = newValue;
-						oExistingEntry.OldValue = oldValue;
-					} else {
-						aChangeLogData.push(oNewEntry);
-					}
-				}
-
-				this.prdStrogeLocFlag = false;
-				this._selectedFieldEvent = undefined;
-				this.sRowPath = undefined;
-				oChangeLogModel.setData(aChangeLogData); // added by sabarish 18-12-2025
-				//eoc
-
-				return;
-			}
-			//eoc
-
 			// Get the input that triggered F4
 			var sSelectedFieldId = this.selectedField;
 			var oSelectedInput = this.getView().byId(sSelectedFieldId) || sap.ui.getCore().byId(sSelectedFieldId) || Fragment.byId(
@@ -1317,7 +1203,7 @@ sap.ui.define([
 					return oCtx;
 				}
 			};
-			this.checkboxFlag = true;
+
 			this.fnLiveChange(oFakeEvent);
 		},
 
@@ -1614,14 +1500,13 @@ sap.ui.define([
 		},
 
 		fnNavBack: function() {
-			var that = this;
 			var oPopupModel = new sap.ui.model.json.JSONModel({
 				title: "Information",
 				text: "Do you Want to exit this Process? once exit all data will be Refreshed",
 				negativeButton: "Cancel",
-				negativeIcon: that.getView().getModel("JM_ImageModel").getProperty("/path") + "Cancel.svg",
+				negativeIcon: "Image/Cancel.svg",
 				positiveButton: "Proceed",
-				positiveIcon: that.getView().getModel("JM_ImageModel").getProperty("/path") + "Apply.svg",
+				positiveIcon: "Image/Apply.svg",
 				Indicator: "BOM_BACK"
 			});
 			// Set model with name
@@ -1638,7 +1523,6 @@ sap.ui.define([
 
 		fnSaveBack: function() {
 			var that = this;
-			this.saveBack = true;
 			this.fnBomValidation(null, function() {
 				var oBOMPayload = that.fnSaveBomModels();
 				var oBomModel = that.getOwnerComponent().getModel("JM_Bom");
@@ -1664,23 +1548,15 @@ sap.ui.define([
 				f.setValueState("None");
 			});
 
-			// coproduct front end validation When save only it trigger
+			var aFilteredItems = oPayload.NavBomItem.filter(function(oItem) {
+				return oItem.Postp && oItem.Postp.trim() !== "";
+			});
 
-			if (this.saveBack) {
-				var oTable = this.getView().byId("id_bomTable");
-				var oTableModel = oTable.getModel("JM_BOMTable");
-				var aTableData = oTableModel.getProperty("/BOMList");
-				for (var i = 0; i < aTableData.length; i++) {
-					var item = aTableData[i];
-					if (item.Idnrk !== "" && item.key === "") {
-						this.getView().getModel("JM_BOMTable").setProperty("/BOMList/" + i + "/KZKUP", "Error");
-						this.getView().getModel("JM_BOMTable").setProperty("/BOMList/" + i + "/KZKUP_TXT", "please select co - product" + " - " + item.Posnr);
-						ErrorHandler.showCustomSnackbar("please select co - product" + " - " + item.Posnr, "Error", this);
-						return;
-					}
-				}
-				this.saveBack = false;
+			if (aFilteredItems.length === 0) {
+				ErrorHandler.showCustomSnackbar(i18n.getText("EnterComponentDetails"), "Error", that);
+				return;
 			}
+
 			// OData Create
 			var oModel = this.getOwnerComponent().getModel();
 			oModel.create("/Recipe_HeaderSet", oPayload, {
@@ -1903,16 +1779,14 @@ sap.ui.define([
 				// "AENNR": 10, // Change No.
 				// "DUMPS": 11, // Phantom Item
 				"SORTF": 12, // Sort String
-				"LGORT": 13,
-				"KZKUP": 14,
-				"IDENT": 15, // Item ID
-				"AENRA": 16, // Change No.To
+				"IDENT": 13, // Item ID
+				"AENRA": 14, // Change No.To
 				// "ALPGR": 15, // Group
 				// "FMENG": 16, // Fixed Quantity
-				"LTXPO": 19, // Long Text
-				"SGTCMKZ": 20, // Segmented Maintained
-				"SGTCATV": 21, // Seg Value
-				"OBTSP": 22 // Object Type
+				"LTXPO": 17, // Long Text
+				"SGTCMKZ": 18, // Segmented Maintained
+				"SGTCATV": 19, // Seg Value
+				"OBTSP": 20 // Object Type
 			};
 			var iIndex = columnMapping[sFnm];
 			if (iIndex === undefined) return null;
@@ -1924,9 +1798,6 @@ sap.ui.define([
 				var aItems = oCell.getItems();
 				for (var i = 0; i < aItems.length; i++) {
 					if (aItems[i] instanceof sap.m.Input) return aItems[i];
-					if (aItems[i] instanceof sap.m.Select) {
-						return aItems[i];
-					}
 				}
 			}
 			return null;
@@ -3034,619 +2905,7 @@ sap.ui.define([
 			}
 
 			return retMsg;
-		},
-
-		//  logic added by sabarish 20 01 2025
-		fnf4prodStlocpress: function(oEvent) {
-			var oJsonModel;
-			var vTitle;
-			var oLabels = {};
-			var vLength;
-			var aFormattedRows = [];
-			var oInput = oEvent.getSource();
-			var oBindInfo = oInput.getBindingInfo("value");
-			var sModelName = oBindInfo.parts[0].model;
-			var sFieldPath = oBindInfo.parts[0].path;
-			var oContext = oBindInfo.binding.oContext;
-
-			if (!sModelName || !sFieldPath || !oContext) {
-				return;
-			}
-
-			var sRowPath = oContext.getPath(); // e.g., "/rows/0"
-			var Idnrk = this.getView().getModel("JM_BOMTable").getProperty(sRowPath + "/Idnrk");
-			this.sRowPath = sRowPath;
-			if (Idnrk === "") {
-				ErrorHandler.showCustomSnackbar("Please Enter Component", "Error", this);
-				return;
-			}
-
-			this._selectedFieldEvent = oInput;
-			this.prdStrogeLocFlag = true;
-			var sIdnrk = this.Idnrk;
-			var oModel = this.getOwnerComponent().getModel("JMConfig");
-			var oPayload = {
-				FieldId: "ID_BOM_LGORT",
-				Process: "X",
-				F4Type: "P",
-				FieldNam2: "WERKS",
-				FieldNam1: "MATNR",
-				Value2: this.getView().byId("ID_BOM_WERKS").getValue(),
-				Value1: (/^\d+$/.test(Idnrk)) ? ("000000000000000000" + Idnrk).slice(-18) : Idnrk
-			};
-			oPayload.NavSerchResult = [];
-			oModel.create("/SearchHelpSet", oPayload, {
-				success: function(oData) {
-					if (oData.MsgType === "I") {
-						ErrorHandler.showCustomSnackbar(oData.Message, "Error", this);
-						return;
-					}
-					var aResults = oData.NavSerchResult.results;
-					if (aResults.length > 0) {
-						var oFirst = aResults[0];
-
-						if (oFirst.MsgType === "I" || oFirst.MsgType === "E") {
-							ErrorHandler.showCustomSnackbar(oFirst.Message, "Error", this);
-							return;
-						}
-						if (oFirst.Label1) {
-							oLabels.col1 = oFirst.Label1;
-						}
-						if (oFirst.Label2) {
-							oLabels.col2 = oFirst.Label2;
-						}
-						if (oFirst.Label3) {
-							oLabels.col3 = oFirst.Label3;
-						}
-						if (oFirst.Label4) {
-							oLabels.col4 = oFirst.Label4;
-						}
-						aResults.forEach(function(item) {
-							var row = {};
-
-							row.col1 = item.Value1;
-
-							if (oLabels.col2) {
-								row.col2 = item.Value2;
-							}
-							if (oLabels.col3) {
-								row.col3 = item.Value3;
-							}
-							if (oLabels.col4) {
-								row.col4 = item.Value4;
-							}
-							aFormattedRows.push(row);
-						});
-					}
-					oJsonModel = new sap.ui.model.json.JSONModel({
-						labels: oLabels,
-						rows: aFormattedRows
-					});
-					this.getView().setModel(oJsonModel, "JM_F4Model");
-					this.getView().getModel("JM_F4Model");
-					if (this.agentFieldFlag) {
-						var jsonList = {
-							List: aResults
-						};
-						var oJsonList = new sap.ui.model.json.JSONModel();
-						oJsonList.setData(jsonList);
-						this.getView().setModel(oJsonList, "JM_Agents");
-						vLength = aResults.results.length;
-						// this.agentFieldFlag = false;
-					}
-					vTitle = this.getView().getModel("JM_F4Model").getData().labels.col1 + " (" + vLength + ")";
-					this.fnF4fragopen(oEvent, vTitle).open();
-
-				}.bind(this),
-				error: function(oResponse) {
-
-				}
-			});
-		},
-		fncoProductSelect: function(oEvent) {
-			var oSelect = oEvent.getSource();
-			var sKey = oSelect.getSelectedKey();
-			oSelect.setValueState("None");
-			oSelect.setValueStateText("");
-			this.checkboxFlag = true;
-			// Get row context correctly
-			var oCtx = oSelect.getBindingContext("JM_BOMTable");
-			if (!oCtx) {
-				return;
-			}
-
-			var sRowPath = oCtx.getPath();
-			var oModel = this.getView().getModel("JM_BOMTable");
-			// Row data
-			var oRow = oModel.getProperty(sRowPath);
-
-			if (oRow.Idnrk === "") {
-				ErrorHandler.showCustomSnackbar("Please Enter Compoenet", "Error", this);
-				oSelect.setSelectedKey("");
-				return;
-			}
-			if (sKey === "") {
-				return;
-			} else if (sKey === "Y") {
-				// data.Kzkup = true;
-				oModel.setProperty(sRowPath + "/Kzkup", true);
-				var oFakeEvent = {
-					getSource: function() {
-						return oSelect;
-					},
-
-					getBindingContext: function() {
-						return oCtx;
-					}
-				};
-				this.fnBomValidation(oFakeEvent);
-			} else if (sKey === "N") {
-				oModel.setProperty(sRowPath + "/Kzkup", false);
-				var oFakeEvent = {
-					getSource: function() {
-						return oSelect;
-					},
-
-					getBindingContext: function() {
-						return oCtx;
-					}
-				};
-				this.fnBomValidation(oFakeEvent);
-			}
-		},
-		fndownload: function() {
-			var oModel = this.getView().getModel("JM_BOMTable");
-			var aAllData = oModel.getProperty("/BOMList");
-
-			// Column definitions
-			var aCols = [{
-				label: "Component",
-				property: "Idnrk",
-				type: "string"
-			}, {
-				label: "Quantity",
-				property: "Menge",
-				type: "string"
-			}, {
-				label: "Sort String",
-				property: "Sortf",
-				type: "string"
-			}, {
-				label: "Stroage Location",
-				property: "Lgort",
-				type: "string"
-			}, {
-				label: "Recursive Allowed",
-				property: "RekrsTxt",
-				type: "string"
-			}];
-
-			// Export all data
-			var oSpreadsheet = new sap.ui.export.Spreadsheet({
-				workbook: {
-					columns: aCols,
-					autoFilter: false
-				},
-				dataSource: aAllData,
-				fileName: "BOM_TEMPLATE.xlsx",
-				worker: false,
-				showProgress: false
-			});
-			var that = this;
-
-			oSpreadsheet.build().then(function() {
-				// ErrorHandler.showCustomSnackbar(i18n.getText("downloadComplete_Success"), "Success", that);
-			}).catch(function(oError) {
-				ErrorHandler.showCustomSnackbar(oError.message, "Error", that);
-			});
-
-		},
-		fnUpload: function() {
-			var oFileUploader = this.byId("FileUploaderId");
-			if (oFileUploader) {
-				var oDomRef = oFileUploader.getFocusDomRef();
-				if (oDomRef) {
-					oDomRef.click(); // Opens file dialog
-				}
-			}
-		},
-
-		fnFileSelect: function(oEvent) {
-			var that = this;
-			var oFileUploader = this.byId("FileUploaderId");
-			var oFile = oEvent.getParameter("files")[0];
-			if (oFile) {
-				if (oFile.size > 2 * 1024 * 1024) {
-					ErrorHandler.showCustomSnackbar("Maximum File size will be 2MB", "Information", this);
-					oFileUploader.setValue(""); // Reset to allow re-selection
-					return;
-				}
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					var sBase64 = e.target.result.split(",")[1];
-					// Store temporarily
-					var oModel = that.getView().getModel("JMUploadFileModel");
-					oModel.setProperty("/FileName", oFile.name);
-					oModel.setProperty("/uploadedFileContent", sBase64);
-					oModel.setProperty("/uploadedMimeType", oFile.type);
-					oModel.setProperty("/uploadedFileSize", oFile.size);
-					that.getView().byId("id_fileNameInput").setValue(oFile.name);
-				};
-				reader.readAsDataURL(oFile);
-			}
-		},
-		fnExcelUpload: function() {
-			var oFileUploader;
-			var status = false;
-			var oTable = this.getView().byId("id_bomTable");
-			if (oTable) {
-				oTable.clearSelection();
-			}
-			var oMobileModel = this.getView().getModel("RoadMapUI");
-			if (oMobileModel) {
-				status = oMobileModel.getProperty("/labelVisible");
-			}
-			oFileUploader = this.byId("FileUploaderId");
-			var oFile = oFileUploader.oFileUpload.files[0];
-
-			if (!oFile) {
-				ErrorHandler.showCustomSnackbar(i18n.getText("No_file_error"), "Error", this);
-				return;
-			}
-
-			var that = this;
-			var reader = new FileReader();
-			reader.onload = function(event) {
-				var data = event.target.result;
-				var workbook = XLSX.read(data, {
-					type: "binary"
-				});
-				var sheetName = workbook.SheetNames[0];
-				var sheet = workbook.Sheets[sheetName];
-				var excelData = XLSX.utils.sheet_to_json(sheet);
-				var oPayload = {
-					AppId: this.AppId,
-					Werks: that.getView().byId("ID_BOM_WERKS").getValue(),
-					Ind: "B",
-					MsgTyp: "M"
-				};
-				oPayload.NavBomHeader = [];
-				oPayload.NavBomItem = [];
-				oPayload.NavDescription = [];
-				oPayload.NavBomHeader.push({
-					Stlan: that.getView().byId("ID_BOM_STLAN").getValue(),
-					Stlal: that.getView().byId("ID_BOM_STLAL").getValue()
-				});
-				excelData.forEach(function(item) {
-					oPayload.NavBomItem.push({
-						Idnrk: item.Component || "",
-						Menge: that.fnToEdmDecimal(item.Quantity, 13, 3) || null,
-						Sortf: item["Sort String"] || "",
-						Lgort: item["Stroage Location"] ? String(item["Stroage Location"]) : "",
-						Upskz: null,
-						Datuv: null,
-						Datub: null,
-						Dumps: null,
-						Avoau: null,
-						Ausch: null,
-						Fmeng: null,
-						Netau: null,
-						Rekrs: (item["Recursive Allowed"] === "X") ? true : false,
-						Rekri: null,
-						Kzkup: null,
-						Nlfzt: null,
-						Nlfzv: null,
-						Sanko: null,
-						Sanin: null,
-						Sanfe: null,
-						Schgt: null,
-						Schkz: null,
-						Andat: null,
-						Aedat: null
-					});
-				});
-				var odataCall = this.getOwnerComponent().getModel();
-				odataCall.create("/Recipe_HeaderSet", oPayload, {
-					success: function(oData) {
-						oFileUploader.clear();
-						var today = new Date();
-						var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-						var oItemData = oData.NavBomItem.results;
-						var DescData = oData.NavDescription.results;
-						for (var i = 0; i < oItemData.length; i++) {
-							var data1 = oItemData[i];
-							data1.ComponentDes = data1.Ktext;
-							data1.Datuv = firstDay;
-							data1.Nlfmv = "";
-							data1.Datub = new Date(9999, 11, 31);
-						}
-						// var oItemModel = new JSONModel({
-						// 	BOMList: oItemData
-						// });
-						oItemData.forEach(function(item) {
-							item.Stlkz = item.Stlkz === "X";
-							item.key = item.Kzkup ? "Y" : "N";
-						});
-						this.fnsendValidation(oItemData, DescData);
-					}.bind(this),
-					error: function(oResponse) {
-						busyDialog.close();
-						var sMessage = ErrorHandler.parseODataError(oResponse);
-						ErrorHandler.showCustomSnackbar(sMessage, "Error", this);
-					}.bind(this)
-				});
-				ErrorHandler.showCustomSnackbar(i18n.getText("ExcelUploadedSuccessfully"), "success", that);
-				that.getView().byId("id_fileNameInput").setValue("");
-
-			}.bind(this);
-			reader.readAsBinaryString(oFile);
-		},
-		fnsendValidation: function(oItemData, DescData) {
-			var that = this;
-			this.oItemData = oItemData;
-			var aFilteredTableData = oItemData.map(function(oItem) {
-				return {
-					Idnrk: oItem.Idnrk,
-					Posnr: oItem.Posnr,
-					Avoau: that.fnToEdmDecimal(oItem.Avoau, 5, 2) || null, // added by sabarish 18-12-2025
-					Postp: oItem.Postp,
-					Ausch: that.fnToEdmDecimal(oItem.Ausch, 5, 2) || null, // added by sabarish 18-12-2025,
-					Stvkn: oItem.Stvkn, // changed by sabarish Itmid -> Stvkn 15-12-2025
-					Fmeng: oItem.Fmeng,
-					Sortf: oItem.Sortf,
-					Netau: oItem.Netau,
-					Alpgr: oItem.Alpgr,
-					Rfpnt: oItem.Rfpnt,
-					Rekrs: oItem.Rekrs,
-					Rekri: oItem.Rekri,
-					Kzkup: oItem.Kzkup,
-					Nlfzt: that.fnToEdmDecimal(oItem.Nlfzt, 3, 0) || null, // added by Sabarish 18-12-2025
-					Nlfzv: that.fnToEdmDecimal(oItem.Nlfzv, 3, 0) || null, // added by Sabarish 18-12-2025
-					Nlfmv: oItem.Nlfmv,
-					Verti: oItem.Verti,
-					Dspst: oItem.Dspst,
-					Itsob: oItem.Itsob,
-					Dumps: oItem.Dumps,
-					Potx1: oItem.Potx1,
-					Potx2: oItem.Potx2,
-					Erskz: oItem.Erskz,
-					Rvrel: oItem.Rvrel,
-					Sanko: oItem.Sanko,
-					Sanin: oItem.Sanin,
-					Sanfe: oItem.Sanfe,
-					Sanka: oItem.Sanka,
-					// Alekz: oItem.Alekz,
-					// Cadpo: oItem.Cadpo,
-					Beikz: oItem.Beikz,
-					Lgort: oItem.Lgort,
-					Prvbe: oItem.Prvbe,
-					Schgt: oItem.Schgt,
-					Schkz: oItem.Schkz,
-					Menge: that.fnToEdmDecimal(oItem.Menge, 13, 3) || null,
-					Meins: oItem.Meins,
-					Datuv: oItem.Datuv,
-					Datub: oItem.Datub,
-					Stlkz: oItem.Stlkz ? "X" : ""
-				};
-			});
-			var oView = this.getView();
-
-			// Header navigation 
-			var aNavBomHeader = [{
-				Bmeng: that.fnToEdmDecimal(oView.byId("ID_BOM_BMENG").getValue(), 13, 3) || null,
-				Ztext: oView.byId("ID_BOM_ZTEXT").getValue(),
-				Bmein: oView.byId("ID_BOM_BMEIN").getValue(),
-				Stktx: oView.byId("ID_BOM_STKTX").getValue(),
-				Losvn: oView.byId("ID_BOM_LOSVN").getValue() || null,
-				Losbs: oView.byId("ID_BOM_LOSBS").getValue() || null,
-				Losme: oView.byId("ID_BOM_LOSME").getValue(),
-				Stlst: oView.byId("ID_BOM_STLST").getValue(),
-				Labor: oView.byId("ID_BOM_LABOR").getValue(),
-				Datuv: oView.byId("ID_BOM_ADATU").getDateValue() || null,
-				Groes: "",
-				Tetyp: oView.byId("ID_BOM_TETYP").getValue(),
-				Stlan: oView.byId("ID_BOM_STLAN").getValue(),
-				Stlal: oView.byId("ID_BOM_STLAL").getValue(),
-
-			}];
-
-			// Item navigation
-			var Initiatorpayload = {
-				AppId: this.AppId,
-				Matnr: oView.byId("ID_BOM_MATNR").getValue(),
-				Maktx: oView.byId("ID_BOM_MAKTX").getValue(),
-				Werks: oView.byId("ID_BOM_WERKS").getValue(),
-				Ind: "X",
-				NavBomHeader: aNavBomHeader,
-				NavBomItem: aFilteredTableData,
-				NavReturn_Msg: []
-			};
-			var ServiceCall = this.getOwnerComponent().getModel();
-			ServiceCall.create("/Recipe_HeaderSet", Initiatorpayload, {
-				success: function(oData) {
-					var aAllMsgs = oData.NavReturn_Msg.results;
-					var itemData = oData.NavBomItem.results;
-					var aItemErrors = aAllMsgs.filter(function(oMsg) {
-						return oMsg.MsgType === "E" && oMsg.ItemNo;
-					});
-					if (aItemErrors.length !== 0) {
-						var oErrModel = new sap.ui.model.json.JSONModel(aItemErrors);
-						this.getView().setModel(oErrModel, "ErrorMsgModel");
-						if (!this._oErrorFrag) {
-							this._oErrorFrag = sap.ui.xmlfragment(
-								"MANAGED_BOM.Fragment.UploadError",
-								this
-							);
-							this.getView().addDependent(this._oErrorFrag);
-						}
-						this._oErrorFrag.open();
-
-						var oModel = this.getView().getModel("JM_BOMTable");
-						if (oModel) {
-							var data = oModel.getProperty("/BOMList");
-							for (var i = 0; i < data.length; i++) {
-								var sPath = "/BOMList/" + i;
-								oModel.setProperty(sPath + "/ComponentDes", "");
-								oModel.setProperty(sPath + "/Idnrk", "");
-								oModel.setProperty(sPath + "/Datuv", null);
-								oModel.setProperty(sPath + "/Datub", null);
-								this.fnclearallRow(sPath);
-							}
-						}
-
-						// this.fnAddRow();
-					} else {
-						var stlan = this.getView().byId("ID_BOM_STLAN").getValue();
-						var oBOMModel = this.getView().getModel("JM_BOMTable");
-
-						itemData.forEach(function(item) {
-							item.Stlkz = item.Stlkz === "X";
-							item.key = item.Kzkup ? "Y" : "N";
-							item.Sanfe = (stlan === "1");
-							item.Ltxpo = item.Ltxpo === "X";
-							item.SgtCmkz = item.SgtCmkz === "X";
-							// Set Ktext based on matching Idnrk
-							var oMatch = this.oItemData.find(function(oItem) {
-								return oItem.Idnrk === item.Idnrk;
-							});
-							item.Ktext = oMatch ? oMatch.Ktext : "";
-						}.bind(this));
-
-						if (oBOMModel) {
-							oBOMModel.setProperty("/BOMList", itemData);
-							oBOMModel.refresh(true);
-						}
-						for (var i = 0; i < DescData.length; i++) {
-							var value = DescData[i];
-							var Model = this.getView().getModel("JM_BOMTable");
-							if (Model) {
-								Model.setProperty("/BOMList/" + i + "/LgortDes", value.Fielddesc);
-							}
-						}
-
-					}
-				}.bind(this),
-				error: function(oResponse) {
-					busyDialog.close();
-					var sMessage = ErrorHandler.parseODataError(oResponse);
-					ErrorHandler.showCustomSnackbar(sMessage, "Error", this);
-				}.bind(this)
-			});
-		},
-		fnerrorDialogCancel: function() {
-			if (this._oErrorFrag) {
-				this._oErrorFrag.close();
-				this._oErrorFrag.destroy();
-				this._oErrorFrag = null;
-			}
-		},
-		fnDownloadExcel: function() {
-
-			var oModel = this.getView().getModel("JM_BOMTable");
-			var aRows = oModel.getProperty("/BOMList");
-			var aFilteredRows = aRows.filter(function(row) {
-				return row.Idnrk && row.Idnrk.trim() !== "";
-			});
-
-			if (!aFilteredRows || aFilteredRows.length === 0) {
-				ErrorHandler.showCustomSnackbar("No BOM data available!", "Warning", this);
-				return;
-			}
-
-			var aCols = [{
-				label: "Item",
-				property: "Posnr",
-				type: EdmType.String
-			}, {
-				label: "ICt",
-				property: "Postp",
-				type: EdmType.String
-			}, {
-				label: "Component",
-				property: "Idnrk",
-				type: EdmType.String
-			}, {
-				label: "Component Description",
-				property: "ComponentDes",
-				type: EdmType.String
-			}, {
-				label: "Quantity",
-				property: "Menge",
-				type: EdmType.Number
-			}, {
-				label: "UOM",
-				property: "Meins",
-				type: EdmType.String
-			}, {
-				label: "Asm",
-				property: "Stlkz",
-				type: EdmType.Boolean
-			}, {
-				label: "Sls",
-				property: "SIs",
-				type: EdmType.Boolean
-			}, {
-				label: "Valid From",
-				property: "Datuv",
-				type: EdmType.String
-			}, {
-				label: "Valid To",
-				property: "Datub",
-				type: EdmType.String
-			}, {
-				label: "Change No",
-				property: "ChangeNo",
-				type: EdmType.String
-			}, {
-				label: "Phantom Item",
-				property: "Dumps",
-				type: EdmType.Boolean
-			}, {
-				label: "Sort String",
-				property: "Sortf",
-				type: EdmType.String
-			}, {
-				label: "Item ID",
-				property: "Stvkn", // changed by sabarish Itmid -> Stvkn 15-12-2025
-				type: EdmType.String
-			}, {
-				label: "Change No To",
-				property: "ChangeNoto",
-				type: EdmType.String
-			}, {
-				label: "Group",
-				property: "Grp",
-				type: EdmType.String
-			}, {
-				label: "Fixed Quantity",
-				property: "Fmeng",
-				type: EdmType.Boolean
-			}, {
-				label: "Long Text",
-				property: "LngText",
-				type: EdmType.Boolean
-			}, {
-				label: "Segment Maintained",
-				property: "SegMaintain",
-				type: EdmType.Boolean
-			}, {
-				label: "Seg Value",
-				property: "SegValue",
-				type: EdmType.String
-			}];
-			var oSettings = {
-				workbook: {
-					columns: aCols
-				},
-				dataSource: aFilteredRows,
-				fileName: "BOM_Download.xlsx"
-			};
-
-			var oSpreadsheet = new Spreadsheet(oSettings);
-			oSpreadsheet.build().finally(function() {
-				oSpreadsheet.destroy();
-			});
-		},
+		}
 
 	});
 
